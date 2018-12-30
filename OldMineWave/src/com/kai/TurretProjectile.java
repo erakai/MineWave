@@ -28,7 +28,7 @@ public class TurretProjectile {
 		speed = 2;
 		myTurret = mine;
 		try {                
-		turretproj = ImageIO.read(new File("TurretProjectile.png"));
+		turretproj = ImageIO.read(new File("OldMineWave/src/com/kai/TurretProjectile.png"));
 		} catch (IOException ex) { System.out.println("turreproj exception"); } 
 	
 	}

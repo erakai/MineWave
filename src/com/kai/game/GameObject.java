@@ -1,7 +1,6 @@
 package com.kai.game;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
     private Image self;
@@ -16,7 +15,7 @@ public abstract class GameObject {
         this.height = height;
     }
 
-    public abstract void paintComponent(Graphics g);
+    public abstract void drawMe(Graphics g);
 
     public boolean checkCollision(GameObject otherObject) {
         return ((otherObject.getX() < getX()+width) &&
@@ -43,5 +42,9 @@ public abstract class GameObject {
 
     public Image getSelfImage() {
         return self;
+    }
+
+    public void setSelf(Image self) {
+        this.self = self;
     }
 }

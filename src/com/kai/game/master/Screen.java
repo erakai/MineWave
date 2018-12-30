@@ -2,36 +2,46 @@ package com.kai.game.master;
 
 import com.kai.game.GameObject;
 import com.kai.game.Updatable;
-import com.kai.game.entities.Entity;
+import com.kai.game.entities.Player;
+import com.kai.game.hud.InGameDisplay;
+import com.kai.game.hud.MainMenu;
+import com.kai.game.hud.SelectionScreen;
 import com.kai.game.scene.Environment;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Screen extends JPanel implements KeyListener, MouseListener {
+public class Screen extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
     public static final int WINDOW_WIDTH = 1000;
-    public static final int WINDOW_HEIGHT = 500;
-    public static final int FRAMES_PER_SECOND = 100;
+    public static final int WINDOW_HEIGHT = WINDOW_WIDTH/2;
+    public static final int FRAMES_PER_SECOND = 60;
 
     public static GameState state;
 
+    //Handles background and scene objects.
     private static GameObject environment;
-    private static List<Updatable> entities;
+    //Handles the player.
+    private static Player player;
+    //Handles level management and enemies.
+    private static LevelHandler levelHandler;
+    //Handles misc objects that need to be drawn or updated.
+    private static List<Updatable> toUpdate;
+    //Handles all user interface.
+    private static List<GameObject> userInterface;
 
     public Screen() {
-        entities = new ArrayList<>();
+        toUpdate = new ArrayList<>();
+        userInterface = new ArrayList<>();
 
         transitionToScene(GameState.MENU);
 
         setFocusable(true);
         addKeyListener(this);
         addMouseListener(this);
+        addMouseMotionListener(this);
     }
 
     @Override
@@ -45,25 +55,53 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
         //Environment manages all scene objects.
         if (environment != null) {
-            environment.paintComponent(g);
+            environment.drawMe(g);
         }
 
-        for (Updatable u: entities) {
+        for (Updatable u: toUpdate) {
             if (u instanceof GameObject) {
-                ((GameObject) u).paintComponent(g);
+                ((GameObject) u).drawMe(g);
+            }
+        }
+
+        //LevelHandler manages all enemies.
+        if (levelHandler != null) {
+            levelHandler.drawAllEnemies(g);
+        }
+
+        for (GameObject UI: userInterface) {
+            UI.drawMe(g);
+        }
+
+
+
+    }
+
+    private void update() {
+
+        //Respond to all player input.
+        Input.updateChanges();
+
+        if (levelHandler != null) {
+            levelHandler.updateEnemies();
+        }
+
+        for (Updatable u: toUpdate) {
+            u.update();
+        }
+
+        if (state == GameState.RUNNING && player != null) {
+            if (checkForGameOver()) {
+                transitionToScene(GameState.DEATH);
             }
         }
 
     }
 
-    private void update() {
-        for (Updatable u: entities) {
-            u.update();
-        }
-    }
-
     public void animate() {
         while(true) {
+
+            repaint();
 
             try {
                 Thread.sleep(1000/FRAMES_PER_SECOND);
@@ -72,25 +110,39 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
             }
 
             update();
-            repaint();
 
         }
     }
 
+    private boolean checkForGameOver() {
+        return (getPlayer().getHealth() < 1);
+    }
+
     public static void transitionToScene(GameState newState) {
         state = newState;
-        entities.clear();
+        toUpdate.clear();
+        userInterface.clear();
         environment = null;
+        player = null;
+        levelHandler = null;
 
         switch(newState.getName()) {
             case "Menu":
-
+                userInterface.add(new MainMenu());
                 break;
             case "Selection Screen":
-
+                userInterface.add(new SelectionScreen());
                 break;
             case "Running":
                 environment = new Environment();
+
+                player = new Player(WINDOW_WIDTH/2,WINDOW_HEIGHT/2, (int)(22.0/1200.0 * WINDOW_WIDTH), (int)(60.0/600.0 * WINDOW_HEIGHT));
+                addUpdatable(player);
+
+                levelHandler = new LevelHandler(1);
+                addUpdatable(levelHandler);
+
+                addUpdatable(new InGameDisplay((int)(310.0/1200.0 * Screen.WINDOW_WIDTH), (int)(500.0/600.0 * Screen.WINDOW_HEIGHT)));
                 break;
             case "Death Screen":
 
@@ -102,9 +154,14 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         return environment;
     }
 
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static LevelHandler getLevelHandler() { return levelHandler; }
 
     public static void addUpdatable(Updatable e) {
-        entities.add(e);
+        toUpdate.add(e);
     }
 
     @Override
@@ -130,4 +187,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseDragged(MouseEvent e) { }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {Input.mouseMoved(e.getX(), e.getY());}
 }

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Draw {
+public class ResourceManager {
 
     //TODO: Organize images into spritesheets.
     //Unable to do so at current time due to inaccessibility of aseprite.
@@ -22,13 +22,7 @@ public class Draw {
     }
 
     public static Image getImage(String imageName, int width, int height) {
-        try {
-            return (ImageIO.read(new File("src/com/kai/resources/"+imageName))).getScaledInstance(width, height, Image.SCALE_FAST);
-        } catch (IOException e) {
-            System.out.println(imageName + " loading error.");
-            e.printStackTrace();
-        }
-        return null;
+        return (getImage(imageName)).getScaledInstance(width, height, Image.SCALE_FAST);
     }
 
 }

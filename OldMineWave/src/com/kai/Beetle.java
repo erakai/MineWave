@@ -26,7 +26,7 @@ public class Beetle extends Enemy {
 		shootTick = 0;
 		rand = new Random();
 		try {                
-		beetle = ImageIO.read(new File("beetle.png"));
+		beetle = ImageIO.read(new File("OldMineWave/src/com/kai/beetle.png"));
 		} catch (IOException ex) { System.out.println("beetle exception"); }    
 	}	
 	

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MineWave:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MineWave_jar</output-path>
+    <root id="archive" name="MineWave.jar">
+      <element id="module-output" name="MineWave" />
+    </root>
+  </artifact>
+</component>

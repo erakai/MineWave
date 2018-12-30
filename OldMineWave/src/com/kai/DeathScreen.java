@@ -15,9 +15,9 @@ public class DeathScreen {
 	BufferedImage deathsc;
 	boolean putinto;
 	static boolean confirmed;
-	String fileName = "leaderboards/leaderboard.txt";
-	String fileName2 = "leaderboards/leaderboard2.txt";
-	String fileName3 = "leaderboards/leaderboard3.txt";
+	String fileName = "OldMineWave/src/com/kai/leaderboards/leaderboard.txt";
+	String fileName2 = "OldMineWave/src/com/kai/leaderboards/leaderboard2.txt";
+	String fileName3 = "OldMineWave/src/com/kai/leaderboards/leaderboard3.txt";
 	int scores = 0;
 	String chars, ab, name;
 	int[] ldbScores = new int[10];
@@ -38,7 +38,7 @@ public class DeathScreen {
 		
 		
 		try {
-		deathsc = ImageIO.read(new File("DeathScreen.png"));
+		deathsc = ImageIO.read(new File("OldMineWave/src/com/kai/DeathScreen.png"));
 		} catch (IOException ex) { System.out.println("deathscreen exception"); }
 	}	
 	

@@ -26,7 +26,7 @@ public class MagicBallProjectile {
 		speed = 3;
 		myMagicBall = mine;
 		try {                
-		myprojimage = ImageIO.read(new File("EnemyBallProj.png"));
+		myprojimage = ImageIO.read(new File("OldMineWave/src/com/kai/EnemyBallProj.png"));
 		} catch (IOException ex) { System.out.println("magic ball projectile exception"); } 
 	
 	}

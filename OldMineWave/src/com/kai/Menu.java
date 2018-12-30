@@ -13,9 +13,9 @@ public class Menu {
 	
 	public void updateMenu(Graphics g, int h) {
 		try {                
-          menu = ImageIO.read(new File("Menu.png"));
+          menu = ImageIO.read(new File("OldMineWave/src/com/kai/Menu.png"));
         } catch (IOException ex) {
-			System.out.println("exception");
+			System.out.println("menu exception");
 		}
 		g.drawImage(menu, 310, 500, null);
 		g.setColor(Color.red);

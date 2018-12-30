@@ -32,10 +32,10 @@ public class Insect extends Enemy {
 		speed = 2;
 		damageTick = 0;
 		try {                
-		insectStraight = ImageIO.read(new File("insectStraight.png"));
+		insectStraight = ImageIO.read(new File("OldMineWave/src/com/kai/insectStraight.png"));
 		} catch (IOException ex) { System.out.println("ins exception"); }
 		try {                
-		insectAttacking = ImageIO.read(new File("insectAttacking.png"));
+		insectAttacking = ImageIO.read(new File("OldMineWave/src/com/kai/insectAttacking.png"));
 		} catch (IOException ex) { System.out.println("ins exception"); } 
 	}
 	

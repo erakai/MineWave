@@ -46,10 +46,10 @@ public class VampireBoss extends Enemy {
 		immune = false;
 		stage = 1;
 		try {                
-		myimage = ImageIO.read(new File("Boss2.png"));
+		myimage = ImageIO.read(new File("OldMineWave/src/com/kai/Boss2.png"));
 		} catch (IOException ex) { System.out.println("vamp exception"); }
 		try {                
-		invincible = ImageIO.read(new File("Boss2Invincible.png"));
+		invincible = ImageIO.read(new File("OldMineWave/src/com/kai/Boss2Invincible.png"));
 		} catch (IOException ex) { System.out.println("vamp exception"); } 
 	}
 	

@@ -30,7 +30,7 @@ public class InsectNest extends Enemy {
 		damageTick = 0;
 		moveTick = 0;
 		try {                
-		insectNest = ImageIO.read(new File("insectNest.png"));
+		insectNest = ImageIO.read(new File("OldMineWave/src/com/kai/insectNest.png"));
 		} catch (IOException ex) { System.out.println("nest exception"); }
 	}	
 		

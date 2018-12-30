@@ -29,7 +29,7 @@ public class beetleProjectile {
 		speed = 3;
 		myBeetle = mine;
 		try {                
-		beetleProj = ImageIO.read(new File("beetleProjectile.png"));
+		beetleProj = ImageIO.read(new File("OldMineWave/src/com/kai/beetleProjectile.png"));
 		} catch (IOException ex) { System.out.println("beetleProj exception"); } 
 	
 	}

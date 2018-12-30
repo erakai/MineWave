@@ -18,7 +18,7 @@ public class Mine {
 		this.x = x;
 		this.y = y;
 		try {                
-		mine = ImageIO.read(new File("Mine.png"));
+		mine = ImageIO.read(new File("OldMineWave/src/com/kai/Mine.png"));
 		} catch (IOException ex) { System.out.println("mine exception"); }
 	}
 

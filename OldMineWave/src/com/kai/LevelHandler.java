@@ -33,11 +33,11 @@ public class LevelHandler {
 	public LevelHandler() {
 		level = 0;
 		rand = new Random();
-		try {                
-		background = ImageIO.read(new File("Background.png"));
+		try {
+		background = ImageIO.read(new File("OldMineWave/src/com/kai/Background.png"));
 		} catch (IOException ex) { System.out.println("background exception"); }
 		try {                
-		bossincimage = ImageIO.read(new File("bossinc.png"));
+		bossincimage = ImageIO.read(new File("OldMineWave/src/com/kai/bossinc.png"));
 		} catch (IOException ex) { System.out.println("lvlhandler exception"); }
 	}	
 	

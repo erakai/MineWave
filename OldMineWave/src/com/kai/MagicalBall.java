@@ -32,7 +32,7 @@ public class MagicalBall extends Enemy {
 		shootTick = 0;
 		teleportTick = rand.nextInt(249)+1;
 		try {                
-		myimage = ImageIO.read(new File("EnemyBall.png"));
+		myimage = ImageIO.read(new File("OldMineWave/src/com/kai/EnemyBall.png"));
 		} catch (IOException ex) { System.out.println("magical ball exception"); }    
 	}	
 	

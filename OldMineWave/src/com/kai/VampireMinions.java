@@ -31,7 +31,7 @@ public class VampireMinions extends Enemy {
 		speed = 2;
 		damageTick = 0;
 		try {                
-		myimage = ImageIO.read(new File("Boss2Minion.png"));
+		myimage = ImageIO.read(new File("OldMineWave/src/com/kai/Boss2Minion.png"));
 		} catch (IOException ex) { System.out.println("vampire minion exception"); }
 	}
 	

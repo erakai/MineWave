@@ -23,7 +23,7 @@ public class ArmoredInsect extends Enemy {
 		speed = 1;
 		damageTick = 0;
 		try {                
-		selfidle = ImageIO.read(new File("ArmoredInsect1.png"));
+		selfidle = ImageIO.read(new File("OldMineWave/src/com/kai/ArmoredInsect1.png"));
 		} catch (IOException ex) { System.out.println("armored ins exception"); }
 	}		
 	

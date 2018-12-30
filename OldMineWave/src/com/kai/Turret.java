@@ -30,7 +30,7 @@ public class Turret extends Enemy {
 		speed = 0;
 		shootTick = 0;
 		try {                
-		turretImage = ImageIO.read(new File("Turret.png"));
+		turretImage = ImageIO.read(new File("OldMineWave/src/com/kai/Turret.png"));
 		} catch (IOException ex) { System.out.println("turret exception"); }    
 	}
 	

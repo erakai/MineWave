@@ -34,28 +34,28 @@ public class WormBoss extends Enemy {
 		chargeY = -1;
 		
 		try {                
-		wormRight = ImageIO.read(new File("WormBossSprites/WormRight.png"));
+		wormRight = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormRight.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 		try {                
-		wormUpRight = ImageIO.read(new File("WormBossSprites/WormUpRight.png"));
+		wormUpRight = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormUpRight.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 		try {                
-		wormUp = ImageIO.read(new File("WormBossSprites/WormUp.png"));
+		wormUp = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormUp.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 		try {                
-		wormUpLeft = ImageIO.read(new File("WormBossSprites/WormUpLeft.png"));
+		wormUpLeft = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormUpLeft.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 		try {                
-		wormLeft = ImageIO.read(new File("WormBossSprites/WormLeft.png"));
+		wormLeft = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormLeft.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 		try {                
-		wormDownLeft = ImageIO.read(new File("WormBossSprites/WormDownLeft.png"));
+		wormDownLeft = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormDownLeft.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 		try {                
-		wormDown = ImageIO.read(new File("WormBossSprites/WormDown.png"));
+		wormDown = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormDown.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 		try {                
-		wormDownRight = ImageIO.read(new File("WormBossSprites/WormDownRight.png"));
+		wormDownRight = ImageIO.read(new File("OldMineWave/src/com/kai/WormBossSprites/WormDownRight.png"));
 		} catch (IOException ex) { System.out.println("worm exception"); }
 	}	
 

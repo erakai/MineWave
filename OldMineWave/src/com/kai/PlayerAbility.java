@@ -28,17 +28,17 @@ public class PlayerAbility {
 		comboCooldown = 7;
 		
 		try {                
-		teleportImage = ImageIO.read(new File("AbilitySprites/TeleportImage.png"));
+		teleportImage = ImageIO.read(new File("OldMineWave/src/com/kai/AbilitySprites/TeleportImage.png"));
 		} catch (IOException ex) { System.out.println("ability exception"); }
 		try {                
-		shieldImage = ImageIO.read(new File("AbilitySprites/ShieldImage.png"));
+		shieldImage = ImageIO.read(new File("OldMineWave/src/com/kai/AbilitySprites/ShieldImage.png"));
 		} catch (IOException ex) { System.out.println("ability exception"); }
 		try {                
-		comboImage = ImageIO.read(new File("AbilitySprites/ComboImage.png"));
+		comboImage = ImageIO.read(new File("OldMineWave/src/com/kai/AbilitySprites/ComboImage.png"));
 		} catch (IOException ex) { System.out.println("ability exception"); }
 		try {
-		startBackground = ImageIO.read(new File("StartBackground.png"));
-		} catch (IOException ex) { System.out.println("ability exception"); }
+		startBackground = ImageIO.read(new File("OldMineWave/src/com/kai/StartBackground.png"));
+		} catch (IOException ex) { System.out.println("ability bg exception"); }
 	}	
 	
 	public void drawMe(Graphics g) {

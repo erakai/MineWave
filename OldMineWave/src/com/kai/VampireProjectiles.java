@@ -26,7 +26,7 @@ public class VampireProjectiles {
 		py = spy;
 		speed = 5;
 		try {                
-		vampireproj = ImageIO.read(new File("Boss2Projectile.png"));
+		vampireproj = ImageIO.read(new File("OldMineWave/src/com/kai/Boss2Projectile.png"));
 		} catch (IOException ex) { System.out.println("vampireproj exception"); } 
 	
 	}

@@ -1,0 +1,69 @@
+New changelog file as of December 2018!
+
+Was writing this when IntelliJ crashed and deleted it...
+
+MineWave was fun.
+I'd like to go back and add new features/clean it up.
+I've decided to almost completely rewrite it, only using some snippets here and there.
+I'll be able to add more systems and basically fun things.
+
+Old changelog (from over a year ago) was stored in 'A. Changelog.txt' (OldMineWave/src/com/kai/A. Changelog.txt).
+All new notes and changes will be put here.
+
+All TODOs/planned changes can be found using IntelliJ's to-do finder thing.
+
+Changelog:
+
+    12/25/18:
+        - Created framework:
+        - /Master/ mostly set up.
+        - Basic GameObject/Entity layout organized.
+        - Packages arranged.
+
+    12/26/18:
+        - More framework/set up.
+        - Skill system set up
+        - Selection Screen mostly finished (still needs work)
+        - Functional Player Movement
+        - Projectile class
+        - The player can place mines
+
+    12/27/18:
+        - Combat (damage, health, etc) in place
+        - LevelHandler/levels functioning
+        - Everything has collision!
+
+    12/28/18:
+        - In-game HUD with health, mines, and level
+        - The player can use the selected skill
+        - Added ComboSkill
+        - Wrote ProjectileEnemy and changed Projectile, it's a bit messy now
+        - Added Beetle
+        - Added InsectNest
+
+    12/29/18:
+        *=These will list more of the smaller fixes/changes from now on.=*
+
+        - Fixed constant ConcurrentModificationExceptions (I think)
+        - Added ArmoredInsect
+        - Added Regeneration
+        - Fixed enemies spawning off screen
+        - Put a little 'E' above the starter ability.
+        - Fixed attacks per seconds for enemies
+
+
+Future Enemy Possibilities:
+    - A thrower who throws a damaging aoe attack.
+    - A 'castle' that spawns armored insects and shoots you.
+    - An enemy that teleports.
+    - An enemy that heals surrounding/nearby enemies.
+    - Something with both ranged and melee, switching between the two modes with distance.
+    - Buzzsaws/lasers/Something to restrict movement.
+
+Future:
+    - Items
+    - Traits
+    - Stats
+    - More things to chose from when creating your character
+    - Similarly to Ambush, go through rooms and have a map
+    - More Bosses

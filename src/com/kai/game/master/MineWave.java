@@ -4,8 +4,10 @@ import javax.swing.*;
 
 public class MineWave {
 
+    //TODO: Before launching the main game, have a dialogue asking what size window the user would like.
+
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Mine Wave");
+        JFrame frame = new JFrame("MineWave");
         Screen screen = new Screen();
         frame.add(screen);
 
