@@ -14,7 +14,8 @@ public class Input {
     private static List<Integer> keyReleases = new ArrayList<>();
     private static List<int[]> mouseClicks = new ArrayList<>();
 
-    public static void updateChanges() {
+    //i barely know what synchronized does pls work and stop concurrent modification
+    public synchronized static void updateChanges() {
         keyPressChanges();
         keyReleaseChanges();
         mouseClickChanges();

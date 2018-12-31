@@ -21,7 +21,7 @@ public class Beetle extends ProjectileEnemy {
 
     public void createProjectile(int tX, int tY) {
         projectiles.add(new Projectile(this, ResourceManager.getImage("beetleProjectile.png", BEETLE_PROJ_WIDTH, BEETLE_PROJ_HEIGHT)
-                , getX(), getY(), BEETLE_PROJ_WIDTH, BEETLE_PROJ_HEIGHT, 4, tX, tY, getRange()));
+                , getX(), getY(), BEETLE_PROJ_WIDTH, BEETLE_PROJ_HEIGHT, 4, tX, tY, getRange(), getDamage()));
     }
 
 }

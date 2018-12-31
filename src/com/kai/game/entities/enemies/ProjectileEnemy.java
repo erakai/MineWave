@@ -31,7 +31,7 @@ public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
     @Override
     public void onProjectileCollision(GameObject collidedWith, Projectile p) {
         if (collidedWith instanceof Player) {
-            this.attack((Entity)collidedWith);
+            this.attack((Entity)collidedWith, p.getDamage());
         }
         addToRemoveQueue(p);
     }

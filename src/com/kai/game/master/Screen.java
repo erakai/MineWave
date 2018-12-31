@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Screen extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
+    //Either 1000/500 or 1200/600 is recommended, imo.
     public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = WINDOW_WIDTH/2;
     public static final int FRAMES_PER_SECOND = 60;

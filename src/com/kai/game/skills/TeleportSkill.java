@@ -9,7 +9,7 @@ public class TeleportSkill extends Skill {
         super("TeleportSkill", owner, ResourceManager.getImage("TeleportImage.png", Skill.SKILL_WIDTH, Skill.SKILL_HEIGHT), 10,
                 new String[] {
                         "Teleport: 10 second cooldown.",
-                        "Teleports the player to the mouse, leaving a trail of mines behind them."
+                        "Teleports the player to the selected location."
                 });
     }
 

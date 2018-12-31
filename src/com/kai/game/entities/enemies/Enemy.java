@@ -37,8 +37,13 @@ public abstract class Enemy extends Entity {
 
     @Override
     public void attack(Entity target) {
+        attack(target, getDamage());
+    }
+
+    @Override
+    public void attack(Entity target, int ovrDamage) {
         if (damageTick >= maxDamageTick) {
-            target.takeDamage(getDamage());
+            target.takeDamage(ovrDamage);
             damageTick = 0;
         }
     }

@@ -38,7 +38,7 @@ public class LevelHandler implements Updatable {
         List<Enemy> toRemove = new ArrayList<>();
         for (Enemy e: enemies) {
             e.update();
-            if (e.getHealth() <= 0) {
+            if ((int)e.getHealth() < 1) {
                 if (e instanceof SpecialDeath) {
                     ((SpecialDeath) e).onDeath();
                 }
@@ -98,8 +98,6 @@ public class LevelHandler implements Updatable {
         } while	(((Math.abs(Screen.getPlayer().getY() - ry) < MIN_DISTANCE_FROM_PLAYER)
                 || !(ry > 0))
                 || !(ry+enemyHeight < Screen.WINDOW_HEIGHT));
-
-        System.out.println(ry + " + " + enemyHeight + " < " + Screen.WINDOW_HEIGHT);
         return ry;
     }
 
@@ -139,13 +137,13 @@ public class LevelHandler implements Updatable {
             case 1:
                 createNewEnemy(Insect.class, 1);
                 break;
-            default:
-                switch (rand.nextInt(5)) {
+            case 2:
+                switch (rand.nextInt(4)) {
                     case 0:
                         createNewEnemy(Beetle.class,  2);
                         break;
                     case 1:
-                        createNewEnemy(Insect.class, 3);
+                        createNewEnemy(Insect.class, 2);
                         break;
                     case 2:
                         createNewEnemy(Insect.class, 1);
@@ -154,12 +152,55 @@ public class LevelHandler implements Updatable {
                     case 3:
                         createNewEnemy(InsectNest.class, 1);
                         break;
-                    case 4:
+                }
+                break;
+            case 3:case 4:
+                switch (rand.nextInt(4)) {
+                    case 0:
+                        createNewEnemy(Insect.class ,2);
+                        createNewEnemy(ArmoredInsect.class, 2);
+                        break;
+                    case 1:
+                        createNewEnemy(ArmoredInsect.class, 2);
+                        createNewEnemy(InsectNest.class, 1);
+                        break;
+                    case 2:
+                        createNewEnemy(Beetle.class, 2);
                         createNewEnemy(ArmoredInsect.class, 1);
-                        createNewEnemy(Beetle.class, 1);
+                        createNewEnemy(Insect.class, 1);
+                        break;
+                    case 3:
+                        createNewEnemy(Beetle.class, 2);
+                        createNewEnemy(InsectNest.class, 1);
+                        createNewEnemy(ArmoredInsect.class, 1);
                         break;
                 }
                 break;
+            default:
+                switch (rand.nextInt(5)) {
+                    case 0:
+                        createNewEnemy(ArmoredInsect.class, 3);
+                        createNewEnemy(Beetle.class, 2);
+                        break;
+                    case 1:
+                        createNewEnemy(InsectNest.class, 2);
+                        createNewEnemy(Insect.class, 1);
+                        break;
+                    case 2:
+                        createNewEnemy(Insect.class, 4);
+                        createNewEnemy(ArmoredInsect.class, 1);
+                        break;
+                    case 3:
+                        createNewEnemy(Beetle.class, 4);
+                        break;
+                    case 4:
+                        createNewEnemy(InsectNest.class, 1);
+                        createNewEnemy(Beetle.class, 2);
+                        createNewEnemy(ArmoredInsect.class, 1);
+                        break;
+                }
+                break;
+
         }
     }
 

@@ -4,10 +4,7 @@ import com.kai.game.GameObject;
 import com.kai.game.entities.Player;
 import com.kai.game.master.ResourceManager;
 import com.kai.game.master.Screen;
-import com.kai.game.skills.ComboSkill;
-import com.kai.game.skills.ShieldSkill;
-import com.kai.game.skills.Skill;
-import com.kai.game.skills.TeleportSkill;
+import com.kai.game.skills.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +42,7 @@ public class SelectionScreen extends GameObject {
         selectableAbilities.add(new TeleportSkill(null));
         selectableAbilities.add(new ShieldSkill(null));
         selectableAbilities.add(new ComboSkill(null));
+        selectableAbilities.add(new GreatMineSkill(null));
     }
 
     public static Skill getCurrentlySelected(Player p) {
@@ -55,6 +53,8 @@ public class SelectionScreen extends GameObject {
                 return new ShieldSkill(p);
             case "ComboSkill":
                 return new ComboSkill(p);
+            case "GreatMineSkill":
+                return new GreatMineSkill(p);
             default:
                 return null;
         }
@@ -80,6 +80,10 @@ public class SelectionScreen extends GameObject {
         g.drawImage(getSelfImage(), getX(), getY(), null);
 
         for (int i = 0; i < selectableAbilities.size(); i++) {
+            g.setColor(new Color(247, 181, 26));
+            if (currentlySelected == selectableAbilities.get(i)) {
+                g.fillRect((startDrawX + (i*10) + (i * Skill.SKILL_WIDTH))-5, startDrawY-5, Skill.SKILL_WIDTH+10, Skill.SKILL_HEIGHT+10);
+            }
             selectableAbilities.get(i).drawMe(g, startDrawX + (i*10) + (i * Skill.SKILL_WIDTH), startDrawY);
         }
 

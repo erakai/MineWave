@@ -165,9 +165,9 @@ public class DeathScreen {
 		}
 
 		try {
-			PrintWriter writer = new PrintWriter("leaderboards\\leaderboard.txt");
-			PrintWriter writer2 = new PrintWriter("leaderboards\\leaderboard2.txt");
-			PrintWriter writer3 = new PrintWriter("leaderboards\\leaderboard3.txt");
+			PrintWriter writer = new PrintWriter(fileName);
+			PrintWriter writer2 = new PrintWriter(fileName2);
+			PrintWriter writer3 = new PrintWriter(fileName3);
 		
 			for (int q = 0; q < 10; q++) {
 				writer.println(ldbScores[q]);

@@ -15,8 +15,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     private String dir;
 
     private int maxMines, currentMines;
-    private final int mineWidth = (int)(25.0/1200 * Screen.WINDOW_WIDTH);
-    private final int mineHeight = (int)(25.0/600 * Screen.WINDOW_HEIGHT);
+    public final int MINE_WIDTH = (int)(25.0/1200 * Screen.WINDOW_WIDTH);
+    public final int MINE_HEIGHT = (int)(25.0/600 * Screen.WINDOW_HEIGHT);
 
     private boolean moveRight, moveLeft, moveUp, moveDown;
 
@@ -48,17 +48,26 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         target.takeDamage(getPlayerDamage());
     }
 
+    public void attack(Entity target, int ovrDamage) {target.takeDamage(ovrDamage );}
+
     public void createProjectile(int targetX, int targetY) {
         if (currentMines < maxMines) {
             currentMines++;
-            projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", mineWidth, mineHeight),
-                    (int)(targetX-(mineWidth/2.0)), (targetY-(mineHeight/2)), mineWidth, mineHeight, 0, targetX, targetY, 0));
+            projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_WIDTH, MINE_HEIGHT),
+                    (int)(targetX-(MINE_WIDTH /2.0)), (targetY-(MINE_HEIGHT /2)), MINE_WIDTH, MINE_HEIGHT, 0, targetX, targetY, 0, getPlayerDamage()));
+        }
+    }
+
+    public void createProjectile(Projectile p) {
+        if (currentMines < maxMines) {
+            currentMines++;
+            projectiles.add(p);
         }
     }
 
     public void onProjectileCollision(GameObject collidedWith, Projectile p) {
         if (collidedWith instanceof Enemy) {
-            this.attack((Entity)collidedWith);
+            this.attack((Entity)collidedWith, p.getDamage());
         }
         addToRemoveQueue(p);
     }
@@ -217,7 +226,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     }
 
-
-
-
+    public List<Projectile> getProjectiles() {
+        return projectiles;
+    }
 }
