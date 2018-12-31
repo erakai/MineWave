@@ -5,6 +5,10 @@
 
 Wave-based game with enemies progressing in difficulty, where the player must survive using abilities and mines.
 
+>You can view the original, horribly made version of this game in OldMineWave/.
+
+>The new, remastered version can be found in src/.
+
 ## Features:
 
   - Wave based level generation.
