@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: MineWave/src
-Main-Class: com.kai.game.master.MineWave
-

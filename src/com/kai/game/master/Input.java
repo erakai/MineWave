@@ -103,21 +103,15 @@ public class Input {
     }
 
     public static void keyPressed(int keycode) {
-        if (!Screen.updatingUserInput) {
-            keyPresses.add(keycode);
-        }
+        keyPresses.add(keycode);
     }
 
     public static void keyReleased(int keycode) {
-        if (!Screen.updatingUserInput) {
-            keyReleases.add(keycode);
-        }
+        keyReleases.add(keycode);
     }
 
     public static void mouseClicked(int mouseX, int mouseY) {
-        if (!Screen.updatingUserInput) {
-            mouseClicks.add(new int[]{mouseX, mouseY});
-        }
+        mouseClicks.add(new int[]{mouseX, mouseY});
     }
 
     public static void mouseMoved(int mouseX, int mouseY) {

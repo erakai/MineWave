@@ -20,8 +20,6 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
     public static final int WINDOW_HEIGHT = WINDOW_WIDTH/2;
     public static final int FRAMES_PER_SECOND = 60;
 
-    public static boolean updatingUserInput = false;
-
     public static GameState state;
 
     //Handles background and scene objects.
@@ -81,9 +79,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
     private void update() {
 
         //Respond to all player input.
-        updatingUserInput = true;
         Input.updateChanges();
-        updatingUserInput = false;
 
         if (levelHandler != null) {
             levelHandler.updateEnemies();
@@ -178,13 +174,13 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
     public void keyReleased(KeyEvent e) {Input.keyReleased(e.getKeyCode());}
 
     @Override
-    public void mouseClicked(MouseEvent e) {Input.mouseClicked(e.getX(), e.getY());}
+    public void mouseClicked(MouseEvent e) {}
 
     @Override
     public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {Input.mouseClicked(e.getX(), e.getY());}
 
     @Override
     public void mouseEntered(MouseEvent e) {}
