@@ -2,9 +2,11 @@ package com.kai.game.master;
 
 import com.kai.game.GameObject;
 import com.kai.game.Updatable;
+import com.kai.game.entities.Entity;
 import com.kai.game.entities.SpecialDeath;
 import com.kai.game.entities.UsesProjectiles;
 import com.kai.game.entities.enemies.*;
+import com.kai.game.hud.MainMenu;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,14 +18,17 @@ public class LevelHandler implements Updatable {
     private static List<Enemy> toAddQueue;
 
     private static int currentLevel;
+    private static int displayedLevel;
     private static Random rand;
 
+    //The closest distance that an enemy will spawn to the palyer.
     private static final int MIN_DISTANCE_FROM_PLAYER = 80;
 
     LevelHandler(int startingLevel) {
         enemies = new ArrayList<>();
         toAddQueue = new ArrayList<>();
         LevelHandler.currentLevel = startingLevel;
+        displayedLevel = startingLevel;
         rand = new Random();
         transitionToLevel(currentLevel);
     }
@@ -112,12 +117,13 @@ public class LevelHandler implements Updatable {
 
     private void checkForLevelCompletion() {
         if (enemies.isEmpty() && toAddQueue.isEmpty()) {
+            displayedLevel++;
             currentLevel++;
             transitionToLevel(currentLevel);
         }
     }
 
-    private static void createNewEnemy(Class c, int amount) {
+    private void createNewEnemy(Class c, int amount) {
         for (int i = 0; i < amount; i++) {
             if (c == Insect.class) {
                 enemies.add(new Insect(getXAwayFromPlayer(Insect.INSECT_WIDTH), getYAwayFromPlayer(Insect.INSECT_HEIGHT)));
@@ -131,6 +137,10 @@ public class LevelHandler implements Updatable {
                 enemies.add(new Turret(getXAwayFromPlayer(Turret.TURRET_WIDTH), getYAwayFromPlayer(Turret.TURRET_HEIGHT)));
             } else if (c == Worm.class) {
                 enemies.add(new Worm(getXAwayFromPlayer(Worm.WORM_WIDTH), getYAwayFromPlayer(Worm.WORM_HEIGHT)));
+            } else if (c == BossIncomingSign.class) {
+                int bossx = (int)(500.0/1200.0 * Screen.WINDOW_WIDTH);
+                int bossy = (int)(150.0/600.0 * Screen.WINDOW_HEIGHT);
+                enemies.add(new BossIncomingSign(bossx, bossy, 6));
             }
         }
     }
@@ -154,10 +164,14 @@ public class LevelHandler implements Updatable {
         }
 
         if (level == 8) {
+            bossInc();
+        }
+
+        if (level == 9) {
             wormLevel8();
         }
 
-        if (level >= 9) {
+        if (level >= 10) {
             difficultyFive();
         }
 
@@ -263,13 +277,16 @@ public class LevelHandler implements Updatable {
         }
     }
 
-    //TODO: Implement a delay/warning of several seconds before "boss" levels, so the player gets situated.
-    
+    private void bossInc() {
+        centerPlayer();
+        Screen.getPlayer().removeAllMines();
+
+        createNewEnemy(BossIncomingSign.class, 1);
+    }
+
     private void wormLevel8() {
         int scaled50X = (int)(50.0/1200.0 * Screen.WINDOW_WIDTH);
         int scaled50Y = (int)(50.0/600.0 * Screen.WINDOW_HEIGHT);
-
-        centerPlayer();
 
         createNewEnemy(Worm.class, 1);
         enemies.add(new Turret(scaled50X, scaled50Y)); // top left
@@ -284,8 +301,53 @@ public class LevelHandler implements Updatable {
         Screen.getPlayer().setY(Screen.WINDOW_HEIGHT/2 + (Screen.getPlayer().height/2));
     }
 
-    public static int getCurrentLevel() {
+    public int getCurrentLevel() {
         return currentLevel;
+    }
+
+    public int getDisplayedLevel() {
+        return displayedLevel;
+    }
+
+    private class BossIncomingSign extends Enemy {
+
+        private int duration;
+        private long start, current;
+
+        private static final int BOSS_INC_WIDTH = (int)(200.0/1200.0 * Screen.WINDOW_WIDTH);
+        private static final int BOSS_INC_HEIGHT = (int)(50.0/600.0 * Screen.WINDOW_HEIGHT);
+
+        public BossIncomingSign(int x, int y, int duration) {
+            super(ResourceManager.getImage("bossinc.png", BOSS_INC_WIDTH, BOSS_INC_HEIGHT), x, y,
+                    BOSS_INC_WIDTH, BOSS_INC_HEIGHT, 0, 1, "Boss Incoming Sign", 0, 1);
+            this.duration = duration;
+            this.start = System.currentTimeMillis();
+
+            //Since it doesn't really count as as level;
+            displayedLevel--;
+        }
+
+        @Override
+        public void chase(int targetX, int targetY) {
+            current = System.currentTimeMillis();
+        }
+
+        @Override
+        public void drawMe(Graphics g) {
+            g.drawImage(getSelfImage(), getX(), getY(), null);
+            g.setColor(Color.red);
+            //TODO: Have a constant for ogfont somewhere that isn't MainMenu.
+            g.setFont(MainMenu.ogfont);
+            g.setFont(new Font(g.getFont().getFontName(), g.getFont().getStyle(), (int)(g.getFont().getSize() * (Screen.WINDOW_WIDTH/(1200.0/1.75)))));
+            g.drawString("BOSS INCOMING", (int)(519.0/1200.0 * Screen.WINDOW_WIDTH), (int)(182.0/600.0 * Screen.WINDOW_HEIGHT));
+        }
+
+        @Override
+        public void update() {
+            if (current - start > (duration * 1000)) {
+                setHealth(0);
+            }
+        }
     }
 
 }

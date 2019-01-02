@@ -1,6 +1,7 @@
 package com.kai.game.master;
 
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,9 +15,9 @@ public class ResourceManager {
 
     public static BufferedImage getImage(String imageName) {
         try {
-            return (ImageIO.read(new File("src/com/kai/resources/"+imageName)));
+            return (ImageIO.read(ResourceManager.class.getResourceAsStream("/com/kai/resources/"+imageName)));
         } catch (IOException e) {
-            System.out.println(imageName + " loading error.");
+            System.out.println("/com/kai/resources/" + imageName + " loading error.");
             e.printStackTrace();
         }
         return null;

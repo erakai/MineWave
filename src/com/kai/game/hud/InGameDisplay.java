@@ -78,7 +78,7 @@ public class InGameDisplay extends GameObject implements Updatable {
         maxHealthToDraw = getPlayer().getMaxHealth();
         minesToDraw = getPlayer().getCurrentMines();
         maxMinesToDraw = getPlayer().getMaxMines();
-        currentLevelToDraw = Screen.getLevelHandler().getCurrentLevel();
+        currentLevelToDraw = Screen.getLevelHandler().getDisplayedLevel();
         skillToDraw = getPlayer().getSkills().get(0);
     }
 

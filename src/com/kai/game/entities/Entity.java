@@ -64,6 +64,10 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
         return health;
     }
 
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
     public int getSpeed() {
         return speed;
     }

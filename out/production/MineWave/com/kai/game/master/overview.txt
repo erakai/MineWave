@@ -66,8 +66,11 @@ Changelog:
         - Added Worm
         - Added more levels, including the "mini-boss" one at level 8 with a worm
 
+    1/2/19:
+        - There is no a warning before bosses, along with a delay.
 
-Still need to add turret, wormboss, vampireboss, magicball, deathscreen, leaderboards
+
+Still need to add vampireboss, magicball, deathscreen, leaderboards
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MineWave.iml" filepath="$PROJECT_DIR$/MineWave.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OldMineWave/OldMineWave.iml" filepath="$PROJECT_DIR$/OldMineWave/OldMineWave.iml" />
     </modules>
   </component>
 </project>
