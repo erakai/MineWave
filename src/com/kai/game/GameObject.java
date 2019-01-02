@@ -1,6 +1,7 @@
 package com.kai.game;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
     private Image self;

@@ -58,8 +58,13 @@ public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
 
 
     @Override
+    public void attack(Entity target, int ovrDamage) {
+        target.takeDamage(ovrDamage);
+    }
+
+    @Override
     public void attack(Entity target) {
-        target.takeDamage(getDamage());
+        attack(target, getDamage());
     }
 
     //DamageTick represents how often to shoot in this case.

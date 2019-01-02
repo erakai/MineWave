@@ -47,13 +47,13 @@ public class Turret extends Enemy {
 	
 	public void chase(int targetX, int targetY) {
 		if (shootTick > 100) {
-			listOfProjectiles.add(new TurretProjectile(x, y, x, y-500, this));			//shoots up
+			listOfProjectiles.add(new TurretProjectile(x, y,      x,     y-500, this));			//shoots up
 			listOfProjectiles.add(new TurretProjectile(x, y, x-500, y-500, this));			//shoots up left
-			listOfProjectiles.add(new TurretProjectile(x, y, x-500, y, this));			//shoots left
+			listOfProjectiles.add(new TurretProjectile(x, y, x-500,      y, this));			//shoots left
 			listOfProjectiles.add(new TurretProjectile(x, y, x-500, y+500, this));			//shoots down left
-			listOfProjectiles.add(new TurretProjectile(x, y, x, y+500, this));			//shoots down
+			listOfProjectiles.add(new TurretProjectile(x, y,      x,     y+500, this));			//shoots down
 			listOfProjectiles.add(new TurretProjectile(x, y, x+500, y+500, this));			//shoots down right
-			listOfProjectiles.add(new TurretProjectile(x, y, x+500, y, this));			//shoots right
+			listOfProjectiles.add(new TurretProjectile(x, y, x+500,      y, this));			//shoots right
 			listOfProjectiles.add(new TurretProjectile(x, y, x+500, y-500, this));			//shoots up right
 			shootTick = 0;
 		} else {

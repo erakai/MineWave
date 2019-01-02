@@ -57,6 +57,16 @@ Changelog:
 
         !!!!!!! CONCURRENTMODIFICATIONECEPTIONS ARE BACK RUN !KHU:H$PY#P
 
+    12/30/18:
+        - Added Turret
+        - Fixed a bug where enemy projectiles did no damage
+        - Fixed a possible crash that would occur when generating Turrets
+
+    1/1/19:
+        - Added Worm
+
+
+
 Still need to add turret, wormboss, vampireboss, magicball, deathscreen, leaderboards
 
 Possible way to have effects:

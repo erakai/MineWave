@@ -14,8 +14,7 @@ public class Input {
     private static List<Integer> keyReleases = new ArrayList<>();
     private static List<int[]> mouseClicks = new ArrayList<>();
 
-    //i barely know what synchronized does pls work and stop concurrent modification
-    public synchronized static void updateChanges() {
+    public static void updateChanges() {
         keyPressChanges();
         keyReleaseChanges();
         mouseClickChanges();
@@ -104,15 +103,21 @@ public class Input {
     }
 
     public static void keyPressed(int keycode) {
-        keyPresses.add(keycode);
+        if (!Screen.updatingUserInput) {
+            keyPresses.add(keycode);
+        }
     }
 
     public static void keyReleased(int keycode) {
-        keyReleases.add(keycode);
+        if (!Screen.updatingUserInput) {
+            keyReleases.add(keycode);
+        }
     }
 
     public static void mouseClicked(int mouseX, int mouseY) {
-        mouseClicks.add(new int[] {mouseX, mouseY});
+        if (!Screen.updatingUserInput) {
+            mouseClicks.add(new int[]{mouseX, mouseY});
+        }
     }
 
     public static void mouseMoved(int mouseX, int mouseY) {

@@ -35,23 +35,25 @@ public class Projectile extends GameObject implements Updatable {
         distanceTraveled = 0;
     }
 
+
     //TODO: Manually setting the target to off screen so the projectiles travel the full range seems bad. Alternatives?
 
     //TODO: Method doesn't work when you are to the left of the enemy (Proj gets stuck on x = 0). Fix?
+
     private void updateTarget() {
-        double m = (    ((double)(targetY - getY())) / ((double)(targetX - getX()))    );
-        int b = (int)(getY() - (m * getX()));
+        double m = (((double) (targetY - getY())) / ((double) (targetX - getX())));
+        int b = (int) (getY() - (m * getX()));
         if (targetX > getX()) {
             targetX = getCloseNumber(1.2, Screen.WINDOW_WIDTH, targetX);
-            targetY = (int)((m * targetX) + b);
+            targetY = (int) ((m * targetX) + b);
         } else if (targetX < getX()) {
             targetX -= (getCloseNumber(1.2, Screen.WINDOW_WIDTH, targetX));
-            targetY = (int)((m * targetX) + b);
+            targetY = (int) ((m * targetX) + b);
         } else {
             if (targetY > getY()) {
-                targetY *= 5;
+                targetY = Screen.WINDOW_HEIGHT;
             } else if (targetY < getY()) {
-                targetY -= (targetY * 5);
+                targetY = 0-height;
             }
         }
     }
@@ -59,6 +61,10 @@ public class Projectile extends GameObject implements Updatable {
     private int getCloseNumber(double multiAmount, int bound, int start) {
         if (start == 0) {
             return start;
+        }
+
+        if (start < 0) {
+            start *= -1;
         }
 
         double num = start;
@@ -75,12 +81,13 @@ public class Projectile extends GameObject implements Updatable {
 
     @Override
     public void update() {
+
         double deltaX = targetX - getX();
         double deltaY = targetY - getY();
         double direction = Math.atan2(deltaY, deltaX);
 
-        int xTravelAmount = (int)((speed * Math.cos(direction)));
-        int yTravelAmount = (int)((speed * Math.sin(direction)));
+        int xTravelAmount = (int) ((speed * Math.cos(direction)));
+        int yTravelAmount = (int) ((speed * Math.sin(direction)));
 
         updateDistanceTraveled(xTravelAmount, yTravelAmount);
 
@@ -90,6 +97,7 @@ public class Projectile extends GameObject implements Updatable {
 
         setX(getX() + xTravelAmount);
         setY(getY() + yTravelAmount);
+
     }
 
     private void updateDistanceTraveled(int xAmount, int yAmount) {
@@ -107,5 +115,13 @@ public class Projectile extends GameObject implements Updatable {
 
     public int getDamage() {
         return damage;
+    }
+
+    public int getTargetX() {
+        return targetX;
+    }
+
+    public int getTargetY() {
+        return targetY;
     }
 }

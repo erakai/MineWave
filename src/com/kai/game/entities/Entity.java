@@ -13,6 +13,8 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
 
     //TODO: Remove instance width/height values and use constants for each class.
 
+    //TODO: Replace the constants for width/height for each class and use getters.
+
     public Entity(Image self, int x, int y, int width, int height, int speed, int maxHealth) {
         super(self, x, y, width, height);
         this.speed = speed;
@@ -21,8 +23,12 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
     }
 
     public double distanceTo (Entity otherEntity) {
-        double a = Math.abs(getX() - otherEntity.getX());
-        double b = Math.abs(getY() - otherEntity.getY());
+        return distanceTo(otherEntity.getX(), otherEntity.getY());
+    }
+
+    public double distanceTo (int tX, int tY) {
+        double a = Math.abs(getX() - tX);
+        double b = Math.abs(getY() - tY);
         return(Math.sqrt((a*a) + (b*b)));
     }
 
