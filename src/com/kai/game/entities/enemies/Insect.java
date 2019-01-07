@@ -1,7 +1,7 @@
 package com.kai.game.entities.enemies;
 
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
+import com.kai.game.util.ResourceManager;
+import com.kai.game.core.Screen;
 
 public class Insect extends Enemy {
 

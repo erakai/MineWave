@@ -2,7 +2,8 @@ package com.kai.game.entities;
 
 import com.kai.game.GameObject;
 import com.kai.game.Updatable;
-import com.kai.game.master.Screen;
+import com.kai.game.core.Screen;
+import com.kai.game.util.Parameters;
 
 import java.awt.*;
 
@@ -39,13 +40,13 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
     }
 
     public void moveDown() {
-        if (getY() < Screen.WINDOW_HEIGHT-height) {
+        if (getY() < Screen.WINDOW_HEIGHT-getHeight()) {
             setY(getY()+speed);
         }
     }
 
     public void moveRight() {
-        if (getX() < Screen.WINDOW_WIDTH-width) {
+        if (getX() < Screen.WINDOW_WIDTH-getWidth()) {
             setX(getX()+speed);
         }
     }
@@ -89,7 +90,7 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
 
     public void regenerate(int lifePerSecond) {
         //Should be called in an update method.
-        heal((((double)(lifePerSecond))/Screen.FRAMES_PER_SECOND));
+        heal((((double)(lifePerSecond))/ Parameters.FRAMES_PER_SECOND));
     }
 
 }

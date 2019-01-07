@@ -1,10 +1,8 @@
 package com.kai.game.entities.enemies;
 
 import com.kai.game.entities.Projectile;
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
-
-import java.awt.*;
+import com.kai.game.util.ResourceManager;
+import com.kai.game.core.Screen;
 
 public class Beetle extends ProjectileEnemy {
 

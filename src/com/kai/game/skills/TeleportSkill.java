@@ -2,12 +2,12 @@ package com.kai.game.skills;
 
 import com.kai.game.entities.Entity;
 import com.kai.game.entities.Player;
-import com.kai.game.master.ResourceManager;
+import com.kai.game.util.ResourceManager;
 
 public class TeleportSkill extends Skill {
 
     public TeleportSkill(Entity owner) {
-        super("TeleportSkill", owner, ResourceManager.getImage("TeleportImage.png", Skill.SKILL_WIDTH, Skill.SKILL_HEIGHT), 10,
+        super("TeleportSkill", owner, ResourceManager.getImage("TeleportImage.png", Skill.SKILL_SIZE.getWidth(), Skill.SKILL_SIZE.getHeight()), 10,
                 new String[] {
                         "Teleport: 10 second cooldown.",
                         "Teleports the player to the selected location.",
@@ -26,7 +26,7 @@ public class TeleportSkill extends Skill {
             p.createProjectile(p.getX(), p.getY());
         }
 
-        getOwner().setX(targetedX- (getOwner().width/2));
-        getOwner().setY(targetedY- (getOwner().height/2));
+        getOwner().setX(targetedX- (getOwner().getWidth()/2));
+        getOwner().setY(targetedY- (getOwner().getHeight()/2));
     }
 }

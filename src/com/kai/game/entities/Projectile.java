@@ -2,8 +2,7 @@ package com.kai.game.entities;
 
 import com.kai.game.GameObject;
 import com.kai.game.Updatable;
-import com.kai.game.entities.enemies.Enemy;
-import com.kai.game.master.Screen;
+import com.kai.game.core.Screen;
 
 import java.awt.*;
 import java.util.List;
@@ -53,7 +52,7 @@ public class Projectile extends GameObject implements Updatable {
             if (targetY > getY()) {
                 targetY = Screen.WINDOW_HEIGHT;
             } else if (targetY < getY()) {
-                targetY = 0-height;
+                targetY = 0-getHeight();
             }
         }
     }

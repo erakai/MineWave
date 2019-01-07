@@ -5,8 +5,6 @@ import com.kai.game.entities.Entity;
 import com.kai.game.entities.Player;
 import com.kai.game.entities.Projectile;
 import com.kai.game.entities.UsesProjectiles;
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
 
 import java.awt.*;
 import java.util.ArrayList;

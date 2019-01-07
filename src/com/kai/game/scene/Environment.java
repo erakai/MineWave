@@ -1,8 +1,8 @@
 package com.kai.game.scene;
 
 import com.kai.game.GameObject;
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
+import com.kai.game.util.ResourceManager;
+import com.kai.game.core.Screen;
 
 import java.awt.*;
 import java.util.ArrayList;

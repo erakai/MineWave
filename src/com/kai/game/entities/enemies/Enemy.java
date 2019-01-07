@@ -1,7 +1,8 @@
 package com.kai.game.entities.enemies;
 
 import com.kai.game.entities.Entity;
-import com.kai.game.master.Screen;
+import com.kai.game.core.Screen;
+import com.kai.game.util.Parameters;
 
 import java.awt.*;
 
@@ -18,7 +19,7 @@ public abstract class Enemy extends Entity {
         this.damage = damage;
         this.attacksPerSecond = attacksPerSecond;
 
-        this.maxDamageTick = (int)(Screen.FRAMES_PER_SECOND/attacksPerSecond);
+        this.maxDamageTick = (int)(Parameters.FRAMES_PER_SECOND/attacksPerSecond);
         damageTick = maxDamageTick;
 
     }
@@ -75,7 +76,7 @@ public abstract class Enemy extends Entity {
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
         g.setColor(Color.red);
-        g.fillRect(getX(), getY()-(int)(10.0/600.0 * Screen.WINDOW_HEIGHT), (int)(getHealth()/getMaxHealth() * (width)) , (int)(5.0/600.0 * Screen.WINDOW_HEIGHT));
+        g.fillRect(getX(), getY()-(int)(10.0/600.0 * Screen.WINDOW_HEIGHT), (int)(getHealth()/getMaxHealth() * (getWidth())) , (int)(5.0/600.0 * Screen.WINDOW_HEIGHT));
     }
 
     public String getName() {

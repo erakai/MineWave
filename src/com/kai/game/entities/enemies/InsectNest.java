@@ -2,11 +2,9 @@ package com.kai.game.entities.enemies;
 
 import com.kai.game.entities.Entity;
 import com.kai.game.entities.SpecialDeath;
-import com.kai.game.master.LevelHandler;
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
-
-import java.awt.*;
+import com.kai.game.core.LevelHandler;
+import com.kai.game.util.ResourceManager;
+import com.kai.game.core.Screen;
 
 public class InsectNest extends Enemy  implements SpecialDeath {
 
@@ -26,7 +24,7 @@ public class InsectNest extends Enemy  implements SpecialDeath {
     @Override
     public void chase(int targetX, int targetY) {
         if (getDamageTick() >= getMaxDamageTick()) {
-            LevelHandler.addEnemy(new Insect(getX() + (width/2), getY() + (height/2)));
+            LevelHandler.addEnemy(new Insect(getX() + (getWidth()/2), getY() + (getHeight()/2)));
             setDamageTick(0);
         }
     }
@@ -39,7 +37,7 @@ public class InsectNest extends Enemy  implements SpecialDeath {
 
     @Override
     public void onDeath() {
-        LevelHandler.addEnemy(new Insect(getX()+(width/2), getY()+(height/2)));
+        LevelHandler.addEnemy(new Insect(getX()+(getWidth()/2), getY()+(getHeight()/2)));
         LevelHandler.addEnemy(new Insect(getX(), getY()));
     }
 

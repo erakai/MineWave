@@ -1,10 +1,11 @@
 package com.kai.game.skills;
 
 import com.kai.game.entities.Entity;
-import com.kai.game.master.Screen;
+import com.kai.game.core.Screen;
+import com.kai.game.util.MRectangle;
+import com.kai.game.util.ResourceManager;
 
 import java.awt.*;
-import java.util.Date;
 
 public abstract class Skill {
     private String name;
@@ -17,8 +18,8 @@ public abstract class Skill {
 
     private long lastUsed;
 
-    public static final int SKILL_WIDTH = (int)((50/1200.0) * Screen.WINDOW_WIDTH);
-    public static final int SKILL_HEIGHT = (int)((50/600.0) * Screen.WINDOW_HEIGHT);
+    public static final MRectangle SKILL_SIZE = new MRectangle(50, 50);
+
 
     public Skill(String name, Entity owner, Image img, int cooldown, String[] description) {
         this.name = name;
@@ -32,6 +33,10 @@ public abstract class Skill {
 
     public void drawMe(Graphics g, int x, int y) {
         g.drawImage(selfImage, x, y, null);
+    }
+
+    public void updateSelfImage() {
+        setSelfImage(ResourceManager.resizeImage(getSelfImage(), SKILL_SIZE.getWidth(), SKILL_SIZE.getHeight()));
     }
 
     public void use(int targetedX, int targetedY) {
@@ -61,6 +66,10 @@ public abstract class Skill {
 
     public Image getSelfImage() {
         return selfImage;
+    }
+
+    public void setSelfImage(Image selfImage) {
+        this.selfImage = selfImage;
     }
 
     public int getCooldown() {

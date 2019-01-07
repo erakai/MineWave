@@ -2,7 +2,7 @@ package com.kai.game.skills;
 
 import com.kai.game.entities.Player;
 import com.kai.game.entities.Projectile;
-import com.kai.game.master.ResourceManager;
+import com.kai.game.util.ResourceManager;
 
 
 public class GreatMineSkill extends Skill {
@@ -11,7 +11,7 @@ public class GreatMineSkill extends Skill {
     private final int damageMultiplier = 2;
 
     public GreatMineSkill(Player owner) {
-        super("GreatMineSkill", owner, ResourceManager.getImage("GreatMineSkill.png", Skill.SKILL_WIDTH, Skill.SKILL_HEIGHT), 15,
+        super("GreatMineSkill", owner, ResourceManager.getImage("GreatMineSkill.png", Skill.SKILL_SIZE.getWidth(), Skill.SKILL_SIZE.getHeight()), 15,
                 new String[] {
                         "Great Mine: 15 second cooldown.",
                         "Creates a large mine at the selected location.",

@@ -3,8 +3,8 @@ package com.kai.game.entities;
 import com.kai.game.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
+import com.kai.game.util.ResourceManager;
+import com.kai.game.core.Screen;
 import com.kai.game.skills.Skill;
 
 import java.awt.*;
@@ -170,11 +170,11 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     }
 
     public int getScaledWidth(int oldWidth) {
-        return (int)(oldWidth/22.0 * width);
+        return (int)(oldWidth/22.0 * getWidth());
     }
 
     public int getScaledHeight(int oldHeight) {
-        return (int)(oldHeight/60.0 * height);
+        return (int)(oldHeight/60.0 * getHeight());
     }
 
     public void movementKeyPressed(int keycode) {

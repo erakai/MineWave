@@ -1,12 +1,12 @@
 package com.kai.game.skills;
 
 import com.kai.game.entities.Player;
-import com.kai.game.master.ResourceManager;
+import com.kai.game.util.ResourceManager;
 
 public class ShieldSkill extends Skill {
 
     public ShieldSkill(Player owner) {
-        super("ShieldSkill", owner, ResourceManager.getImage("ShieldImage.png", Skill.SKILL_WIDTH, Skill.SKILL_HEIGHT), 6,
+        super("ShieldSkill", owner, ResourceManager.getImage("ShieldImage.png", Skill.SKILL_SIZE.getWidth(), Skill.SKILL_SIZE.getHeight()), 6,
                 new String[] {
                         "Shield: 6 second cooldown.",
                         "Creates a protective barrier of mines around the player.",

@@ -3,8 +3,9 @@ package com.kai.game.hud;
 import com.kai.game.GameObject;
 import com.kai.game.Updatable;
 import com.kai.game.entities.Player;
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
+import com.kai.game.util.Parameters;
+import com.kai.game.util.ResourceManager;
+import com.kai.game.core.Screen;
 import com.kai.game.skills.Skill;
 
 import java.awt.*;
@@ -42,14 +43,14 @@ public class InGameDisplay extends GameObject implements Updatable {
         g.fillRect(getScaledX(648), getScaledY(535), (int)((((double)minesToDraw / maxMinesToDraw)) * getScaledX(264)), getScaledY(29));
 
         //Drawing current level:
-        g.setFont(MainMenu.ogfont);
+        g.setFont(Parameters.ORIGINAL_FONT);
         g.setColor(Color.RED);
         g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/1.5)))));
         g.drawString("Level: " + currentLevelToDraw, getScaledX(570), getScaledY(595));
 
         //Drawing the first playerSkill:
         g.setColor(Color.WHITE);
-        g.setFont(MainMenu.ogfont);
+        g.setFont(Parameters.ORIGINAL_FONT);
         g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/0.6)))));
         g.drawString("E", getScaledX(606), getScaledY(518));
         if (skillToDraw.checkCooldown()) {
@@ -63,7 +64,7 @@ public class InGameDisplay extends GameObject implements Updatable {
         g.setColor(Color.BLACK);
         g.fillRect(bX, bY, getScaledX(50), getScaledY(50));
         g.setColor(Color.WHITE);
-        g.setFont(MainMenu.ogfont);
+        g.setFont(Parameters.ORIGINAL_FONT);
         g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/1.5)))));
         if (onCooldown.secondsUntilReady() < 10) {
             g.drawString(String.valueOf(onCooldown.secondsUntilReady()), getScaledX(603), getScaledY(550));
@@ -103,10 +104,10 @@ public class InGameDisplay extends GameObject implements Updatable {
     }
 
     private int getScaledX(int oldWidth) {
-        return (int)(oldWidth/600.0 * this.width);
+        return (int)(oldWidth/600.0 * this.getWidth());
     }
 
     private int getScaledY(int oldHeight) {
-        return (int)(oldHeight/100.0 * this.height);
+        return (int)(oldHeight/100.0 * this.getHeight());
     }
 }

@@ -1,7 +1,7 @@
 package com.kai.game.entities.enemies;
 
-import com.kai.game.master.ResourceManager;
-import com.kai.game.master.Screen;
+import com.kai.game.util.ResourceManager;
+import com.kai.game.core.Screen;
 
 import java.awt.*;
 
@@ -29,12 +29,12 @@ public class Worm extends Enemy {
     public void drawMe(Graphics g) {
         g.drawImage(ResourceManager.rotate(getSelfImage(), rotationDegreeDir), getX(), getY(), null);
         g.setColor(Color.red);
-        g.fillRect(getX() + 2, getY()-(int)(10.0/600.0 * Screen.WINDOW_HEIGHT), (int)(getHealth()/getMaxHealth() * (width)) , (int)(5.0/600.0 * Screen.WINDOW_HEIGHT));
+        g.fillRect(getX() + 2, getY()-(int)(10.0/600.0 * Screen.WINDOW_HEIGHT), (int)(getHealth()/getMaxHealth() * (getWidth())) , (int)(5.0/600.0 * Screen.WINDOW_HEIGHT));
     }
 
 
     private void updateRotationDegreeDir(int targetX, int targetY) {
-        double opposite = Math.abs(targetX - (getX() + width/2.0));
+        double opposite = Math.abs(targetX - (getX() + getWidth()/2.0));
         double adjacent = Math.abs(targetY - (getY()));
         double deg = Math.toDegrees(Math.atan( (opposite/adjacent) ));
         if (getY() < targetY && getX() < targetX) {
