@@ -1,7 +1,7 @@
 package com.kai.game.entities;
 
-import com.kai.game.GameObject;
-import com.kai.game.Updatable;
+import com.kai.game.core.GameObject;
+import com.kai.game.core.Updatable;
 import com.kai.game.core.Screen;
 import com.kai.game.util.Parameters;
 
@@ -35,25 +35,25 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
 
     public void moveUp() {
         if (getY() > 0) {
-            setY(getY()-speed);
+            setY(getHardY()-speed);
         }
     }
 
     public void moveDown() {
         if (getY() < Screen.WINDOW_HEIGHT-getHeight()) {
-            setY(getY()+speed);
+            setY(getHardY()+speed);
         }
     }
 
     public void moveRight() {
         if (getX() < Screen.WINDOW_WIDTH-getWidth()) {
-            setX(getX()+speed);
+            setX(getHardX()+speed);
         }
     }
 
     public void moveLeft() {
          if (getX() > 0) {
-             setX(getX() - speed);
+             setX(getHardX() - speed);
          }
     }
 

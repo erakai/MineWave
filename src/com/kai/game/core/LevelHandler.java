@@ -1,7 +1,5 @@
 package com.kai.game.core;
 
-import com.kai.game.GameObject;
-import com.kai.game.Updatable;
 import com.kai.game.entities.SpecialDeath;
 import com.kai.game.entities.UsesProjectiles;
 import com.kai.game.entities.enemies.*;
@@ -140,9 +138,7 @@ public class LevelHandler implements Updatable {
             } else if (c == Worm.class) {
                 enemies.add(new Worm(getXAwayFromPlayer(Worm.WORM_WIDTH), getYAwayFromPlayer(Worm.WORM_HEIGHT)));
             } else if (c == BossIncomingSign.class) {
-                int bossx = (int)(500.0/1200.0 * Screen.WINDOW_WIDTH);
-                int bossy = (int)(150.0/600.0 * Screen.WINDOW_HEIGHT);
-                enemies.add(new BossIncomingSign(bossx, bossy, 6));
+                enemies.add(new BossIncomingSign(500, 150, 6));
             }
         }
     }

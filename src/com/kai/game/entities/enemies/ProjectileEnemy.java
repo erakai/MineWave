@@ -1,6 +1,6 @@
 package com.kai.game.entities.enemies;
 
-import com.kai.game.GameObject;
+import com.kai.game.core.GameObject;
 import com.kai.game.entities.Entity;
 import com.kai.game.entities.Player;
 import com.kai.game.entities.Projectile;

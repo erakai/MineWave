@@ -1,6 +1,6 @@
 package com.kai.game.entities;
 
-import com.kai.game.GameObject;
+import com.kai.game.core.GameObject;
 import java.util.List;
 
 public interface UsesProjectiles {

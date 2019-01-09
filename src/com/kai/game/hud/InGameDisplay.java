@@ -1,7 +1,7 @@
 package com.kai.game.hud;
 
-import com.kai.game.GameObject;
-import com.kai.game.Updatable;
+import com.kai.game.core.GameObject;
+import com.kai.game.core.Updatable;
 import com.kai.game.entities.Player;
 import com.kai.game.util.Parameters;
 import com.kai.game.util.ResourceManager;
@@ -21,6 +21,8 @@ public class InGameDisplay extends GameObject implements Updatable {
     private int maxMinesToDraw;
     private int currentLevelToDraw;
     private Skill skillToDraw;
+
+
 
     public InGameDisplay(int x, int y) {
         super(ResourceManager.getImage("IngameHUD.png", HUD_WIDTH, HUD_HEIGHT), x, y, HUD_WIDTH, HUD_HEIGHT);

@@ -32,4 +32,14 @@ public class MPoint {
     public void setY(int y) {
         this.y = y;
     }
+
+
+    //"Hard" values that aren't scaled
+    public int getHardX() {
+        return x;
+    }
+
+    public int getHardY() {
+        return y;
+    }
 }

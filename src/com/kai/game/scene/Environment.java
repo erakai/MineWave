@@ -1,6 +1,6 @@
 package com.kai.game.scene;
 
-import com.kai.game.GameObject;
+import com.kai.game.core.GameObject;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
 

@@ -1,6 +1,6 @@
 package com.kai.game.entities;
 
-import com.kai.game.GameObject;
+import com.kai.game.core.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.util.ResourceManager;

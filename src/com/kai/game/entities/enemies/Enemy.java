@@ -28,12 +28,12 @@ public abstract class Enemy extends Entity {
 
 
     public void defaultMoveTowards(int targetX, int targetY) {
-        double deltaX = targetX - getX();
-        double deltaY = targetY - getY();
+        double deltaX = targetX - getHardX();
+        double deltaY = targetY - getHardY();
         double direction = Math.atan2(deltaY, deltaX);
 
-        setX((int)(getX() + (getSpeed() * Math.cos(direction))));
-        setY((int)(getY() + (getSpeed() * Math.sin(direction))));
+        setX((int)(getHardX() + (getSpeed() * Math.cos(direction))));
+        setY((int)(getHardY() + (getSpeed() * Math.sin(direction))));
     }
 
     @Override

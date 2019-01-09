@@ -1,7 +1,7 @@
 package com.kai.game.entities;
 
-import com.kai.game.GameObject;
-import com.kai.game.Updatable;
+import com.kai.game.core.GameObject;
+import com.kai.game.core.Updatable;
 import com.kai.game.core.Screen;
 
 import java.awt.*;
@@ -81,8 +81,8 @@ public class Projectile extends GameObject implements Updatable {
     @Override
     public void update() {
 
-        double deltaX = targetX - getX();
-        double deltaY = targetY - getY();
+        double deltaX = targetX - getHardX();
+        double deltaY = targetY - getHardY();
         double direction = Math.atan2(deltaY, deltaX);
 
         int xTravelAmount = (int) ((speed * Math.cos(direction)));
@@ -94,8 +94,8 @@ public class Projectile extends GameObject implements Updatable {
             owner.addToRemoveQueue(this);
         }
 
-        setX(getX() + xTravelAmount);
-        setY(getY() + yTravelAmount);
+        setX(getHardX() + xTravelAmount);
+        setY(getHardY() + yTravelAmount);
 
     }
 

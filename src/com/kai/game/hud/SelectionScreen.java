@@ -1,9 +1,8 @@
 package com.kai.game.hud;
 
-import com.kai.game.GameObject;
+import com.kai.game.core.GameObject;
 import com.kai.game.entities.Player;
 import com.kai.game.util.MFont;
-import com.kai.game.util.Parameters;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
 import com.kai.game.skills.*;

@@ -1,4 +1,4 @@
-package com.kai.game;
+package com.kai.game.core;
 
 public interface Updatable {
 

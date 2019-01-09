@@ -1,21 +1,23 @@
-package com.kai.game;
+package com.kai.game.core;
 
+import com.kai.game.util.MPoint;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
     private Image self;
+
+    private MPoint location;
+
     private int x, y;
 
     public MRectangle dimensions;
 
     public GameObject(Image self, int x, int y, int width, int height) {
         this.self = self;
-        this.x = x;
-        this.y = y;
+        this.location = new MPoint(x, y);
         dimensions = new MRectangle(width, height);
     }
 
@@ -43,19 +45,27 @@ public abstract class GameObject {
     }
 
     public int getX() {
-        return x;
+        return location.getX();
     }
 
     public void setX(int x) {
-        this.x = x;
+        location.setX(x);
     }
 
     public int getY() {
-        return y;
+        return location.getY();
+    }
+
+    public int getHardX() {
+        return location.getHardX();
+    }
+
+    public int getHardY() {
+        return location.getHardY();
     }
 
     public void setY(int y) {
-        this.y = y;
+        location.setY(y);
     }
 
     public Image getSelfImage() {

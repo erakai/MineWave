@@ -1,7 +1,5 @@
 package com.kai.game.core;
 
-import com.kai.game.GameObject;
-import com.kai.game.Updatable;
 import com.kai.game.entities.Player;
 import com.kai.game.hud.InGameDisplay;
 import com.kai.game.hud.MainMenu;
@@ -19,7 +17,7 @@ import java.util.List;
 
 public class Screen extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
     //Either 1000/500 or 1200/600 is recommended, imo.
-    public static int WINDOW_WIDTH = 1000;
+    public static int WINDOW_WIDTH = 1200;
     public static int WINDOW_HEIGHT = WINDOW_WIDTH/2;
 
 
