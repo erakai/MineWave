@@ -3,6 +3,7 @@ package com.kai.game.entities;
 import com.kai.game.core.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
+import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
 import com.kai.game.skills.Skill;
@@ -15,8 +16,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     private String dir;
 
     private int maxMines, currentMines;
-    public final int MINE_WIDTH = (int)(25.0/1200 * Screen.WINDOW_WIDTH);
-    public final int MINE_HEIGHT = (int)(25.0/600 * Screen.WINDOW_HEIGHT);
+
+    public final MRectangle MINE_SIZE = new MRectangle(25, 25);
 
     private boolean moveRight, moveLeft, moveUp, moveDown;
 
@@ -42,6 +43,13 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         removeProjectileQueue = new ArrayList<>();
     }
 
+    @Override
+    public void updateSelfImage() {
+        super.updateSelfImage();
+        for (Projectile p: projectiles) {
+            p.updateSelfImage();
+        }
+    }
 
     @Override
     public void attack(Entity target) {
@@ -53,8 +61,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     public void createProjectile(int targetX, int targetY) {
         if (currentMines < maxMines) {
             currentMines++;
-            projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_WIDTH, MINE_HEIGHT),
-                    (int)(targetX-(MINE_WIDTH /2.0)), (targetY-(MINE_HEIGHT /2)), MINE_WIDTH, MINE_HEIGHT, 0, targetX, targetY, 0, getPlayerDamage()));
+            projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png",MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
+                    (int)(targetX-(MINE_SIZE.getHardWidth() /2.0)), (targetY-(MINE_SIZE.getHardHeight() /2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
         }
     }
 

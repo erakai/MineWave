@@ -21,7 +21,7 @@ public class LevelHandler implements Updatable {
     private static int displayedLevel;
     private static Random rand;
 
-    //The closest distance that an enemy will spawn to the palyer.
+    //The closest distance that an enemy will spawn to the player.
     private static final int MIN_DISTANCE_FROM_PLAYER = 80;
 
     LevelHandler(int startingLevel) {
@@ -280,6 +280,8 @@ public class LevelHandler implements Updatable {
         Screen.getPlayer().removeAllMines();
 
         createNewEnemy(BossIncomingSign.class, 1);
+        //Since it doesn't really count as a level;
+        displayedLevel--;
     }
 
     private void wormLevel8() {
@@ -318,8 +320,6 @@ public class LevelHandler implements Updatable {
             this.duration = duration;
             this.start = System.currentTimeMillis();
 
-            //Since it doesn't really count as as level;
-            displayedLevel--;
         }
 
         @Override
@@ -331,7 +331,6 @@ public class LevelHandler implements Updatable {
         public void drawMe(Graphics g) {
             g.drawImage(getSelfImage(), getX(), getY(), null);
             g.setColor(Color.red);
-            //TODO: Have a constant for ORIGINAL_FONT somewhere that isn't MainMenu.
             g.setFont(Parameters.ORIGINAL_FONT);
             g.setFont(new Font(g.getFont().getFontName(), g.getFont().getStyle(), (int)(g.getFont().getSize() * (Screen.WINDOW_WIDTH/(1200.0/1.75)))));
             g.drawString("BOSS INCOMING", (int)(519.0/1200.0 * Screen.WINDOW_WIDTH), (int)(182.0/600.0 * Screen.WINDOW_HEIGHT));

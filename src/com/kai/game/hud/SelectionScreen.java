@@ -33,7 +33,7 @@ public class SelectionScreen extends GameObject {
     private final int abilityDescIncrement = (int)(30.0/600.0 * Screen.WINDOW_HEIGHT);
 
     public SelectionScreen() {
-        super(ResourceManager.getImage("selection.png", Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT), 0, 0, Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT);
+        super(ResourceManager.getImage("selection.png", Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT), 0, 0, 1200, 600);
 
         selectableAbilities = new ArrayList<>();
         addPlayerAbilities();

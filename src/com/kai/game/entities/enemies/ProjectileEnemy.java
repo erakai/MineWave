@@ -27,6 +27,14 @@ public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
     //TODO: Do something more elegant than having the same projectile code both here and in player.
 
     @Override
+    public void updateSelfImage() {
+        super.updateSelfImage();
+        for (Projectile p: projectiles) {
+            p.updateSelfImage();
+        }
+    }
+
+    @Override
     public void onProjectileCollision(GameObject collidedWith, Projectile p) {
         if (collidedWith instanceof Player) {
             this.attack((Entity)collidedWith, p.getDamage());
@@ -66,8 +74,7 @@ public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
     }
 
     //DamageTick represents how often to shoot in this case.
-    @Override
-    public void chase(int targetX, int targetY) {
+    public void defaultProjectileEnemyChase(int targetX, int targetY) {
         manageProjectileShooting(targetX, targetY);
         defaultMoveTowards(targetX, targetY);
     }

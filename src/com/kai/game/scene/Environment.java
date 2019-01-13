@@ -12,7 +12,7 @@ public class Environment extends GameObject {
     private List<SceneObject> sceneObjects;
 
     public Environment() {
-        super(ResourceManager.getImage("background.png", Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT), 0, 0, Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT);
+        super(ResourceManager.getImage("background.png", Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT), 0, 0, 1200, 600);
         sceneObjects = new ArrayList<>();
     }
 
@@ -24,6 +24,14 @@ public class Environment extends GameObject {
 
         for (GameObject o: sceneObjects) {
             o.drawMe(g);
+        }
+    }
+
+    @Override
+    public void updateSelfImage() {
+        super.updateSelfImage();
+        for (SceneObject so: sceneObjects) {
+            so.updateSelfImage();
         }
     }
 

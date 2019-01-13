@@ -20,6 +20,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
     public static int WINDOW_WIDTH = 1200;
     public static int WINDOW_HEIGHT = WINDOW_WIDTH/2;
 
+    //TODO: Fix how everything breaks when you resize the window.
 
     public static GameState state;
 
@@ -54,6 +55,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
                 wasResized = true;
             }
         });
+
     }
 
     @Override
@@ -167,13 +169,13 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
             case "Running":
                 environment = new Environment();
 
-                player = new Player(WINDOW_WIDTH/2,WINDOW_HEIGHT/2, (int)(22.0/1200.0 * WINDOW_WIDTH), (int)(60.0/600.0 * WINDOW_HEIGHT));
+                player = new Player(WINDOW_WIDTH/2,WINDOW_HEIGHT/2, 22, 60);
                 addUpdatable(player);
 
                 levelHandler = new LevelHandler(1);
                 addUpdatable(levelHandler);
 
-                addUpdatable(new InGameDisplay((int)(310.0/1200.0 * Screen.WINDOW_WIDTH), (int)(500.0/600.0 * Screen.WINDOW_HEIGHT)));
+                addUpdatable(new InGameDisplay(310, 500));
 
                 break;
             case "Death Screen":

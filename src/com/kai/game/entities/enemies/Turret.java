@@ -15,8 +15,13 @@ public class Turret extends ProjectileEnemy {
     private static final int TURRET_PROJ_HEIGHT = (int)(31.0/600.0 * Screen.WINDOW_HEIGHT);
 
     public Turret(int x, int y) {
-        super(ResourceManager.getImage("Turret.png", TURRET_WIDTH, TURRET_HEIGHT ), x, y, TURRET_WIDTH, TURRET_HEIGHT,
+        super(ResourceManager.getImage("Turret.png", TURRET_WIDTH, TURRET_HEIGHT ), x, y, 20, 100,
                 0, 25, "Turret", 2, 0.5, 250);
+    }
+
+    @Override
+    public void chase(int targetX, int targetY) {
+        defaultProjectileEnemyChase(targetX, targetY);
     }
 
     @Override
@@ -25,28 +30,28 @@ public class Turret extends ProjectileEnemy {
 
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2, getX()-500, getY()-500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getX()-500, getY()-500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2, getX()-500,         getY(), getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getX()-500,         getY(), getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2, getX()-500, getY()+500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getX()-500, getY()+500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2, getX()+500, getY()+500, getRange(), getDamage()));
+                ,getHardX(), getHardY(), 31, 31, 2, getX()+500, getY()+500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2, getX()+500,         getY(), getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getX()+500,         getY(), getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2, getX()+500, getY()-500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getX()+500, getY()-500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2, getX(), getY()-500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getX(), getY()-500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getX(), getY(), TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT, 2,         getX(),     getY()+500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2,         getX(),     getY()+500, getRange(), getDamage()));
 
     }
 

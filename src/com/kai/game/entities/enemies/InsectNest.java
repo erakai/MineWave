@@ -13,7 +13,7 @@ public class InsectNest extends Enemy  implements SpecialDeath {
 
     public InsectNest(int x, int y) {
         super(ResourceManager.getImage("insectNest.png", INSECT_NEST_WIDTH, INSECT_NEST_HEIGHT),
-                x, y, INSECT_NEST_WIDTH, INSECT_NEST_HEIGHT, 0, 11, "Insect Nest", 0, 0.3);
+                x, y, 80, 80, 0, 11, "Insect Nest", 0, 0.3);
         setDamageTick((getMaxDamageTick()/2));
     }
 

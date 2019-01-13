@@ -12,9 +12,6 @@ import java.awt.*;
 
 public class InGameDisplay extends GameObject implements Updatable {
 
-    private static final int HUD_WIDTH = (int)(600.0/1200.0 * Screen.WINDOW_WIDTH);
-    private static final int HUD_HEIGHT = (int)(100.0/600.0 * Screen.WINDOW_HEIGHT);
-
     private double healthToDraw;
     private int maxHealthToDraw;
     private int minesToDraw;
@@ -25,7 +22,7 @@ public class InGameDisplay extends GameObject implements Updatable {
 
 
     public InGameDisplay(int x, int y) {
-        super(ResourceManager.getImage("IngameHUD.png", HUD_WIDTH, HUD_HEIGHT), x, y, HUD_WIDTH, HUD_HEIGHT);
+        super(ResourceManager.getImage("IngameHUD.png", (int)(600.0/1200.0 * Screen.WINDOW_WIDTH), (int)(100.0/600.0 * Screen.WINDOW_HEIGHT)), x, y, 600, 100);
         healthToDraw = 1;
         maxHealthToDraw = 1;
         minesToDraw = 0;

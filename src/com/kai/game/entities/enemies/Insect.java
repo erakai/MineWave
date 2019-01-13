@@ -12,7 +12,7 @@ public class Insect extends Enemy {
     private static final int DISTANCE_TO_ENRAGE = 60;
 
     public Insect(int x, int y) {
-        super(ResourceManager.getImage("insect.png", INSECT_WIDTH, INSECT_HEIGHT), x, y, INSECT_WIDTH, INSECT_HEIGHT, 3, 8, "Insect", 1, 2);
+        super(ResourceManager.getImage("insect.png", INSECT_WIDTH, INSECT_HEIGHT), x, y, 48, 50, 3, 8, "Insect", 1, 2);
         this.enraged = false;
     }
 

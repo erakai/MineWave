@@ -69,6 +69,9 @@ Changelog:
     1/2/19:
         - There is no a warning before bosses, along with a delay.
 
+    1/7/19 - 1/10/19
+        - Tried to get resizing the screen working, doesn't really work but I'm going to move on
+
 
 Still need to add vampireboss, magicball, deathscreen, leaderboards
 

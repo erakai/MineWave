@@ -26,6 +26,14 @@ public class MRectangle {
         return ((int)((double)height/600.0 * Screen.WINDOW_HEIGHT));
     }
 
+    public int getHardWidth() {
+        return width;
+    }
+
+    public int getHardHeight() {
+        return height;
+    }
+
     public MPoint getTopLeft() {
         return topLeft;
     }
