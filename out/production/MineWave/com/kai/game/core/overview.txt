@@ -78,11 +78,14 @@ Changelog:
 
     1/12/19:
         - Added VampireBoss
-        - Added another (equally terrible) background after level 8
+        - Added another (equally terrible) background after level 8\
+
+    1/13/19:
+        - Added MagicBall
 
 
 
-Still need to add magicball, deathscreen, leaderboards
+Still need to add deathscreen, leaderboards
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type

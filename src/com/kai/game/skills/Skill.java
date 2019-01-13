@@ -39,14 +39,20 @@ public abstract class Skill {
         setSelfImage(ResourceManager.resizeImage(getSelfImage(), SKILL_SIZE.getWidth(), SKILL_SIZE.getHeight()));
     }
 
-    public void use(int targetedX, int targetedY) {
+    public boolean use(int targetedX, int targetedY) {
         if (checkCooldown()) {
             lastUsed = System.currentTimeMillis();
             _use(targetedX, targetedY);
+            return true;
         }
+        return false;
     }
 
     public abstract void _use(int tX, int tY);
+
+    public void setLastUsed(long lastUsed) {
+        this.lastUsed = lastUsed;
+    }
 
     public boolean checkCooldown() {
         return ( (System.currentTimeMillis() - lastUsed) > (cooldown*1000) );

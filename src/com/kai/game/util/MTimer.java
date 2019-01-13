@@ -27,12 +27,7 @@ public class MTimer {
         return (int)((System.currentTimeMillis() - markedTimes.get(key))/1000.0);
     }
 
-    public int markTime(String identifier) {
+    public void markTime(String identifier) {
         markedTimes.put(identifier, System.currentTimeMillis());
-        return (markedTimes.size()-1);
-    }
-
-    private Object getElementByIndex(LinkedHashMap map,int index){
-        return map.get( (map.keySet().toArray())[ index ] );
     }
 }

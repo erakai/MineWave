@@ -22,12 +22,13 @@ public class Input {
     }
 
     /*
-    I'm using a queue for any input rather then doing it directly in the menu, as this prevents
+    I'm using a queue for any input rather then doing it directly in the menu, as this prevents ( i think )
     concurrent modification. I believe java creates a new thread for listeners, but I'm not sure.
      */
 
     private static void keyPressChanges() {
-        for (int keycode: keyPresses) {
+        for (int i = 0; i < keyPresses.size(); i++ ) {
+            int keycode = keyPresses.get(i);
             switch (Screen.state.getName()) {
                 case "Menu":
 
@@ -49,7 +50,8 @@ public class Input {
     }
 
     private static void keyReleaseChanges() {
-        for (int keycode: keyReleases) {
+        for (int i = 0; i < keyReleases.size(); i++) {
+            int keycode = keyReleases.get(i);
             switch (Screen.state.getName()) {
                 case "Menu":
 
@@ -78,7 +80,8 @@ public class Input {
     }
 
     private static void mouseClickChanges() {
-        for (int[] mousePos: mouseClicks) {
+        for (int i = 0; i < mouseClicks.size(); i++) {
+            int[] mousePos = mouseClicks.get(i);
             int mouseX = mousePos[0];
             int mouseY = mousePos[1];
             switch (Screen.state.getName()) {
@@ -138,6 +141,7 @@ public class Input {
 
 /*        switch (Screen.state.getName()) {
             case "Menu":
+
                 break;
             case "Selection Screen":
 

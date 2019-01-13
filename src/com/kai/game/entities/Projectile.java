@@ -101,8 +101,8 @@ public class Projectile extends GameObject implements Updatable {
     }
 
     private void updateDistanceTraveled(int xAmount, int yAmount) {
-        distanceTraveled += xAmount;
-        distanceTraveled += yAmount;
+        distanceTraveled += Math.abs(xAmount);
+        distanceTraveled += Math.abs(yAmount);
     }
 
     public void allCollisions (List<GameObject> objectsToCheckWith) {

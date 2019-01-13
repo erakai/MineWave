@@ -124,6 +124,7 @@ public class LevelHandler implements Updatable {
         }
     }
 
+    private static final int DEFAULT_MIN_DISTANCE = 200;
     public void createNewEnemy(Class c, int amount) {
         for (int i = 0; i < amount; i++) {
             if (c == Insect.class) {
@@ -143,7 +144,9 @@ public class LevelHandler implements Updatable {
             } else if (c == Bat.class) {
                 enemies.add(new Bat(getXAwayFromPlayer(Bat.BAT_WIDTH), getYAwayFromPlayer(Bat.BAT_HEIGHT)));
             } else if (c == Vampire.class) {
-                enemies.add(new Vampire(getXAwayFromPlayer(200), getYAwayFromPlayer(200)));
+                enemies.add(new Vampire(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+            } else if (c == MagicBall.class) {
+                enemies.add(new MagicBall(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             }
         }
     }
@@ -194,7 +197,7 @@ public class LevelHandler implements Updatable {
     }
 
     private void difficultyOne() {
-        createNewEnemy(Insect.class, 1);
+        createNewEnemy(MagicBall.class, 1);
     }
 
     private void difficultyTwo() {

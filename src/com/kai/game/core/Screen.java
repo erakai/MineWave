@@ -25,7 +25,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
     public static GameState state;
 
     //Handles background and scene objects.
-    private static GameObject environment;
+    private static Environment environment;
     //Handles the player.
     private static Player player;
     //Handles level management and enemies.
@@ -184,7 +184,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
         }
     }
 
-    public static GameObject getEnvironment() {
+    public static Environment getEnvironment() {
         return environment;
     }
 
