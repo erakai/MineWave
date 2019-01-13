@@ -2,6 +2,7 @@ package com.kai.game.core;
 
 import com.kai.game.entities.SpecialDeath;
 import com.kai.game.entities.UsesProjectiles;
+import com.kai.game.entities.bosses.Vampire;
 import com.kai.game.entities.enemies.*;
 import com.kai.game.util.MPoint;
 import com.kai.game.util.MRectangle;
@@ -86,7 +87,7 @@ public class LevelHandler implements Updatable {
         }
     }
 
-    private static int getXAwayFromPlayer(int enemyWidth) {
+    public static int getXAwayFromPlayer(int enemyWidth) {
         int rx;
         do {
             rx = rand.nextInt(Screen.WINDOW_WIDTH);
@@ -96,7 +97,7 @@ public class LevelHandler implements Updatable {
         return rx;
     }
 
-    private static int getYAwayFromPlayer(int enemyHeight) {
+    public static int getYAwayFromPlayer(int enemyHeight) {
         int ry;
         do {
             ry = rand.nextInt(Screen.WINDOW_HEIGHT);
@@ -123,7 +124,7 @@ public class LevelHandler implements Updatable {
         }
     }
 
-    private void createNewEnemy(Class c, int amount) {
+    public void createNewEnemy(Class c, int amount) {
         for (int i = 0; i < amount; i++) {
             if (c == Insect.class) {
                 enemies.add(new Insect(getXAwayFromPlayer(Insect.INSECT_WIDTH), getYAwayFromPlayer(Insect.INSECT_HEIGHT)));
@@ -139,6 +140,10 @@ public class LevelHandler implements Updatable {
                 enemies.add(new Worm(getXAwayFromPlayer(Worm.WORM_WIDTH), getYAwayFromPlayer(Worm.WORM_HEIGHT)));
             } else if (c == BossIncomingSign.class) {
                 enemies.add(new BossIncomingSign(500, 150, 6));
+            } else if (c == Bat.class) {
+                enemies.add(new Bat(getXAwayFromPlayer(Bat.BAT_WIDTH), getYAwayFromPlayer(Bat.BAT_HEIGHT)));
+            } else if (c == Vampire.class) {
+                enemies.add(new Vampire(getXAwayFromPlayer(200), getYAwayFromPlayer(200)));
             }
         }
     }
@@ -169,8 +174,20 @@ public class LevelHandler implements Updatable {
             wormLevel8();
         }
 
-        if (level >= 10) {
+        if (level >= 10 && level < 17) {
             difficultyFive();
+        }
+
+        if (level == 17) {
+            bossInc();
+        }
+
+        if (level == 18) {
+            vampireLevel16();
+        }
+
+        if (level > 18) {
+            difficultySix();
         }
 
 
@@ -275,6 +292,11 @@ public class LevelHandler implements Updatable {
         }
     }
 
+    private void difficultySix() {
+        createNewEnemy(Bat.class, 10);
+        createNewEnemy(Worm.class, 1);
+    }
+
     private void bossInc() {
         centerPlayer();
         Screen.getPlayer().removeAllMines();
@@ -292,6 +314,10 @@ public class LevelHandler implements Updatable {
         enemies.add(new Turret(Screen.WINDOW_WIDTH - scaledDistance.getX(), scaledDistance.getY())); // top right
         enemies.add(new Turret(scaledDistance.getX(), Screen.WINDOW_HEIGHT - scaledDistance.getY() - Turret.TURRET_HEIGHT)); // bottom left
         enemies.add(new Turret(Screen.WINDOW_WIDTH - scaledDistance.getX(), Screen.WINDOW_HEIGHT - scaledDistance.getY() - Turret.TURRET_HEIGHT)); // bottom right
+    }
+
+    private void vampireLevel16() {
+        createNewEnemy(Vampire.class, 1);
     }
 
 

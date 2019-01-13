@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
     private int range;
 
-    List<Projectile> projectiles;
+    protected List<Projectile> projectiles;
     private List<Projectile> removeProjectileQueue;
 
     public ProjectileEnemy(Image self, int x, int y, int width, int height, int speed, int maxHealth, String name, int damage, double attacksPerSecond, int range) {

@@ -90,6 +90,7 @@ public class Projectile extends GameObject implements Updatable {
 
         updateDistanceTraveled(xTravelAmount, yTravelAmount);
 
+        //TODO: Make range not really broken depending on screen size.
         if (distanceTraveled > range && speed > 0) {
             owner.addToRemoveQueue(this);
         }

@@ -14,7 +14,7 @@ public class ResourceManager {
     public static BufferedImage getImage(String imageName) {
         try {
             return (ImageIO.read(ResourceManager.class.getResourceAsStream("/com/kai/resources/"+imageName)));
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("/com/kai/resources/" + imageName + " loading error.");
             e.printStackTrace();
         }

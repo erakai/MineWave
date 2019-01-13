@@ -93,4 +93,6 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
         heal((((double)(lifePerSecond))/ Parameters.FRAMES_PER_SECOND));
     }
 
+
+
 }

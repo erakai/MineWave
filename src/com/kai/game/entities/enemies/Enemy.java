@@ -97,7 +97,13 @@ public abstract class Enemy extends Entity {
         this.damageTick = damageTick;
     }
 
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 
+    public void setAttacksPerSecond(double attacksPerSecond) {
+        this.attacksPerSecond = attacksPerSecond;
+    }
 
     public double getAttacksPerSecond() {
         return attacksPerSecond;

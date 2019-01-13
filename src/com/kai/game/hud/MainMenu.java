@@ -12,7 +12,7 @@ import java.awt.*;
 public class MainMenu extends GameObject {
 
     private MPoint titleText = new MPoint(270, 240);
-    private MPoint clickToPlay = new MPoint(410, 480);
+    private MPoint clickToPlay = new MPoint(425, 470);
 
     public MainMenu() {
         super(ResourceManager.getImage("StartMenu.png", Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT), 0, 0, 1200, 600);

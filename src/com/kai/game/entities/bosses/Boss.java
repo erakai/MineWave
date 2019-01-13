@@ -9,15 +9,18 @@ import java.awt.*;
 public abstract class Boss extends ProjectileEnemy {
     private MTimer timer;
 
+    //TODO: Draw boss health bar somewhere where it can be much longer and not directly above the boss.
+
     /*
     Name of marked times in timer:
         Object creation - "start"
         Stages - "stage {stage number}"
      */
 
-    protected int stage, maxStages;
+    int stage;
+    private int maxStages;
 
-    public Boss(Image self, int x, int y, int width, int height, int speed, int maxHealth, String name,
+    Boss(Image self, int x, int y, int width, int height, int speed, int maxHealth, String name,
                 int damage, double attacksPerSecond, int range, int maxStages) {
         super(self, x, y, width, height, speed, maxHealth, name, damage, attacksPerSecond, range);
 
@@ -28,22 +31,29 @@ public abstract class Boss extends ProjectileEnemy {
 
     public abstract void createProjectile(int tX, int tY);
     public abstract void chase(int targetX, int targetY);
+    public abstract void checkTransitions();
 
-    protected void nextStage() {
+    @Override
+    public void update() {
+        super.update();
+        checkTransitions();
+    }
+
+    void nextStage() {
         transitionToStage(stage + 1);
     }
 
     //Override this and call the super
-    protected void transitionToStage(int newStage) {
+    void transitionToStage(int newStage) {
         timer.markTime("stage " + newStage);
         this.stage = newStage;
     }
 
-    protected boolean timeTransition(String markedTimeKey, int necessaryLength) {
+    boolean timeTransition(String markedTimeKey, int necessaryLength) {
         return (timer.getSecondsSinceMarkedTime(markedTimeKey) >= necessaryLength);
     }
 
-    protected boolean healthTransition(double percentageRequired) {
+    boolean healthTransition(double percentageRequired) {
         return (getHealth() / (double)getMaxHealth() <= percentageRequired);
     }
 

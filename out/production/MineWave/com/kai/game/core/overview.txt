@@ -67,10 +67,22 @@ Changelog:
         - Added more levels, including the "mini-boss" one at level 8 with a worm
 
     1/2/19:
-        - There is no a warning before bosses, along with a delay.
+        - There is now a warning before bosses, along with a delay.
+
+    1/7/19 - 1/10/19:
+        - Tried to get resizing the screen working, doesn't really work but I'm going to move on
+
+    1/10/19 - 1/11/19:
+        - Added boss class
+        - Added MTimer
+
+    1/12/19:
+        - Added VampireBoss
+        - Added another (equally terrible) background after level 8
 
 
-Still need to add vampireboss, magicball, deathscreen, leaderboards
+
+Still need to add magicball, deathscreen, leaderboards
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
