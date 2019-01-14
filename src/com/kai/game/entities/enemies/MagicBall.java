@@ -8,11 +8,11 @@ import com.kai.game.util.Parameters;
 import com.kai.game.util.ResourceManager;
 
 import java.awt.*;
-import java.util.ArrayList;a
+import java.util.ArrayList;
 import java.util.List;
 
 public class MagicBall extends ProjectileEnemy implements UsesSkills {
-    List<Skill> skills;
+    private List<Skill> skills;
 
     private static final double SECONDS_PER_TELEPORT = 3;
 
@@ -22,7 +22,7 @@ public class MagicBall extends ProjectileEnemy implements UsesSkills {
 
         skills = new ArrayList<>();
         TeleportSkill tp = new TeleportSkill(this);
-        tp.setLastUsed(System.currentTimeMillis());
+        tp.setLastUsed(System.currentTimeMillis() +((int)(Math.random() * 2000)));
         tp.setCooldown((int)SECONDS_PER_TELEPORT);
         equipSkill(tp);
 

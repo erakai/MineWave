@@ -4,6 +4,7 @@ package com.kai.game.util;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.core.Screen;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ public class Input {
     private static List<Integer> keyPresses = new ArrayList<>();
     private static List<Integer> keyReleases = new ArrayList<>();
     private static List<int[]> mouseClicks = new ArrayList<>();
+
+    public static boolean mouse_pressed = false;
 
     public static void updateChanges() {
         keyPressChanges();
@@ -103,6 +106,11 @@ public class Input {
                     break;
             }
         }
+        if (Screen.state == GameState.RUNNING) {
+            if (mouse_pressed && Screen.getPlayer().SHOOT) {
+                Screen.getPlayer().createProjectile(currentMouseX, currentMouseY);
+            }
+        }
         mouseClicks.clear();
     }
 
@@ -118,7 +126,7 @@ public class Input {
         mouseClicks.add(new int[]{mouseX, mouseY});
     }
 
-    public static void mouseMoved(int mouseX, int mouseY) {
+    public static void mouseExists(int mouseX, int mouseY) {
         switch (Screen.state.getName()) {
             case "Menu":
                 break;
@@ -126,8 +134,8 @@ public class Input {
 
                 break;
             case "Running":
-                currentMouseX = mouseX;
-                currentMouseY = mouseY;
+                currentMouseX = (int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX);
+                currentMouseY = (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY);
                 break;
             case "Death Screen":
 

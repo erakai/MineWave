@@ -39,7 +39,7 @@ public class Projectile extends GameObject implements Updatable {
 
     //TODO: Method doesn't work when you are to the left of the enemy (Proj gets stuck on x = 0). Fix?
 
-    private void updateTarget() {
+    public void updateTarget() {
         double m = (((double) (targetY - getY())) / ((double) (targetX - getX())));
         int b = (int) (getY() - (m * getX()));
         if (targetX > getX()) {

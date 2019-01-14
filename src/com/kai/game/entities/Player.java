@@ -3,6 +3,7 @@ package com.kai.game.entities;
 import com.kai.game.core.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
+import com.kai.game.skills.GunSkill;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
@@ -27,6 +28,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     private List<Projectile> removeProjectileQueue;
 
     private List<Skill> skills;
+
+    public boolean SHOOT = false;
 
     public Player(int x, int y, int width, int height) {
         super(null, x, y, width, height, 4, 20);
@@ -61,8 +64,21 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     public void createProjectile(int targetX, int targetY) {
         if (currentMines < maxMines) {
             currentMines++;
-            projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png",MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
-                    (int)(targetX-(MINE_SIZE.getHardWidth() /2.0)), (targetY-(MINE_SIZE.getHardHeight() /2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
+            if (!SHOOT) {
+                projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
+                        (int) (targetX - (MINE_SIZE.getHardWidth() / 2.0)), (targetY - (MINE_SIZE.getHardHeight() / 2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
+            } else {
+                GunSkill gs = (GunSkill)getSkills().get(0);
+                if (gs.currentShotTick > gs.maxShotTick) {
+                    gs.currentShotTick = 0;
+                    Projectile p = new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
+                            getX() + getWidth() / 2 - 12, getY() + getHeight() / 2 - 12, MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 8, targetX, targetY, 1200, getPlayerDamage());
+                    p.updateTarget();
+                    projectiles.add(p);
+                } else {
+                    currentMines--;
+                }
+            }
         }
     }
 
@@ -123,6 +139,11 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         }
 
         removeAllInQueue();
+
+
+        if (SHOOT) {
+            ((GunSkill)getSkills().get(0)).currentShotTick++;
+        }
     }
 
     @Override
@@ -204,6 +225,10 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     public int getPlayerDamage() {
         return playerDamage;
+    }
+
+    public void setPlayerDamage(int playerDamage) {
+        this.playerDamage = playerDamage;
     }
 
     public int getCurrentMines() {

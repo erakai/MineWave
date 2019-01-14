@@ -51,7 +51,9 @@ public class InGameDisplay extends GameObject implements Updatable {
         g.setColor(Color.WHITE);
         g.setFont(Parameters.ORIGINAL_FONT);
         g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/0.6)))));
-        g.drawString("E", getScaledX(606), getScaledY(518));
+        if (!skillToDraw.isPassive()) {
+            g.drawString("E", getScaledX(606), getScaledY(518));
+        }
         if (skillToDraw.checkCooldown()) {
             g.drawImage(skillToDraw.getSelfImage(), getScaledX(585), getScaledY(522), null);
         } else {

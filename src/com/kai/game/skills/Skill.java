@@ -20,6 +20,7 @@ public abstract class Skill {
 
     public static final MRectangle SKILL_SIZE = new MRectangle(50, 50);
 
+    private boolean passive;
 
     public Skill(String name, Entity owner, Image img, int cooldown, String[] description) {
         this.name = name;
@@ -27,8 +28,14 @@ public abstract class Skill {
         this.selfImage = img;
         this.description = description;
         this.cooldown = cooldown;
-
+        this.passive = false;
         lastUsed = -1 * (cooldown * 1000);
+    }
+
+    public Skill(String name, Entity owner, Image img, boolean passive, String[] description) {
+        this(name, owner, img, 0, description);
+        this.passive = passive;
+
     }
 
     public void drawMe(Graphics g, int x, int y) {
@@ -84,5 +91,13 @@ public abstract class Skill {
 
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
+    }
+
+    public boolean isPassive() {
+        return passive;
+    }
+
+    public void setPassive(boolean passive) {
+        this.passive = passive;
     }
 }

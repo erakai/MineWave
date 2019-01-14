@@ -82,7 +82,10 @@ Changelog:
 
     1/13/19:
         - Added MagicBall
-
+        - The last thing causing ConcurrentModificationExceptions comes from the draw functions, no idea what it is
+        - Added GunSkill
+        - Set up "passive" system for skills
+        - Added a really bad way of enabling "hold to shoot" for GunSkill
 
 
 Still need to add deathscreen, leaderboards

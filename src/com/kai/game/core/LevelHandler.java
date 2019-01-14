@@ -197,7 +197,7 @@ public class LevelHandler implements Updatable {
     }
 
     private void difficultyOne() {
-        createNewEnemy(MagicBall.class, 1);
+        createNewEnemy(Insect.class, 1);
     }
 
     private void difficultyTwo() {
@@ -296,8 +296,34 @@ public class LevelHandler implements Updatable {
     }
 
     private void difficultySix() {
-        createNewEnemy(Bat.class, 10);
-        createNewEnemy(Worm.class, 1);
+        switch(rand.nextInt(5)) {
+            case 0:
+                createNewEnemy(Bat.class, 10);
+                createNewEnemy(Worm.class, 1);
+                break;
+            case 1:
+                createNewEnemy(MagicBall.class, 2);
+                createNewEnemy(Beetle.class, 6);
+                break;
+            case 2:
+                createNewEnemy(InsectNest.class, 1);
+                createNewEnemy(MagicBall.class, 1);
+                createNewEnemy(ArmoredInsect.class, 3);
+                createNewEnemy(Turret.class, 1);
+                break;
+            case 3:
+                createNewEnemy(Turret.class, 3);
+                createNewEnemy(Insect.class, 4);
+                break;
+            case 4:
+                createNewEnemy(Beetle.class, 1);
+                createNewEnemy(Turret.class, 1);
+                createNewEnemy(ArmoredInsect.class, 1);
+                createNewEnemy(Insect.class, 1);
+                createNewEnemy(MagicBall.class, 1);
+                createNewEnemy(InsectNest.class, 1);
+                break;
+        }
     }
 
     private void bossInc() {

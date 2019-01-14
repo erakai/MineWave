@@ -44,6 +44,7 @@ public class SelectionScreen extends GameObject {
         selectableAbilities.add(new ShieldSkill(null));
         selectableAbilities.add(new ComboSkill(null));
         selectableAbilities.add(new GreatMineSkill(null));
+        selectableAbilities.add(new GunSkill(null));
     }
 
     @Override
@@ -64,6 +65,8 @@ public class SelectionScreen extends GameObject {
                 return new ComboSkill(p);
             case "GreatMineSkill":
                 return new GreatMineSkill(p);
+            case "GunSkill":
+                return new GunSkill(p);
             default:
                 return null;
         }

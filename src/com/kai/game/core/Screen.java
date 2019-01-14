@@ -15,7 +15,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Screen extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
+public class Screen extends JPanel implements KeyListener, MouseListener {
     //Either 1000/500 or 1200/600 is recommended, imo.
     public static int WINDOW_WIDTH = 1200;
     public static int WINDOW_HEIGHT = WINDOW_WIDTH/2;
@@ -47,7 +47,6 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
         setFocusable(true);
         addKeyListener(this);
         addMouseListener(this);
-        addMouseMotionListener(this);
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -71,6 +70,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        int x = (int)getLocationOnScreen().getX();
+        int y = (int)getLocationOnScreen().getY();
+        Input.mouseExists(x, y);
 
         //Environment manages all scene objects.
         if (environment != null) {
@@ -211,20 +214,17 @@ public class Screen extends JPanel implements KeyListener, MouseListener, MouseM
     public void mouseClicked(MouseEvent e) {}
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {Input.mouse_pressed = true;}
 
     @Override
-    public void mouseReleased(MouseEvent e) {Input.mouseClicked(e.getX(), e.getY());}
+    public void mouseReleased(MouseEvent e) {
+        Input.mouseClicked(e.getX(), e.getY());
+        Input.mouse_pressed = false;
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {}
 
     @Override
     public void mouseExited(MouseEvent e) {}
-
-    @Override
-    public void mouseDragged(MouseEvent e) { }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {Input.mouseMoved(e.getX(), e.getY());}
 }

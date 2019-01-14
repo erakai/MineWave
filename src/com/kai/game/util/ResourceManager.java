@@ -11,6 +11,8 @@ public class ResourceManager {
     //TODO: Organize images into spritesheets.
     //Unable to do so at current time due to inaccessibility of aseprite.
 
+    //TODO: Load all resources at the start of the program, rather then on GameObject creation.
+
     public static BufferedImage getImage(String imageName) {
         try {
             return (ImageIO.read(ResourceManager.class.getResourceAsStream("/com/kai/resources/"+imageName)));
