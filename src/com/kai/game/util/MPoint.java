@@ -4,8 +4,6 @@ import com.kai.game.core.Screen;
 
 public class MPoint {
 
-    //TODO: Use scaling points rather then straight ints for HUD values.
-
     private int x, y;
 
     public MPoint() {

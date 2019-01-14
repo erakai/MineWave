@@ -47,6 +47,7 @@ public class InGameDisplay extends GameObject implements Updatable {
         g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/1.5)))));
         g.drawString("Level: " + currentLevelToDraw, getScaledX(570), getScaledY(595));
 
+        //TODO: Wrap drawing a skill in a method.
         //Drawing the first playerSkill:
         g.setColor(Color.WHITE);
         g.setFont(Parameters.ORIGINAL_FONT);

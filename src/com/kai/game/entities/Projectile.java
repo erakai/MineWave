@@ -37,7 +37,7 @@ public class Projectile extends GameObject implements Updatable {
 
     //TODO: Manually setting the target to off screen so the projectiles travel the full range seems bad. Alternatives?
 
-    //TODO: Method doesn't work when you are to the left of the enemy (Proj gets stuck on x = 0). Fix?
+    //TODO: Projectiles sometimes get "stuck" in the air. Fix?
 
     public void updateTarget() {
         double m = (((double) (targetY - getY())) / ((double) (targetX - getX())));

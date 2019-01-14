@@ -55,7 +55,7 @@ Changelog:
         - Damage now assigned to individual projectiles
         - GreatMineSkill added (wesley thought of it and did image wowww)
 
-        !!!!!!! CONCURRENTMODIFICATIONECEPTIONS ARE BACK RUN !KHU:H$PY#P
+        !!!!!!! CONCURRENT MODIFICATION EXCEPTIONS ARE BACK RUN !KHU:H$PY#P
 
     12/30/18:
         - Added Turret
@@ -78,7 +78,7 @@ Changelog:
 
     1/12/19:
         - Added VampireBoss
-        - Added another (equally terrible) background after level 8\
+        - Added another (equally terrible) background after level 8
 
     1/13/19:
         - Added MagicBall
@@ -87,6 +87,7 @@ Changelog:
         - Set up "passive" system for skills
         - Added a really bad way of enabling "hold to shoot" for GunSkill
         - Removed the ton of ugly constants for width/height
+        - Shared with Daniel
 
 
 Still need to add deathscreen, leaderboards
