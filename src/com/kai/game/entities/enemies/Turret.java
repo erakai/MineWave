@@ -11,11 +11,9 @@ public class Turret extends ProjectileEnemy {
     public static final int TURRET_WIDTH = (int)(20.0/1200.0 * Screen.WINDOW_WIDTH);
     public static final int TURRET_HEIGHT = (int)(100.0/600.0 * Screen.WINDOW_HEIGHT);
 
-    private static final int TURRET_PROJ_WIDTH = (int)(31.0/1200.0 * Screen.WINDOW_WIDTH);
-    private static final int TURRET_PROJ_HEIGHT = (int)(31.0/600.0 * Screen.WINDOW_HEIGHT);
 
     public Turret(int x, int y) {
-        super(ResourceManager.getImage("Turret.png", TURRET_WIDTH, TURRET_HEIGHT ), x, y, 20, 100,
+        super(ResourceManager.getImage("Turret.png"), x, y, 20, 100,
                 0, 25, "Turret", 2, 0.5, 250);
     }
 
@@ -26,7 +24,7 @@ public class Turret extends ProjectileEnemy {
 
     @Override
     public void createProjectile(int tX, int tY) {
-        Image self =  ResourceManager.getImage("TurretProjectile.png", TURRET_PROJ_WIDTH, TURRET_PROJ_HEIGHT);
+        Image self =  ResourceManager.getImage("TurretProjectile.png");
 
 
         projectiles.add(new Projectile(this, self

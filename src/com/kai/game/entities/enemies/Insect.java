@@ -5,14 +5,11 @@ import com.kai.game.core.Screen;
 
 public class Insect extends Enemy {
 
-    public static final int INSECT_WIDTH = (int)(48.0/1200.0 * Screen.WINDOW_WIDTH);
-    public static final int INSECT_HEIGHT = (int)(50.0/600.0 * Screen.WINDOW_HEIGHT);
-
     private boolean enraged;
     private static final int DISTANCE_TO_ENRAGE = 60;
 
     public Insect(int x, int y) {
-        super(ResourceManager.getImage("insect.png", INSECT_WIDTH, INSECT_HEIGHT), x, y, 48, 50, 3, 8, "Insect", 1, 2);
+        super(ResourceManager.getImage("insect.png"), x, y, 48, 50, 3, 8, "Insect", 1, 2);
         this.enraged = false;
     }
 
@@ -34,7 +31,7 @@ public class Insect extends Enemy {
     private void enrage() {
         enraged = true;
         setSpeed(5);
-        setSelf(ResourceManager.getImage("insectAttacking.png", INSECT_WIDTH, INSECT_HEIGHT));
+        setSelf(ResourceManager.getImage("insectAttacking.png"));
         heal(getMaxHealth()/2);
     }
 

@@ -5,11 +5,9 @@ import com.kai.game.core.Screen;
 
 public class ArmoredInsect extends Enemy {
 
-    public static final int ARMORED_INSECT_WIDTH = (int)(48.0/1200.0 * Screen.WINDOW_WIDTH);
-    public static final int ARMORED_INSECT_HEIGHT = (int)(50.0/600.0 * Screen.WINDOW_HEIGHT);
 
     public ArmoredInsect(int x, int y) {
-        super(ResourceManager.getImage("ArmoredInsect.png", ARMORED_INSECT_WIDTH, ARMORED_INSECT_HEIGHT), x, y, 48, 50,
+        super(ResourceManager.getImage("ArmoredInsect.png"), x, y, 48, 50,
                 1, 20, "Armored Insect", 5, 0.6);
     }
 

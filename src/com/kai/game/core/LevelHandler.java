@@ -128,21 +128,21 @@ public class LevelHandler implements Updatable {
     public void createNewEnemy(Class c, int amount) {
         for (int i = 0; i < amount; i++) {
             if (c == Insect.class) {
-                enemies.add(new Insect(getXAwayFromPlayer(Insect.INSECT_WIDTH), getYAwayFromPlayer(Insect.INSECT_HEIGHT)));
+                enemies.add(new Insect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Beetle.class) {
-                enemies.add(new Beetle(getXAwayFromPlayer(Beetle.BEETLE_WIDTH), getYAwayFromPlayer(Beetle.BEETLE_HEIGHT)));
+                enemies.add(new Beetle(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == InsectNest.class) {
-                enemies.add(new InsectNest(getXAwayFromPlayer(InsectNest.INSECT_NEST_WIDTH), getYAwayFromPlayer(InsectNest.INSECT_NEST_HEIGHT)));
+                enemies.add(new InsectNest(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == ArmoredInsect.class) {
-                enemies.add(new ArmoredInsect(getXAwayFromPlayer(ArmoredInsect.ARMORED_INSECT_WIDTH), getYAwayFromPlayer(ArmoredInsect.ARMORED_INSECT_HEIGHT)));
+                enemies.add(new ArmoredInsect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Turret.class) {
-                enemies.add(new Turret(getXAwayFromPlayer(Turret.TURRET_WIDTH), getYAwayFromPlayer(Turret.TURRET_HEIGHT)));
+                enemies.add(new Turret(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Worm.class) {
-                enemies.add(new Worm(getXAwayFromPlayer(Worm.WORM_WIDTH), getYAwayFromPlayer(Worm.WORM_HEIGHT)));
+                enemies.add(new Worm(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == BossIncomingSign.class) {
                 enemies.add(new BossIncomingSign(500, 150, 6));
             } else if (c == Bat.class) {
-                enemies.add(new Bat(getXAwayFromPlayer(Bat.BAT_WIDTH), getYAwayFromPlayer(Bat.BAT_HEIGHT)));
+                enemies.add(new Bat(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Vampire.class) {
                 enemies.add(new Vampire(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == MagicBall.class) {

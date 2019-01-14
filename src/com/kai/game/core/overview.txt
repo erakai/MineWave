@@ -86,6 +86,7 @@ Changelog:
         - Added GunSkill
         - Set up "passive" system for skills
         - Added a really bad way of enabling "hold to shoot" for GunSkill
+        - Removed the ton of ugly constants for width/height
 
 
 Still need to add deathscreen, leaderboards

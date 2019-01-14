@@ -7,8 +7,6 @@ import java.awt.*;
 
 public class Worm extends Enemy {
 
-    public static final int WORM_WIDTH = (int)(50.0/1200.0 * Screen.WINDOW_WIDTH);
-    public static final int WORM_HEIGHT = (int)(50.0/600.0 * Screen.WINDOW_HEIGHT);
 
     private double rotationDegreeDir;
 
@@ -16,7 +14,7 @@ public class Worm extends Enemy {
     private int maxChargeTick, currentChargeTick;
 
     public Worm(int x, int y) {
-        super(ResourceManager.getImage("Worm.png", WORM_WIDTH, WORM_HEIGHT), x, y, 50, 50,
+        super(ResourceManager.getImage("Worm.png"), x, y, 50, 50,
                 9, 85, "Worm", 4, 1);
         rotationDegreeDir = 0;
         maxChargeTick = getMaxDamageTick();

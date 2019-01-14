@@ -8,11 +8,8 @@ import com.kai.game.core.Screen;
 
 public class InsectNest extends Enemy  implements SpecialDeath {
 
-    public static final int INSECT_NEST_WIDTH = (int)(80.0/1200.0 * Screen.WINDOW_WIDTH);
-    public static final int INSECT_NEST_HEIGHT = (int)(80.0/600.0 * Screen.WINDOW_HEIGHT);
-
     public InsectNest(int x, int y) {
-        super(ResourceManager.getImage("insectNest.png", INSECT_NEST_WIDTH, INSECT_NEST_HEIGHT),
+        super(ResourceManager.getImage("insectNest.png"),
                 x, y, 80, 80, 0, 11, "Insect Nest", 0, 0.3);
         setDamageTick((getMaxDamageTick()/2));
     }

@@ -81,7 +81,7 @@ public class Vampire extends Boss {
         if (currentSpawnTick > maxSpawnTick) {
             currentSpawnTick = 0;
             for (int i = 0; i < 5; i++) {
-                LevelHandler.addEnemy(new Bat(LevelHandler.getXAwayFromPlayer(Bat.BAT_WIDTH), LevelHandler.getYAwayFromPlayer(Bat.BAT_HEIGHT)));
+                LevelHandler.addEnemy(new Bat(LevelHandler.getXAwayFromPlayer(200), LevelHandler.getYAwayFromPlayer(200)));
             }
         }
     }

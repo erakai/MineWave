@@ -12,10 +12,6 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
     private final int maxHealth;
     private double health;
 
-    //TODO: Remove instance width/height values and use constants for each class.
-
-    //TODO: Replace the constants for width/height for each class and use getters.
-
     public Entity(Image self, int x, int y, int width, int height, int speed, int maxHealth) {
         super(self, x, y, width, height);
         this.speed = speed;
