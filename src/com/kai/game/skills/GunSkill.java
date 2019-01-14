@@ -19,7 +19,7 @@ public class GunSkill extends Skill {
                 new String[] {
                         "Gun: Passive Ability",
                         "Instead of placing mines, you instead fire them as projectiles.",
-                        "Your damage is set to 2/3rds of what it once was."
+                        "Your damage is set to 2/3rds of the normal value."
                 });
         if (owner != null) {
             owner.SHOOT = true;

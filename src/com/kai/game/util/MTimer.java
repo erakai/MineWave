@@ -14,20 +14,20 @@ public class MTimer {
     private HashMap<String, Long> markedTimes;
 
     public MTimer() {
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         markedTimes = new HashMap<String, Long>();
         markedTimes.put("start", startTime);
     }
 
     public int getSecondsSinceStart() {
-        return (int)((System.currentTimeMillis() - startTime)/1000.0);
+        return (int)((System.nanoTime() - startTime)/1000000000.0);
     }
 
     public int getSecondsSinceMarkedTime(String key) {
-        return (int)((System.currentTimeMillis() - markedTimes.get(key))/1000.0);
+        return (int)((System.nanoTime() - markedTimes.get(key))/1000000000.0);
     }
 
     public void markTime(String identifier) {
-        markedTimes.put(identifier, System.currentTimeMillis());
+        markedTimes.put(identifier, System.nanoTime());
     }
 }

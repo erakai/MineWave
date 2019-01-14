@@ -6,7 +6,6 @@ import com.kai.game.hud.SelectionScreen;
 import com.kai.game.skills.GunSkill;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
-import com.kai.game.core.Screen;
 import com.kai.game.skills.Skill;
 
 import java.awt.*;

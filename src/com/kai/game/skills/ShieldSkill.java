@@ -10,7 +10,6 @@ public class ShieldSkill extends Skill {
                 new String[] {
                         "Shield: 6 second cooldown.",
                         "Creates a protective barrier of mines around the player.",
-                        "Not effective against enemies ontop of the player."
                 });
     }
 
