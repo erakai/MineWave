@@ -8,7 +8,7 @@ public class MineWave {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("MineWave");
-        Screen screen = new Screen();
+        Screen screen = new Screen(frame);
         frame.add(screen);
 
         frame.pack();

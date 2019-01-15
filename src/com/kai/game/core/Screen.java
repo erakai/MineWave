@@ -23,6 +23,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
     //TODO: Fix how everything breaks when you resize the window.
 
+    //The current state of the game
     public static GameState state;
 
     //Handles background and scene objects.
@@ -38,12 +39,17 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     //Handles all user interface.
     private static List<GameObject> userInterface;
 
+    //The master JFrame, is necessary to have dialogues
+    private static JFrame ownerFrame;
+
     //Signals whether or not the screen was resized recently.
     public static boolean wasResized = false;
 
-    public Screen() {
+    public Screen(JFrame owner) {
         toUpdate = new ArrayList<>();
         userInterface = new ArrayList<>();
+
+        Screen.ownerFrame = owner;
 
         transitionToScene(GameState.MENU);
 
@@ -186,7 +192,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
                 break;
             case "Death Screen":
-                deathScreen = new DeathScreen("nothing");
+                deathScreen = new DeathScreen(null);
                 userInterface.add(deathScreen);
                 break;
         }
