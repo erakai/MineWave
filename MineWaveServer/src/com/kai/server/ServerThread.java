@@ -1,15 +1,16 @@
-package com.kai;
+package com.kai.server;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ServerThread extends Thread {
     private final int SERVER_PORT;
 
-    private final String FILE_NAME = "leaderboard.txt";
+    private final String FILE_NAME = "MineWaveServer/src/com/kai/leaderboard/leaderboard.txt";
 
     private ServerDisplay window;
 
@@ -20,7 +21,7 @@ public class ServerThread extends Thread {
     public ServerThread(int port) {
         this.SERVER_PORT = port;
         clients = new ArrayList<>();
-        ServerDisplay.init(this);
+        window = ServerDisplay.init(this);
         loadLeaderboardFromFile();
     }
 
@@ -28,22 +29,24 @@ public class ServerThread extends Thread {
 
     private void saveLeaderboardToFile() {
         try (FileOutputStream f = new FileOutputStream(new File(FILE_NAME))) {
-            ObjectOutputStream o = new ObjectOutputStream(f);
-            o.writeObject(currentLeaderboard);
-            o.close();
+                ObjectOutputStream o = new ObjectOutputStream(f);
+                o.writeObject(currentLeaderboard);
+                o.close();
         } catch (Exception ex ) { ex.printStackTrace(); }
     }
 
     private void loadLeaderboardFromFile() {
         try (FileInputStream f = new FileInputStream(new File(FILE_NAME))) {
-            ObjectInputStream oi = new ObjectInputStream(f);
-            List<Death> test = (List<Death>)oi.readObject();
-            if (test == null) {
-                currentLeaderboard = new ArrayList<>();
-            } else if (test.isEmpty()) {
-                currentLeaderboard = new ArrayList<>();
-            } else {
-                currentLeaderboard = test;
+            if (f.available() > 0) {
+                ObjectInputStream oi = new ObjectInputStream(f);
+                List<Death> test = (List<Death>) oi.readObject();
+                if (test == null) {
+                    currentLeaderboard = new ArrayList<>();
+                } else if (test.isEmpty()) {
+                    currentLeaderboard = new ArrayList<>();
+                } else {
+                    currentLeaderboard = test;
+                }
             }
         } catch (Exception ex ) { ex.printStackTrace(); }
     }
@@ -58,14 +61,20 @@ public class ServerThread extends Thread {
                 ClientHandler handler = new ClientHandler(connectedSocket);
                 clients.add(handler);
                 new Thread(handler).start();
+
+                saveLeaderboardToFile();
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-
-
+    //Check if the received death is on the leaderboard
+    private boolean checkIfEligible(Death newDeath) {
+        if (currentLeaderboard.size() < 10) { return true; }
+        Collections.sort(currentLeaderboard);
+        return (newDeath.getLevel() > currentLeaderboard.get(9).getLevel());
+    }
 
     private class ClientHandler implements Runnable {
         private Socket socket;
@@ -80,12 +89,32 @@ public class ServerThread extends Thread {
             try {
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
-            } catch (IOException ex) { window.log("Error with client " + socket.getInetAddress()); };
+            } catch (IOException ex) { window.log("Error with client " + socket.getInetAddress()); }
         }
 
         @Override
         public void run() {
+            try {
+                beganReceiving();
+            } catch (Exception ex) { ex.printStackTrace(); }
+        }
 
+        Death newDeath;
+        Boolean onLeaderboard;
+        private void beganReceiving() throws IOException, ClassNotFoundException {
+            while ((newDeath = (Death)in.readObject()) != null) {
+                window.log("Death received from " + socket.getInetAddress() +": \n" + newDeath + "\n --- ");
+                onLeaderboard = false;
+                if (checkIfEligible(newDeath)) {
+                    onLeaderboard = true;
+                    if (currentLeaderboard.size() > 9) {
+                        currentLeaderboard.remove(9);
+                    }
+                    currentLeaderboard.add(newDeath);
+                }
+                out.writeObject(onLeaderboard);
+                out.writeObject(currentLeaderboard);
+            }
         }
     }
 
@@ -125,7 +154,7 @@ public class ServerThread extends Thread {
 
         @Override
         public String toString() {
-            return "Name: " + name + "\nKilled By: " + killedBy + "\nAbility: " + ability + "\nLevel: " + level;
+            return "Name: " + name + "\nKilled By: " + killedBy + "\nAbility: " + ability + "\nLevel: " + level + "\n-";
         }
     }
 }

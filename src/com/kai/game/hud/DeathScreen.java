@@ -26,13 +26,27 @@ public class DeathScreen extends GameObject {
     //Signifies whether or not this client is connected to the server.
     private boolean connected = true;
 
-    public DeathScreen(List<Death> givenLeaderboard) {
-        super(ResourceManager.getImage("DeathScreen.png"), 0, 0, 1200, 600);
+    //Signifies whether or not this player made it on the leaderboards;
+    private boolean onLeaderboards;
 
+    public DeathScreen() {
+        super(ResourceManager.getImage("DeathScreen.png"), 0, 0, 1200, 600);
+/*
         if (givenLeaderboard == null) {
             connected = false;
         } else {
             this.leaderboard = givenLeaderboard;
+            Collections.sort(leaderboard);
+        }*/
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    public void setLeaderboard(List<Death> leaderboard) {
+        this.leaderboard = leaderboard;
+        if (leaderboard != null) {
             Collections.sort(leaderboard);
         }
     }
@@ -46,8 +60,11 @@ public class DeathScreen extends GameObject {
         return new Death(name, killedBy, ability, level);
     }
 
+    public void setOnLeaderboards(boolean onLeaderboards) {
+        this.onLeaderboards = onLeaderboards;
+    }
 
-    private static class Death implements Comparable<Death>, Serializable {
+    public static class Death implements Comparable<Death>, Serializable {
         private String name, killedBy, ability;
         private int level;
 

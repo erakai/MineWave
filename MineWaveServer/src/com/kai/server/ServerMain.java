@@ -1,4 +1,4 @@
-package com.kai;
+package com.kai.server;
 
 public class ServerMain {
     public static final int SERVER_PORT = 8701;

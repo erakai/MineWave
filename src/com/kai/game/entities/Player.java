@@ -30,6 +30,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     public boolean SHOOT = false;
 
+    private Enemy killedBy;
+
     public Player(int x, int y, int width, int height) {
         super(null, x, y, width, height, 4, 20);
         this.dir = "up";
@@ -256,6 +258,14 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         }
 
 
+    }
+
+    public Enemy getKilledBy() {
+        return killedBy;
+    }
+
+    public void setKilledBy(Enemy killedBy) {
+        this.killedBy = killedBy;
     }
 
     public List<Projectile> getProjectiles() {
