@@ -1,3 +1,5 @@
+package com.kai;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
@@ -41,7 +43,7 @@ public class ServerDisplay extends JPanel {
 
     public static ServerDisplay init(ServerThread myServer) {
         ServerDisplay.myServer = myServer;
-        frame = new JFrame("ServerDisplay");
+        frame = new JFrame("com.kai.ServerDisplay");
         mainPanel = new ServerDisplay(new GridBagLayout());
         mainPanel.addComponents();
         frame.add(mainPanel);

@@ -3,6 +3,7 @@ package com.kai.game.hud;
 import com.kai.game.core.GameObject;
 import com.kai.game.util.ResourceManager;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.awt.*;
@@ -13,7 +14,7 @@ public class DeathScreen extends GameObject {
     On program start, socket created in Screen or wherever, creates a boolean saying whether connection successful or not.
     Boolean passed to this class.
     When transitioning to death state:
-        1. if boolean = true, create dialogue asking user for name, send data to server
+        1. if boolean = true, create dialogue asking user for name, send new death to server
             Server sends back full leaderBoard, passed to deathScreen.
         2. if boolean = false, create dialogue saying they didn't make it because they are garbage
     DeathScreen displays either received leaderBoard or error.
@@ -46,7 +47,7 @@ public class DeathScreen extends GameObject {
     }
 
 
-    private static class Death implements Comparable<Death> {
+    private static class Death implements Comparable<Death>, Serializable {
         private String name, killedBy, ability;
         private int level;
 
@@ -78,6 +79,11 @@ public class DeathScreen extends GameObject {
 
         public int getLevel() {
             return level;
+        }
+
+        @Override
+        public String toString() {
+            return "Name: " + name + "\nKilled By: " + killedBy + "\nAbility: " + ability + "\nLevel: " + level;
         }
     }
 
