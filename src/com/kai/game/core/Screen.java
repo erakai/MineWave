@@ -1,6 +1,7 @@
 package com.kai.game.core;
 
 import com.kai.game.entities.Player;
+import com.kai.game.hud.DeathScreen;
 import com.kai.game.hud.InGameDisplay;
 import com.kai.game.hud.MainMenu;
 import com.kai.game.hud.SelectionScreen;
@@ -30,6 +31,8 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     private static Player player;
     //Handles level management and enemies.
     private static LevelHandler levelHandler;
+    //Death Screen
+    private static DeathScreen deathScreen;
     //Handles misc objects that need to be drawn or updated.
     private static List<Updatable> toUpdate;
     //Handles all user interface.
@@ -161,6 +164,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         environment = null;
         player = null;
         levelHandler = null;
+        deathScreen = null;
 
         switch(newState.getName()) {
             case "Menu":
@@ -182,9 +186,14 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
                 break;
             case "Death Screen":
-
+                deathScreen = new DeathScreen("nothing");
+                userInterface.add(deathScreen);
                 break;
         }
+    }
+
+    public static DeathScreen getDeathScreen() {
+        return deathScreen;
     }
 
     public static Environment getEnvironment() {
