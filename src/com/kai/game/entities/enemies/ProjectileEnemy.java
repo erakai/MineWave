@@ -1,6 +1,7 @@
 package com.kai.game.entities.enemies;
 
 import com.kai.game.core.GameObject;
+import com.kai.game.core.Screen;
 import com.kai.game.entities.Entity;
 import com.kai.game.entities.Player;
 import com.kai.game.entities.Projectile;
@@ -38,6 +39,11 @@ public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
     public void onProjectileCollision(GameObject collidedWith, Projectile p) {
         if (collidedWith instanceof Player) {
             this.attack((Entity)collidedWith, p.getDamage());
+            //TODO: The way I'm setting what the player is killed by is bad. Fix?
+            if (Screen.getPlayer().getHealth() < 1) {
+                Screen.playerDied(this);
+            }
+
         }
         addToRemoveQueue(p);
     }

@@ -1,10 +1,14 @@
 package com.kai.game.core;
 
 import com.kai.game.entities.Player;
+import com.kai.game.entities.enemies.Enemy;
+import com.kai.game.hud.DeathScreen;
 import com.kai.game.hud.InGameDisplay;
 import com.kai.game.hud.MainMenu;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.scene.Environment;
+import com.kai.game.skills.Skill;
+import com.kai.game.util.ClientConnection;
 import com.kai.game.util.GameState;
 import com.kai.game.util.Input;
 import com.kai.game.util.Parameters;
@@ -22,6 +26,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
     //TODO: Fix how everything breaks when you resize the window.
 
+    //The current state of the game
     public static GameState state;
 
     //Handles background and scene objects.
@@ -30,17 +35,26 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     private static Player player;
     //Handles level management and enemies.
     private static LevelHandler levelHandler;
+    //Death Screen
+    private static DeathScreen deathScreen;
     //Handles misc objects that need to be drawn or updated.
     private static List<Updatable> toUpdate;
     //Handles all user interface.
     private static List<GameObject> userInterface;
-
+    //The master JFrame, is necessary to have dialogues
+    private static JFrame ownerFrame;
     //Signals whether or not the screen was resized recently.
-    public static boolean wasResized = false;
+    private static boolean wasResized = false;
+    //Connection to the server for leaderboards
+    private static ClientConnection connection;
 
-    public Screen() {
+    public Screen(JFrame owner) {
         toUpdate = new ArrayList<>();
         userInterface = new ArrayList<>();
+
+        connection = new ClientConnection();
+
+        Screen.ownerFrame = owner;
 
         transitionToScene(GameState.MENU);
 
@@ -102,18 +116,14 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         //Respond to all player input.
         Input.updateChanges();
 
+        for (Updatable u: toUpdate) {
+            if (u != null) {
+                u.update();
+            }
+        }
+
         if (levelHandler != null) {
             levelHandler.updateEnemies();
-        }
-
-        for (Updatable u: toUpdate) {
-            u.update();
-        }
-
-        if (state == GameState.RUNNING && player != null) {
-            if (checkForGameOver()) {
-                transitionToScene(GameState.DEATH);
-            }
         }
 
         if (wasResized) {
@@ -132,6 +142,49 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
             wasResized = false;
         }
 
+        if (player != null) {
+            if (getPlayer().getHealth() < 1) {
+                gameOver();
+            }
+        }
+    }
+
+    private void gameOver() {
+        DeathScreen.Death death = constructPlayerDeath(getPlayer().getKilledBy());
+        Skill skill = getPlayer().getSkills().get(0);
+        transitionToScene(GameState.DEATH);
+        if (ClientConnection.isCONNECTED()) {
+            getConnection().setClientDeath(death);
+            getConnection().start();
+        }
+        try { Thread.sleep(Parameters.TIMEOUT_LENGTH); } catch (InterruptedException e) { e.printStackTrace(); }
+        if (getConnection().getGivenLeaderboard() == null) {
+            ClientConnection.setCONNECTED(false);
+        }
+        getDeathScreen().setRecentPlayerDeath(death);
+        getDeathScreen().setRecentPlayerSkill(skill);
+        getDeathScreen().setConnected(ClientConnection.isCONNECTED());
+        getDeathScreen().setLeaderboard(getConnection().getGivenLeaderboard());
+        getDeathScreen().setOnLeaderboards(getConnection().isMadeOnLeaderboards());
+    }
+
+    public static void playerDied(Enemy e) {
+        getPlayer().setKilledBy(e.getName());
+    }
+
+    private static DeathScreen.Death constructPlayerDeath(String e) {
+        //You could make it show DeathScreen right away, but I like this.
+        //TODO: Remove cancel button from killed dialogue.
+        String s = (String)JOptionPane.showInputDialog(ownerFrame, "Enter name: ", "You have died.", JOptionPane.PLAIN_MESSAGE,
+                null ,null, "");
+        if (s == null) {
+            s = "???";
+        }
+        if (s.length() > 7) {
+            s = s.substring(0, 7);
+        }
+        return new DeathScreen.Death(s, e, getPlayer().getSkills().get(0).getName().replaceAll("Skill", ""), getLevelHandler().getDisplayedLevel());
+        //return DeathScreen.createDeath(s, e, getPlayer().getSkills().get(0).getName(), getLevelHandler().getDisplayedLevel());
     }
 
     public void animate() {
@@ -150,17 +203,16 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         }
     }
 
-    private boolean checkForGameOver() {
-        return (getPlayer().getHealth() < 1);
-    }
 
     public static void transitionToScene(GameState newState) {
         state = newState;
-        toUpdate.clear();
-        userInterface.clear();
         environment = null;
         player = null;
         levelHandler = null;
+        deathScreen = null;
+
+        toUpdate.clear();
+        userInterface.clear();
 
         switch(newState.getName()) {
             case "Menu":
@@ -182,9 +234,14 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
                 break;
             case "Death Screen":
-
+                deathScreen = new DeathScreen();
+                userInterface.add(deathScreen);
                 break;
         }
+    }
+
+    public static DeathScreen getDeathScreen() {
+        return deathScreen;
     }
 
     public static Environment getEnvironment() {
@@ -199,6 +256,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
     public static void addUpdatable(Updatable e) {
         toUpdate.add(e);
+    }
+
+    public static ClientConnection getConnection() {
+        return connection;
     }
 
     @Override

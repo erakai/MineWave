@@ -89,6 +89,13 @@ Changelog:
         - Removed the ton of ugly constants for width/height
         - Shared with Daniel
 
+    1/14/19:
+        - Leaderboard branch
+        - Started work on creating online leaderboard
+        - Began MineWaveServer module
+
+    1/15/19:
+        - Thicc progress on leaderboard
 
 Still need to add deathscreen, leaderboards
 

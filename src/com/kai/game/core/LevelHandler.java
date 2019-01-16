@@ -73,12 +73,17 @@ public class LevelHandler implements Updatable {
                 ((UsesProjectiles) e).callAllProjectileCollisions(checkWith);
             } else if (e.checkCollision(Screen.getPlayer())) {
                 e.attack(Screen.getPlayer());
+                if (checkForGameOver()) {
+                    Screen.playerDied(e);
+                }
             }
         }
 
         Screen.getPlayer().callAllProjectileCollisions(new ArrayList<>(enemies));
+    }
 
-
+    public boolean checkForGameOver() {
+        return (Screen.getPlayer().getHealth() < 1);
     }
 
     private void chasePlayer() {

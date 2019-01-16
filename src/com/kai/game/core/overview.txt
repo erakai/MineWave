@@ -89,8 +89,15 @@ Changelog:
         - Removed the ton of ugly constants for width/height
         - Shared with Daniel
 
+    1/14/19:
+        - Leaderboard branch
+        - Started work on creating online leaderboard
+        - Began MineWaveServer module
 
-Still need to add deathscreen, leaderboards
+    1/15/19:
+        - Thicc progress on leaderboard
+        - Online leaderboard works!
+        - Project now has everything original mine wave did :)
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type

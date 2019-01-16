@@ -14,6 +14,7 @@ Wave-based game with enemies progressing in difficulty, where the player must su
   - A skill set used by both players and enemies.
   - Items that modify the player's gameplay.
   - Challenging periodic bosses.
+  - An online leaderboard.
 
 ## Utilizes:
 
@@ -22,6 +23,7 @@ Wave-based game with enemies progressing in difficulty, where the player must su
 ## Contributors:
 
   - Kai
+  - Daniel
 
 
 
