@@ -12,6 +12,8 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
     private final int maxHealth;
     private double health;
 
+    //TODO: Set up a system where behaviors and stats for entities are not client sided.
+
     public Entity(Image self, int x, int y, int width, int height, int speed, int maxHealth) {
         super(self, x, y, width, height);
         this.speed = speed;

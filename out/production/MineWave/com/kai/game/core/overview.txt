@@ -98,6 +98,11 @@ Changelog:
         - Thicc progress on leaderboard
         - Online leaderboard works!
         - Project now has everything original mine wave did :)
+        - Set up a vps using aws, server will be running 24/7
+
+    1/16/19:
+        - Adding a highlight bar around your place on leaderboards
+        - Vampire range 500 -> 800
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type

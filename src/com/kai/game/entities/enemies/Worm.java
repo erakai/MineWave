@@ -13,6 +13,8 @@ public class Worm extends Enemy {
     private int currentTargetedX, currentTargetedY;
     private int maxChargeTick, currentChargeTick;
 
+    //TODO: Fix glitch where Worm doesn't charge if you are hugging left side.
+
     public Worm(int x, int y) {
         super(ResourceManager.getImage("Worm.png"), x, y, 50, 50,
                 9, 85, "Worm", 4, 1);

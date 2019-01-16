@@ -376,7 +376,7 @@ public class LevelHandler implements Updatable {
 
         public BossIncomingSign(int x, int y, int duration) {
             super(ResourceManager.getImage("bossinc.png", BOSS_INC_SIZE.getWidth(), BOSS_INC_SIZE.getHeight()), x, y,
-                    BOSS_INC_SIZE.getWidth(), BOSS_INC_SIZE.getHeight(), 0, 1, "Boss Incoming Sign", 0, 1);
+                    BOSS_INC_SIZE.getWidth(), BOSS_INC_SIZE.getHeight(), 0, 1000000, "Boss Incoming Sign", 0, 1);
             this.duration = duration;
             this.start = System.currentTimeMillis();
 

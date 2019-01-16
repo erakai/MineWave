@@ -20,7 +20,7 @@ public class Vampire extends Boss {
 
     public Vampire(int x, int y) {
         super(ResourceManager.getImage("VampireBoss.png"), x, y, 60, 90,
-                3, 280, "Vampire", 2, 1, 500, 6);
+                3, 280, "Vampire", 2, 1, 800, 6);
         immune = false;
         currentSpawnTick = maxSpawnTick;
         maxSpawnTick = (int)(SPAWN_RATE * Parameters.FRAMES_PER_SECOND);

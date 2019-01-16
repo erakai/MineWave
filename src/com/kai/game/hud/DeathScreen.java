@@ -100,6 +100,11 @@ public class DeathScreen extends GameObject {
         if (connected) {
             for (int i = 0; i<leaderboard.size(); i++) {
                 Death death = leaderboard.get(i);
+                if (onLeaderboards && death.getName().equals(recentPlayerDeath.getName()) && death.getLevel() == recentPlayerDeath.getLevel() && death.getKilledBy().equals(recentPlayerDeath.getKilledBy()) && death.getAbility().equals(recentPlayerDeath.getAbility())) {
+                    g.setColor(new Color(211, 211, 211));
+                    g.fillRect(name.getX()-12, ldbText.getY() + (i * ldbDecrement.getY()- (ldbDecrement.getY()/2)), 490, ldbDecrement.getY()/2 + (ldbDecrement.getY()/3) - 5 );
+                    g.setColor(new Color(42, 112, 224));
+                }
                 g.drawString(death.getName(), name.getX(), ldbText.getY() + (i * ldbDecrement.getY()));
                 g.drawString(death.getKilledBy(), killedBy.getX(), ldbText.getY() + (i * ldbDecrement.getY()));
                 g.drawString(death.getAbility(), ability.getX(), ldbText.getY() + (i * ldbDecrement.getY()));
