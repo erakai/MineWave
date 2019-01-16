@@ -96,8 +96,8 @@ Changelog:
 
     1/15/19:
         - Thicc progress on leaderboard
-
-Still need to add deathscreen, leaderboards
+        - Online leaderboard works!
+        - Project now has everything original mine wave did :)
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type

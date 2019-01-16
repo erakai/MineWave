@@ -13,7 +13,7 @@ public class Parameters {
     public static Font ORIGINAL_FONT;
 
     //The information for connecting to Server for leaderboard data
-    public static final String SERVER_NAME = "localhost";
+    public static final String SERVER_NAME = "54.193.51.83";
     public static final int SERVER_PORT = 8701;
 
     //The time (in millis) that the Client will wait to connect to the server.

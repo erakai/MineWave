@@ -49,7 +49,7 @@ public class ServerDisplay extends JPanel {
         mainPanel.addComponents();
         frame.add(mainPanel);
         frame.pack();
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         return mainPanel;
     }
