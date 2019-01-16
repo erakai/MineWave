@@ -7,6 +7,7 @@ import com.kai.game.hud.InGameDisplay;
 import com.kai.game.hud.MainMenu;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.scene.Environment;
+import com.kai.game.skills.Skill;
 import com.kai.game.util.ClientConnection;
 import com.kai.game.util.GameState;
 import com.kai.game.util.Input;
@@ -150,26 +151,40 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
     private void gameOver() {
         DeathScreen.Death death = constructPlayerDeath(getPlayer().getKilledBy());
+        Skill skill = getPlayer().getSkills().get(0);
         transitionToScene(GameState.DEATH);
         if (ClientConnection.isCONNECTED()) {
             getConnection().setClientDeath(death);
             getConnection().start();
         }
+        try { Thread.sleep(Parameters.TIMEOUT_LENGTH); } catch (InterruptedException e) { e.printStackTrace(); }
+        if (getConnection().getGivenLeaderboard() == null) {
+            ClientConnection.setCONNECTED(false);
+        }
+        getDeathScreen().setRecentPlayerDeath(death);
+        getDeathScreen().setRecentPlayerSkill(skill);
         getDeathScreen().setConnected(ClientConnection.isCONNECTED());
         getDeathScreen().setLeaderboard(getConnection().getGivenLeaderboard());
         getDeathScreen().setOnLeaderboards(getConnection().isMadeOnLeaderboards());
     }
 
     public static void playerDied(Enemy e) {
-        getPlayer().setKilledBy(e);
+        getPlayer().setKilledBy(e.getName());
     }
 
-    private static DeathScreen.Death constructPlayerDeath(Enemy e) {
+    private static DeathScreen.Death constructPlayerDeath(String e) {
         //You could make it show DeathScreen right away, but I like this.
-        //TODO: Remvoe cancel button from killed dialogue.
+        //TODO: Remove cancel button from killed dialogue.
         String s = (String)JOptionPane.showInputDialog(ownerFrame, "Enter name: ", "You have died.", JOptionPane.PLAIN_MESSAGE,
                 null ,null, "");
-        return DeathScreen.createDeath(s, e.getName(), player.getSkills().get(0).getName(), getLevelHandler().getDisplayedLevel());
+        if (s == null) {
+            s = "???";
+        }
+        if (s.length() > 7) {
+            s = s.substring(0, 7);
+        }
+        return new DeathScreen.Death(s, e, getPlayer().getSkills().get(0).getName().replaceAll("Skill", ""), getLevelHandler().getDisplayedLevel());
+        //return DeathScreen.createDeath(s, e, getPlayer().getSkills().get(0).getName(), getLevelHandler().getDisplayedLevel());
     }
 
     public void animate() {

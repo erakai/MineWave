@@ -94,6 +94,8 @@ Changelog:
         - Started work on creating online leaderboard
         - Began MineWaveServer module
 
+    1/15/19:
+        - Thicc progress on leaderboard
 
 Still need to add deathscreen, leaderboards
 

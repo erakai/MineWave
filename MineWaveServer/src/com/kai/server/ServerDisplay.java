@@ -38,12 +38,13 @@ public class ServerDisplay extends JPanel {
 
     public void log(String toLog) {
         loggingDisplay.append(toLog + "\n");
-        //Write to file.
+        System.out.println(toLog);
+        //TODO: Write log to a file.
     }
 
     public static ServerDisplay init(ServerThread myServer) {
         ServerDisplay.myServer = myServer;
-        frame = new JFrame("com.kai.server.ServerDisplay");
+        frame = new JFrame("MineWaveServer");
         mainPanel = new ServerDisplay(new GridBagLayout());
         mainPanel.addComponents();
         frame.add(mainPanel);

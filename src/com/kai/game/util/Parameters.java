@@ -16,4 +16,8 @@ public class Parameters {
     public static final String SERVER_NAME = "localhost";
     public static final int SERVER_PORT = 8701;
 
+    //The time (in millis) that the Client will wait to connect to the server.
+    public static final int TIMEOUT_LENGTH = 1000;
+
+
 }

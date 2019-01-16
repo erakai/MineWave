@@ -49,10 +49,10 @@ public class ClientConnection extends Thread {
             Object received;
             while ((received = in.readObject()) != null) {
                 if (received instanceof Boolean) {
-                    madeOnLeaderboards = (Boolean)received;
+                    madeOnLeaderboards = (Boolean) received;
                 }
                 if (received instanceof List) {
-                    givenLeaderboard = (List<DeathScreen.Death>)received;
+                    givenLeaderboard = (List<DeathScreen.Death>) received;
                 }
             }
         }
@@ -74,5 +74,9 @@ public class ClientConnection extends Thread {
 
     public static boolean isCONNECTED() {
         return CONNECTED;
+    }
+
+    public static void setCONNECTED(boolean CONNECTED) {
+        ClientConnection.CONNECTED = CONNECTED;
     }
 }
