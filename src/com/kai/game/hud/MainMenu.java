@@ -25,7 +25,7 @@ public class MainMenu extends GameObject {
         Parameters.ORIGINAL_FONT = g.getFont();
         g.drawImage(getSelfImage(), getX(), getY(), null);
         g.setFont(new MFont(8.4));
-        g.setColor(new Color(90, 120, 242));
+        g.setColor(new Color(41, 29, 184));
         g.drawString("MINE WAVE", titleText.getX(), titleText.getY());
         g.setFont(new MFont(4.8));
         g.setColor(new Color(136, 165, 215));

@@ -214,6 +214,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         toUpdate.clear();
         userInterface.clear();
 
+
         switch(newState.getName()) {
             case "Menu":
                 userInterface.add(new MainMenu());
@@ -260,6 +261,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
     public static ClientConnection getConnection() {
         return connection;
+    }
+
+    public static void setConnection(ClientConnection connection) {
+        Screen.connection = connection;
     }
 
     @Override

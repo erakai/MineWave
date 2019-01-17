@@ -102,7 +102,11 @@ public class Input {
                     Screen.getPlayer().createProjectile(mouseX, mouseY);
                     break;
                 case "Death Screen":
+                    if (Screen.getDeathScreen().testHover(mouseX, mouseY)) {
+                        Screen.transitionToScene(GameState.SELECT);
+                        Screen.setConnection(new ClientConnection());
 
+                    }
                     break;
             }
         }
@@ -138,7 +142,7 @@ public class Input {
                 currentMouseY = (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY);
                 break;
             case "Death Screen":
-
+                Screen.getDeathScreen().testHover((int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX), (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY));
                 break;
         }
     }

@@ -4,6 +4,7 @@ import com.kai.game.core.GameObject;
 import com.kai.game.skills.Skill;
 import com.kai.game.util.MFont;
 import com.kai.game.util.MPoint;
+import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 
 import java.io.Serializable;
@@ -34,11 +35,14 @@ public class DeathScreen extends GameObject {
     //Signifies whether or not this player made it on the leaderboards;
     private boolean onLeaderboards;
 
+    //Signifies if the mouse is over the replay butotn
+    private boolean replayHover = false;
+
     //The Skill the player was using (to draw)
     private Skill recentPlayerSkill;
 
     public DeathScreen() {
-        super(ResourceManager.getImage("DeathScreen.png"), 0, 0, 1200, 600);
+        super(ResourceManager.getImage("AlternateDeathScreen.png"), 0, 0, 1200, 600);
     }
 
     public void setConnected(boolean connected) {
@@ -53,31 +57,35 @@ public class DeathScreen extends GameObject {
     }
 
 
-    Font medium = new MFont(1.4);
-    Font small = new MFont(1.1);
-    Font large = new MFont(4);
+    private Font small = new MFont(1.4);
+    private Font medium = new MFont(2.3);
+    private Font large = new MFont(4);
 
-    MPoint firstRecentInfo = new MPoint(35, 52);
-    MPoint secondRecentInfo = new MPoint(35, 82);
-    MPoint thirdRecentInfo = new MPoint(35, 112);
-    MPoint recentImageInfo = new MPoint(250, 40);
+    private MPoint firstRecentInfo = new MPoint(35, 52);
+    private MPoint secondRecentInfo = new MPoint(35, 82);
+    private MPoint thirdRecentInfo = new MPoint(35, 112);
+    private MPoint recentImageInfo = new MPoint(250, 40);
 
-    MPoint leaderboardText = new MPoint(790, 60);
-    MPoint name = new MPoint(696, 90);
-    MPoint killedBy = new MPoint(800, 90);
-    MPoint ability = new MPoint(950, 90);
-    MPoint score = new MPoint(1100, 90);
+    private MPoint leaderboardText = new MPoint(785, 60);
+    private MPoint name = new MPoint(696, 90);
+    private MPoint killedBy = new MPoint(800, 90);
+    private MPoint ability = new MPoint(955, 90);
+    private MPoint score = new MPoint(1100, 90);
 
-    MPoint ldbText = new MPoint(0, 125);
-    MPoint ldbDecrement = new MPoint(0, 50);
+    private MPoint ldbText = new MPoint(0, 125);
+    private MPoint ldbDecrement = new MPoint(0, 50);
 
-    MPoint error = new MPoint(750, 300);
+    private MPoint error = new MPoint(750, 300);
+    private MPoint replay = new MPoint(100, 395);
 
+    private MRectangle hoverRectangle = new MRectangle(new MPoint(25, 358), new MPoint(327, 410));
+
+    //TODO: Somewhere on DeathScreen, have some text that says if the user made it onto the leaderboard.
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
 
         //Draw info of recent player death
-        g.setFont(medium);
+        g.setFont(small);
         g.setColor(Color.WHITE);
         g.drawString("You died!", firstRecentInfo.getX(), firstRecentInfo.getY());
         g.drawString("Score: " + recentPlayerDeath.getLevel(), secondRecentInfo.getX(), secondRecentInfo.getY());
@@ -90,7 +98,7 @@ public class DeathScreen extends GameObject {
         g.setColor(Color.ORANGE);
         g.drawString("Leaderboard", leaderboardText.getX(), leaderboardText.getY());
 
-        g.setFont(medium);
+        g.setFont(small);
         g.drawString("Name", name.getX(), name.getY());
         g.drawString("Killed By", killedBy.getX(), killedBy.getY());
         g.drawString("Ability", ability.getX(), ability.getY());
@@ -112,11 +120,18 @@ public class DeathScreen extends GameObject {
             }
         } else {
             g.setColor(new Color(250, 25, 67));
-            g.setFont(medium);
+            g.setFont(small);
             g.drawString("Could not connect to server :(", error.getX(), error.getY());
         }
 
-        //TODO: Draw Replay Button and have it work
+        //Drawing replay
+        g.setFont(medium);
+        if (replayHover) {
+            g.setColor(new Color(43, 64, 121));
+            g.fillRect(hoverRectangle.getTopLeft().getX(), hoverRectangle.getTopLeft().getY(), hoverRectangle.getWidth()+1, hoverRectangle.getHeight()+1);
+        }
+        g.setColor(new Color(192, 209, 216));
+        g.drawString("Play again?", replay.getX(), replay.getY());
     }
 
     public void setRecentPlayerSkill(Skill recentPlayerSkill) {
@@ -129,6 +144,18 @@ public class DeathScreen extends GameObject {
 
     public void setOnLeaderboards(boolean onLeaderboards) {
         this.onLeaderboards = onLeaderboards;
+    }
+
+
+    public boolean testHover(int mouseX, int mouseY) {
+        //damn this method's code is ugly
+        if (mouseX > hoverRectangle.getTopLeft().getX() && mouseX < hoverRectangle.getBottomRight().getX() &&
+            mouseY > hoverRectangle.getTopLeft().getY() && mouseY < hoverRectangle.getBottomRight().getY()) {
+            replayHover = true;
+            return true;
+        }
+        replayHover = false;
+        return false;
     }
 
     public static class Death implements Comparable<Death>, Serializable {

@@ -103,6 +103,7 @@ Changelog:
     1/16/19:
         - Adding a highlight bar around your place on leaderboards
         - Vampire range 500 -> 800
+        - Added a replay button!
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
@@ -127,3 +128,5 @@ Future:
     - More things to chose from when creating your character
     - Similarly to Ambush, go through rooms and have a map
     - More Bosses
+
+if i ever implement accounts/character/character saving, have gun skill be unlocked once you hit level 16 or something

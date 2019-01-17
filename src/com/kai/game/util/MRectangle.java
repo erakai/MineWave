@@ -14,6 +14,10 @@ public class MRectangle {
         this.bottomRight = bottomRight;
     }
 
+    public MRectangle(MPoint topLeft, MPoint bottomRight) {
+        this(Math.abs(bottomRight.getX() - topLeft.getX()), Math.abs(bottomRight.getY() - topLeft.getY()), topLeft, bottomRight);
+    }
+
     public MRectangle(int width, int height) {
         this(width, height, null, null);
     }
