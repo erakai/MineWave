@@ -3,6 +3,8 @@ package com.kai.server;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ServerDisplay extends JPanel {
 
@@ -24,20 +26,23 @@ public class ServerDisplay extends JPanel {
     private void addComponents() {
         GridBagConstraints c = new GridBagConstraints();
 
-        loggingDisplay = new JTextArea(25,30);
+        loggingDisplay = new JTextArea(40,80);
         c.insets = new Insets(10, 10, 10, 10);
         loggingDisplay.setLineWrap(false);
         loggingDisplay.setWrapStyleWord(true);
-        loggingDisplay.setFont(new Font(loggingDisplay.getFont().getName(), loggingDisplay.getFont().getStyle(), (int)(loggingDisplay.getFont().getSize()*0.6)));
+        loggingDisplay.setFont(new Font(loggingDisplay.getFont().getName(), loggingDisplay.getFont().getStyle(), (int)(loggingDisplay.getFont().getSize()*1.2)));
         JScrollPane areaScrollPane = new JScrollPane(loggingDisplay);
         loggingDisplay.setEditable(false);
         areaScrollPane.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         c.gridwidth = 2;
-        add(areaScrollPane, c);
+        add(areaScrollPane);
     }
 
     public void log(String toLog) {
-        loggingDisplay.append(toLog + "\n");
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+
+        loggingDisplay.append("[" + sdf.format(cal.getTime()) + "] " + toLog + "\n");
         System.out.println(toLog);
         //TODO: Write log to a file.
     }

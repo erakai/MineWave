@@ -103,12 +103,21 @@ Changelog:
         - Vampire range 500 -> 800
         - Added a replay button!
         - The main menu click to play button now lights up when hovered over
+        - Increased size of serverDisplay, added time to log
+        - Turret range 250 -> 800
+        - Beetle rate of fire 0.8 -> 1.2
+        - Beetle range 800 -> 1000
+        - Beetle projectile speed 4 -> 5
+
+    immediate future:
+        player range
+        server has leaderboard.txt outside of itself so that future versions can access
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
     and has methods to modify the values but saves og values
     then have a list of current effects in entity that is cycled through and updated
-    and then as updated the effect counts down cooldown and then resets to og values
+    and then as updated the effect counts down cool down and then resets to og values
     boom im a genius thanks god
     !wesley
 

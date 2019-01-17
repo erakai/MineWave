@@ -24,6 +24,7 @@ Wave-based game with enemies progressing in difficulty, where the player must su
 
   - Kai
   - Daniel
+  - Hirod
 
 
 

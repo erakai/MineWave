@@ -16,7 +16,7 @@ public class Turret extends ProjectileEnemy {
 
     public Turret(int x, int y) {
         super(ResourceManager.getImage("Turret.png"), x, y, 20, 100,
-                0, 25, "Turret", 2, 0.5, 250);
+                0, 25, "Turret", 2, 0.5, 800);
     }
 
     @Override
