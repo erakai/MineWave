@@ -26,8 +26,8 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
     }
 
     public double distanceTo (int tX, int tY) {
-        double a = Math.abs(getX() - tX);
-        double b = Math.abs(getY() - tY);
+        double a = Math.abs( (getX() + getWidth()/2) - tX);
+        double b = Math.abs( (getY() + getHeight()/2) - tY);
         return(Math.sqrt((a*a) + (b*b)));
     }
 

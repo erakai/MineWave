@@ -109,6 +109,9 @@ Changelog:
         - Beetle range 800 -> 1000
         - Beetle projectile speed 4 -> 5
 
+    1/17/19:
+        -Player range of 750 added (circle is a little ugly atm)
+
     immediate future:
         player range
         server has leaderboard.txt outside of itself so that future versions can access

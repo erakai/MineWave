@@ -36,6 +36,14 @@ public abstract class GameObject {
         }
     }
 
+    public int getCenterX() {
+        return (getX() + getWidth()/2);
+    }
+
+    public int getCenterY() {
+        return (getY() + getHeight()/2);
+    }
+
     public int getWidth() {
         return dimensions.getWidth();
     }
