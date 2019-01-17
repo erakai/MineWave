@@ -12,7 +12,7 @@ public class Turret extends ProjectileEnemy {
     public static final int TURRET_HEIGHT = (int)(100.0/600.0 * Screen.WINDOW_HEIGHT);
 
 
-    //TODO: Sometimes the center right and left shots don't move faster than the ones above and below them. Why?
+    //TODO: Sometimes the center right and left shots of turret don't move faster than the ones above and below them. Why?
 
     public Turret(int x, int y) {
         super(ResourceManager.getImage("Turret.png"), x, y, 20, 100,

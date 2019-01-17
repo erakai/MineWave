@@ -44,7 +44,7 @@ Changelog:
     12/29/18:
         *=These will list more of the smaller fixes/changes from now on.=*
 
-        - Fixed constant ConcurrentModificationExceptions (I think)
+        - Fixed constant ConcurrentModificationExceptions (I think) (hint: i didn't)
         - Added ArmoredInsect
         - Added Regeneration
         - Fixed enemies spawning off screen
@@ -53,9 +53,7 @@ Changelog:
         - Made some new levels
         - In the selection screen, your selected ability is now highlighted.
         - Damage now assigned to individual projectiles
-        - GreatMineSkill added (wesley thought of it and did image wowww)
-
-        !!!!!!! CONCURRENT MODIFICATION EXCEPTIONS ARE BACK RUN !KHU:H$PY#P
+        - GreatMineSkill added (wesley thought of it and did image wowww go him)
 
     12/30/18:
         - Added Turret
@@ -98,12 +96,13 @@ Changelog:
         - Thicc progress on leaderboard
         - Online leaderboard works!
         - Project now has everything original mine wave did :)
-        - Set up a vps using aws, server will be running 24/7
+        - Set up a vps using aws, server will now be running 24/7
 
     1/16/19:
         - Adding a highlight bar around your place on leaderboards
         - Vampire range 500 -> 800
         - Added a replay button!
+        - The main menu click to play button now lights up when hovered over
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
@@ -128,5 +127,6 @@ Future:
     - More things to chose from when creating your character
     - Similarly to Ambush, go through rooms and have a map
     - More Bosses
+    - Sound
 
 if i ever implement accounts/character/character saving, have gun skill be unlocked once you hit level 16 or something

@@ -71,8 +71,7 @@ public class SelectionScreen extends GameObject {
         }
     }
 
-    //TODO: Make abilitySelectionAttempt() not static and instead have SelectionScreen be retrieved from Screen
-    public static void abilitySelectionAttempt(int mouseX, int mouseY) {
+    public void abilitySelectionAttempt(int mouseX, int mouseY) {
         for (int i = 0; i < selectableAbilities.size(); i++) {
             int abilityX = startDraw.getX() + (i*10) + (i * Skill.SKILL_SIZE.getWidth());
             int abilityY = startDraw.getY();

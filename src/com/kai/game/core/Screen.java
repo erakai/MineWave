@@ -35,8 +35,12 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     private static Player player;
     //Handles level management and enemies.
     private static LevelHandler levelHandler;
-    //Death Screen
+    //The death/end screen of the program
     private static DeathScreen deathScreen;
+    //The starting screen of the program
+    private static MainMenu mainMenu;
+    //The screen where you select an ability/starting things
+    private static SelectionScreen selectionScreen;
     //Handles misc objects that need to be drawn or updated.
     private static List<Updatable> toUpdate;
     //Handles all user interface.
@@ -210,6 +214,8 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         player = null;
         levelHandler = null;
         deathScreen = null;
+        mainMenu = null;
+        selectionScreen = null;
 
         toUpdate.clear();
         userInterface.clear();
@@ -217,10 +223,12 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
         switch(newState.getName()) {
             case "Menu":
-                userInterface.add(new MainMenu());
+                mainMenu = new MainMenu();
+                userInterface.add(mainMenu);
                 break;
             case "Selection Screen":
-                userInterface.add(new SelectionScreen());
+                selectionScreen = new SelectionScreen();
+                userInterface.add(selectionScreen);
                 break;
             case "Running":
                 environment = new Environment();
@@ -241,6 +249,11 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         }
     }
 
+
+    public static SelectionScreen getSelectionScreen() {
+        return selectionScreen;
+    }
+
     public static DeathScreen getDeathScreen() {
         return deathScreen;
     }
@@ -254,6 +267,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     }
 
     public static LevelHandler getLevelHandler() { return levelHandler; }
+
+    public static MainMenu getMainMenu() {
+        return mainMenu;
+    }
 
     public static void addUpdatable(Updatable e) {
         toUpdate.add(e);

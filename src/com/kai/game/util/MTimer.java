@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class MTimer {
 
-    //TODO: Implement MTimer in Skill and enemy and another classes who don't use a timer right now.
+    //TODO: Implement MTimer in Skill and enemy and other classes (BossIncomingSign) who don't use a timer right now.
 
     private long startTime;
     private HashMap<String, Long> markedTimes;

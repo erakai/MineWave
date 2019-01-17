@@ -148,14 +148,9 @@ public class DeathScreen extends GameObject {
 
 
     public boolean testHover(int mouseX, int mouseY) {
-        //damn this method's code is ugly
-        if (mouseX > hoverRectangle.getTopLeft().getX() && mouseX < hoverRectangle.getBottomRight().getX() &&
-            mouseY > hoverRectangle.getTopLeft().getY() && mouseY < hoverRectangle.getBottomRight().getY()) {
-            replayHover = true;
-            return true;
-        }
-        replayHover = false;
-        return false;
+        replayHover = (mouseX > hoverRectangle.getTopLeft().getX() && mouseX < hoverRectangle.getBottomRight().getX() &&
+            mouseY > hoverRectangle.getTopLeft().getY() && mouseY < hoverRectangle.getBottomRight().getY());
+        return replayHover;
     }
 
     public static class Death implements Comparable<Death>, Serializable {

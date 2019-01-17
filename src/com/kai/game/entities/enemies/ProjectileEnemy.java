@@ -40,6 +40,7 @@ public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
         if (collidedWith instanceof Player) {
             this.attack((Entity)collidedWith, p.getDamage());
             //TODO: The way I'm setting what the player is killed by is bad. Fix?
+            //It's bad because I have to add a screen.playerDied() call everywhere that damages the player
             if (Screen.getPlayer().getHealth() < 1) {
                 Screen.playerDied(this);
             }

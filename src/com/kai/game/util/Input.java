@@ -96,7 +96,7 @@ public class Input {
                     }
                     break;
                 case "Selection Screen":
-                    SelectionScreen.abilitySelectionAttempt(mouseX, mouseY);
+                    Screen.getSelectionScreen().abilitySelectionAttempt(mouseX, mouseY);
                     break;
                 case "Running":
                     Screen.getPlayer().createProjectile(mouseX, mouseY);
@@ -133,6 +133,7 @@ public class Input {
     public static void mouseExists(int mouseX, int mouseY) {
         switch (Screen.state.getName()) {
             case "Menu":
+                Screen.getMainMenu().checkHover((int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX), (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY));
                 break;
             case "Selection Screen":
 
