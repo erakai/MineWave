@@ -3,14 +3,12 @@ package com.kai.server;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ServerDisplay extends JPanel {
 
-    /*
-    Pretty much copy pasted from a previous project I did, no reason not to tbh.
-     */
 
     public static JFrame frame;
     public static ServerDisplay mainPanel;
@@ -18,15 +16,35 @@ public class ServerDisplay extends JPanel {
 
     private JTextArea loggingDisplay;
 
+    private PrintWriter pw;
+    private File logFile;
+
 
     public ServerDisplay(LayoutManager layout) {
         super(layout);
+
+        logFile = new File("../log.txt");
+        initFileLog();
+    }
+
+    private void initFileLog() {
+        try {
+            pw = new PrintWriter(new FileWriter(logFile, true));
+        } catch (FileNotFoundException ex) {
+            try {
+                logFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addComponents() {
         GridBagConstraints c = new GridBagConstraints();
 
-        loggingDisplay = new JTextArea(40,80);
+        loggingDisplay = new JTextArea(30,60);
         c.insets = new Insets(10, 10, 10, 10);
         loggingDisplay.setLineWrap(false);
         loggingDisplay.setWrapStyleWord(true);
@@ -41,10 +59,16 @@ public class ServerDisplay extends JPanel {
     public void log(String toLog) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String date = "[" + sdf.format(cal.getTime()) + "]";
 
-        loggingDisplay.append("[" + sdf.format(cal.getTime()) + "] " + toLog + "\n");
-        System.out.println(toLog);
-        //TODO: Write log to a file.
+        loggingDisplay.append(date + " " + toLog + "\n");
+        System.out.println(date + " " + toLog);
+        fileLog(date + " " + toLog);
+    }
+
+    private void fileLog(String toLog) {
+        pw.write(toLog + "\n");
+        pw.flush();
     }
 
     public static ServerDisplay init(ServerThread myServer) {

@@ -14,7 +14,8 @@ public class ServerThread extends Thread {
 
     //TODO: Stop eoff exceptions that occur when a client disconnects.
 
-    private final String FILE_NAME = "MineWaveServer/src/com/kai/leaderboard/leaderboard.txt";
+    //private final String FILE_NAME = "MineWaveServer/src/com/kai/leaderboard/leaderboard.txt";
+    private final String FILE_NAME = "../leaderboard.txt";
 
     private ServerDisplay window;
 
@@ -36,7 +37,16 @@ public class ServerThread extends Thread {
                 ObjectOutputStream o = new ObjectOutputStream(f);
                 o.writeObject(currentLeaderboard);
                 o.close();
-        } catch (Exception ex ) { ex.printStackTrace(); }
+        } catch (FileNotFoundException ex ) {
+            File file = new File(FILE_NAME);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void loadLeaderboardFromFile() {
@@ -52,7 +62,8 @@ public class ServerThread extends Thread {
                     currentLeaderboard = test;
                 }
             }
-        } catch (Exception ex ) { ex.printStackTrace(); }
+        } catch (FileNotFoundException e) { saveLeaderboardToFile(); }
+        catch (Exception ex ) { ex.printStackTrace(); }
     }
 
 
@@ -107,7 +118,7 @@ public class ServerThread extends Thread {
         Boolean onLeaderboard;
         private void beganReceiving() throws IOException, ClassNotFoundException {
             while ((newDeath = (DeathScreen.Death)in.readObject()) != null) {
-                window.log("\nDeath received from " + socket.getInetAddress() +": \n" + newDeath + "\n --- ");
+                window.log("Death received from " + socket.getInetAddress() +": \n" + newDeath + "\n --- ");
                 onLeaderboard = false;
                 if (checkIfEligible(newDeath)) {
                     if (currentLeaderboard == null) {

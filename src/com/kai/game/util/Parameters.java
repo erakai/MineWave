@@ -13,6 +13,7 @@ public class Parameters {
     public static Font ORIGINAL_FONT;
 
     //The information for connecting to Server for leaderboard data
+    //54.193.51.83
     public static final String SERVER_NAME = "54.193.51.83";
     public static final int SERVER_PORT = 8701;
 

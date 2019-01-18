@@ -2,7 +2,7 @@ New changelog file as of December 2018!
 
 Was writing this when IntelliJ crashed and deleted it...
 
-MineWave was fun.
+MineWave was fun,
 I'd like to go back and add new features/clean it up.
 I've decided to almost completely rewrite it, only using some snippets here and there.
 I'll be able to add more systems and basically fun things.
@@ -109,9 +109,14 @@ Changelog:
         - Beetle range 800 -> 1000
         - Beetle projectile speed 4 -> 5
 
-    immediate future:
-        player range
-        server has leaderboard.txt outside of itself so that future versions can access
+    1/17/19:
+        - Player range of 750 added (circle is a little ugly atm)
+        - ServerThread now writes leaderboard.txt to outside of the jar
+        - Server now creates the text file if it does not already exist
+        - Server now logs to a file
+
+    1/18/19:
+        - Put spawn() into a method in enemy (only used by insect nest atm)
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type

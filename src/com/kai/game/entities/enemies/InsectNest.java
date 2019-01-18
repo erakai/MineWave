@@ -16,12 +16,10 @@ public class InsectNest extends Enemy  implements SpecialDeath {
 
     //DamageTick represents spawn rate here.
 
-    //TODO: Replace the spawning here with a spawn() method in Enemy.
-
     @Override
     public void chase(int targetX, int targetY) {
         if (getDamageTick() >= getMaxDamageTick()) {
-            LevelHandler.addEnemy(new Insect(getX() + (getWidth()/2), getY() + (getHeight()/2)));
+            spawn(new Insect(getX() + (getWidth()/2), getY() + (getHeight()/2)));
             setDamageTick(0);
         }
     }
@@ -34,8 +32,8 @@ public class InsectNest extends Enemy  implements SpecialDeath {
 
     @Override
     public void onDeath() {
-        LevelHandler.addEnemy(new Insect(getX()+(getWidth()/2), getY()+(getHeight()/2)));
-        LevelHandler.addEnemy(new Insect(getX(), getY()));
+        spawn(new Insect(getX()+(getWidth()/2), getY()+(getHeight()/2)));
+        spawn(new Insect(getX(), getY()));
     }
 
     @Override
