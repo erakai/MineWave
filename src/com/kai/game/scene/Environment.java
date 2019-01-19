@@ -1,8 +1,10 @@
 package com.kai.game.scene;
 
 import com.kai.game.core.GameObject;
+import com.kai.game.entities.Entity;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
+import javafx.scene.Scene;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,7 +13,6 @@ import java.util.List;
 public class Environment extends GameObject {
     private List<SceneObject> sceneObjects;
 
-    //shouldn't do something like this, not maintainable
     private boolean transitioned = false;
 
     public Environment() {
@@ -30,10 +31,22 @@ public class Environment extends GameObject {
         }
 
 
+        //TODO: Stop doing this because it's terrible and change the background in level handler.
         if (Screen.getLevelHandler().getDisplayedLevel() > 8 && !transitioned) {
             setSelf(ResourceManager.getImage("background2.png",Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT ));
             transitioned = true;
         }
+    }
+
+    public void updateSceneObjects() {
+        List<SceneObject> toRemove = new ArrayList<>();
+        for (SceneObject so: sceneObjects) {
+            so.update();
+            if (so.isMarkedForRemoval()) {
+                toRemove.add(so);
+            }
+        }
+        sceneObjects.removeAll(toRemove);
     }
 
     @Override
@@ -44,14 +57,19 @@ public class Environment extends GameObject {
         }
     }
 
-    public List<SceneObject> sceneCollisions(GameObject obj) {
-        List<SceneObject> trueCollide = new ArrayList<>();
+    public boolean sceneCollisions(Entity obj) {
+        boolean collision = false;
         for (SceneObject o: sceneObjects) {
             if (obj.checkCollision(o)) {
-                trueCollide.add(o);
+                o.onTouch(obj);
+                collision = true;
             }
         }
-        return trueCollide;
+        return collision;
+    }
+
+    public void addSceneObject(SceneObject s) {
+        sceneObjects.add(s);
     }
 
 }

@@ -7,6 +7,7 @@ import com.kai.game.hud.InGameDisplay;
 import com.kai.game.hud.MainMenu;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.scene.Environment;
+import com.kai.game.scene.SceneObject;
 import com.kai.game.skills.Skill;
 import com.kai.game.util.ClientConnection;
 import com.kai.game.util.GameState;
@@ -93,6 +94,8 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         int y = (int)getLocationOnScreen().getY();
         Input.mouseExists(x, y);
 
+        //TODO: Replace all "x != null" with gamestate checks
+
         //Environment manages all scene objects.
         if (environment != null) {
             environment.drawMe(g);
@@ -124,6 +127,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
             if (u != null) {
                 u.update();
             }
+        }
+
+        if (environment != null) {
+            environment.updateSceneObjects();
         }
 
         if (levelHandler != null) {
@@ -173,7 +180,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     }
 
     public static void playerDied(Enemy e) {
-        getPlayer().setKilledBy(e.getName());
+        playerDied(e.getName());
+    }
+    public static void playerDied(String e) {
+        getPlayer().setKilledBy(e);
     }
 
     private static DeathScreen.Death constructPlayerDeath(String e) {
@@ -249,6 +259,9 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         }
     }
 
+    public static void addSceneObject(SceneObject so) {
+        getEnvironment().addSceneObject(so);
+    }
 
     public static SelectionScreen getSelectionScreen() {
         return selectionScreen;

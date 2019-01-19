@@ -117,6 +117,8 @@ Changelog:
 
     1/18/19:
         - Put spawn() into a method in enemy (only used by insect nest atm)
+        - Added Lava (nothing spawns it yet) (the sprite is beautiful)
+        - Set up SceneObjects somewhat
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type

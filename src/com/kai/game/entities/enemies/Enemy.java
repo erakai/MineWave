@@ -3,6 +3,7 @@ package com.kai.game.entities.enemies;
 import com.kai.game.core.LevelHandler;
 import com.kai.game.entities.Entity;
 import com.kai.game.core.Screen;
+import com.kai.game.scene.SceneObject;
 import com.kai.game.util.Parameters;
 
 import java.awt.*;
@@ -59,6 +60,10 @@ public abstract class Enemy extends Entity {
 
     protected void spawn(Enemy e) {
         LevelHandler.addEnemy(e);
+    }
+
+    protected void spawn(SceneObject so) {
+        Screen.addSceneObject(so);
     }
 
     /*This move method means enemies walk diagonally until

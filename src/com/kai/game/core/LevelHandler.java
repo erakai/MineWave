@@ -50,10 +50,13 @@ public class LevelHandler implements Updatable {
                 }
                 toRemove.add(e);
             }
+            Screen.getEnvironment().sceneCollisions(e);
         }
         enemies.removeAll(toRemove);
 
         chasePlayer();
+
+        Screen.getEnvironment().sceneCollisions(Screen.getPlayer());
     }
 
     public void update() {
