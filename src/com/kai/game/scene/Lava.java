@@ -25,9 +25,6 @@ public class Lava extends SceneObject {
 
     @Override
     public void onTouch(Entity e) {
-            if (damageTick < maxDamageTick) {
-                damageTick++;
-            }
             if (damageTick >= maxDamageTick) {
                 if ( !playerOnly || e instanceof Player) {
                     damage(e, damage);
@@ -36,5 +33,11 @@ public class Lava extends SceneObject {
             }
     }
 
-
+    @Override
+    public void update() {
+        super.update();
+        if (damageTick < maxDamageTick) {
+            damageTick++;
+        }
+    }
 }

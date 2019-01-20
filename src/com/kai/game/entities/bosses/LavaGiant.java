@@ -80,7 +80,7 @@ public class LavaGiant extends Boss {
             dropLavaTick++;
         }
         if (dropLavaTick > maxDropLavaTick) {
-            createLava(getHardX()-40, getHardY()-30);
+            createLava(getHardX(), getHardY());
             dropLavaTick = 0;
         }
     }

@@ -13,14 +13,13 @@ import java.util.List;
 public class Environment extends GameObject {
     private List<SceneObject> sceneObjects;
 
-    private boolean transitioned = false;
 
     public Environment() {
         super(ResourceManager.getImage("background.png", Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT), 0, 0, 1200, 600);
         sceneObjects = new ArrayList<>();
     }
 
-    //TODO: Different backgrounds for various levels.
+    //TODO: More different backgrounds for various levels.
 
     @Override
     public void drawMe(Graphics g) {
@@ -31,11 +30,6 @@ public class Environment extends GameObject {
         }
 
 
-        //TODO: Stop doing this because it's terrible and change the background in level handler.
-        if (Screen.getLevelHandler().getDisplayedLevel() > 8 && !transitioned) {
-            setSelf(ResourceManager.getImage("background2.png",Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT ));
-            transitioned = true;
-        }
     }
 
     public void updateSceneObjects() {

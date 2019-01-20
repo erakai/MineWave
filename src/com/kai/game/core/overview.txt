@@ -132,6 +132,8 @@ Changelog:
         - Vampire first minion phase 10sec -> 8 sec
         - Vampire second minion phase 15sec -> 12 sec
         - Vampire rage phase attacks per second 2.5 -> 2
+        - Changed background1 and added background3
+        - Fixed an issue where players could die to lava without actually touching it
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
