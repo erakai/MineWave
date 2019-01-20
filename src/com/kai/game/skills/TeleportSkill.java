@@ -23,7 +23,7 @@ public class TeleportSkill extends Skill {
             if (p.getCurrentMines() >= p.getMaxMines()) {
                 p.addToRemoveQueue(p.getProjectiles().get(0));
             }
-            p.createProjectile(p.getX(), p.getY());
+            p.createProjectile(p.getX(), p.getY(), true);
         }
 
         getOwner().setX(targetedX- (getOwner().getWidth()/2));

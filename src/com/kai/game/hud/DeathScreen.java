@@ -105,13 +105,15 @@ public class DeathScreen extends GameObject {
         g.drawString("Score", score.getX(), score.getY());
 
         g.setColor(new Color(42, 112, 224));
+        boolean choosen = false;
         if (connected) {
             for (int i = 0; i<leaderboard.size(); i++) {
                 Death death = leaderboard.get(i);
-                if (onLeaderboards && death.getName().equals(recentPlayerDeath.getName()) && death.getLevel() == recentPlayerDeath.getLevel() && death.getKilledBy().equals(recentPlayerDeath.getKilledBy()) && death.getAbility().equals(recentPlayerDeath.getAbility())) {
+                if (!choosen && onLeaderboards && death.getName().equals(recentPlayerDeath.getName()) && death.getLevel() == recentPlayerDeath.getLevel() && death.getKilledBy().equals(recentPlayerDeath.getKilledBy()) && death.getAbility().equals(recentPlayerDeath.getAbility())) {
                     g.setColor(new Color(211, 211, 211));
                     g.fillRect(name.getX()-12, ldbText.getY() + (i * ldbDecrement.getY()- (ldbDecrement.getY()/2)), 490, ldbDecrement.getY()/2 + (ldbDecrement.getY()/3) - 5 );
                     g.setColor(new Color(42, 112, 224));
+                    choosen = true;
                 }
                 g.drawString(death.getName(), name.getX(), ldbText.getY() + (i * ldbDecrement.getY()));
                 g.drawString(death.getKilledBy(), killedBy.getX(), ldbText.getY() + (i * ldbDecrement.getY()));
@@ -187,11 +189,17 @@ public class DeathScreen extends GameObject {
             return level;
         }
 
+        public void setName(String name) {
+            this.name = name;
+        }
 
+        public void setKilledBy(String killedBy) {
+            this.killedBy = killedBy;
+        }
 
         @Override
         public String toString() {
-            return "Name: " + name + "\nKilled By: " + killedBy + "\nAbility: " + ability + "\nLevel: " + level;
+            return "\tName: " + name + "\n\tKilled By: " + killedBy + "\n\tAbility: " + ability + "\n\tLevel: " + level;
         }
     }
 

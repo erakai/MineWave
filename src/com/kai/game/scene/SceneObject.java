@@ -24,7 +24,7 @@ public abstract class SceneObject extends GameObject implements Updatable {
 
     @Override
     public void update() {
-        if (timer.getSecondsSinceMarkedTime("start") >= duration) {
+        if (timer.getSecondsSinceStart() >= duration) {
             setMarkedForRemoval(true);
         }
     }

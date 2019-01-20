@@ -18,12 +18,12 @@ public class GunSkill extends Skill {
         super("GunSkill", owner, ResourceManager.getImage("ShootingAbilityImage.png", Skill.SKILL_SIZE.getWidth(), Skill.SKILL_SIZE.getHeight()), true,
                 new String[] {
                         "Gun: Passive Ability",
-                        "Instead of placing mines, you instead fire them as projectiles.",
-                        "Your damage is set to 2/3rds of the normal value."
+                        "Instead of placing mines, you instead fire them as projectiles."
+                        //,"Your damage is set to 2/3rds of the normal value."
                 });
         if (owner != null) {
             owner.SHOOT = true;
-            owner.setPlayerDamage((int)(owner.getPlayerDamage()/3.0 * 2));
+            //owner.setPlayerDamage((int)(owner.getPlayerDamage()/3.0 * 2));
         }
 
         maxShotTick = (int)(SECONDS_PER_SHOT * Parameters.FRAMES_PER_SECOND);

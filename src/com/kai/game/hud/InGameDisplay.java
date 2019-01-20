@@ -19,7 +19,7 @@ public class InGameDisplay extends GameObject implements Updatable {
     private int currentLevelToDraw;
     private Skill skillToDraw;
 
-
+    //TODO: Draw in game display and all your stats beneath the actual gameplay screen.
 
     public InGameDisplay(int x, int y) {
         super(ResourceManager.getImage("IngameHUD.png", (int)(600.0/1200.0 * Screen.WINDOW_WIDTH), (int)(100.0/600.0 * Screen.WINDOW_HEIGHT)), x, y, 600, 100);

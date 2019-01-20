@@ -113,6 +113,10 @@ public class Projectile extends GameObject implements Updatable {
         }
     }
 
+    public int getDistanceTraveled() {
+        return distanceTraveled;
+    }
+
     public int getDamage() {
         return damage;
     }
@@ -123,5 +127,13 @@ public class Projectile extends GameObject implements Updatable {
 
     public int getTargetY() {
         return targetY;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getRange() {
+        return range;
     }
 }

@@ -120,6 +120,9 @@ public class ServerThread extends Thread {
             while ((newDeath = (DeathScreen.Death)in.readObject()) != null) {
                 window.log("Death received from " + socket.getInetAddress() +": \n" + newDeath + "\n --- ");
                 onLeaderboard = false;
+                if (newDeath.getKilledBy() == null) {
+                    newDeath.setKilledBy("null");
+                }
                 if (checkIfEligible(newDeath)) {
                     if (currentLeaderboard == null) {
                         currentLeaderboard = new ArrayList<>();

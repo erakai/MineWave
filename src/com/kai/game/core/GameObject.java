@@ -24,10 +24,10 @@ public abstract class GameObject {
     public abstract void drawMe(Graphics g);
 
     public boolean checkCollision(GameObject otherObject) {
-        return ((otherObject.getX() < getX()+getWidth()) &&
-                (otherObject.getX()+otherObject.getWidth() > getX()) &&
-                (otherObject.getY() < getY()+getHeight()) &&
-                (otherObject.getY()+otherObject.getHeight() > getY()));
+        return ((otherObject.getHardX() < getHardX()+getWidth()) &&
+                (otherObject.getHardX()+otherObject.getWidth() > getHardX()) &&
+                (otherObject.getHardY() < getHardY()+getHeight()) &&
+                (otherObject.getHardY()+otherObject.getHeight() > getHardY()));
     }
 
     public void updateSelfImage() {

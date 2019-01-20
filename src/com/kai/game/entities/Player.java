@@ -66,30 +66,41 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     public void attack(Entity target, int ovrDamage) {target.takeDamage(ovrDamage );}
 
     public void createProjectile(int targetX, int targetY) {
-        if (currentMines < maxMines) {
-            currentMines++;
-            if (!SHOOT) {
-                if (distanceTo(targetX, targetY) <= (PLAYER_RANGE/2)) {
+        if (!SHOOT) {
+            if (distanceTo(targetX, targetY) <= (PLAYER_RANGE / 2)) {
+                createProjectile(targetX, targetY, true);
+            }
+        } else {
+            createProjectile(targetX, targetY, true);
+        }
+    }
+
+    public void createProjectile(int targetX, int targetY, boolean ignoreRange) {
+        if (ignoreRange) {
+            if (currentMines < maxMines) {
+                currentMines++;
+                if (!SHOOT) {
                     projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
                             (int) (targetX - (MINE_SIZE.getHardWidth() / 2.0)), (targetY - (MINE_SIZE.getHardHeight() / 2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
                 } else {
-                    currentMines--;
-                }
-            } else {
-                GunSkill gs = (GunSkill)getSkills().get(0);
-                if (gs.currentShotTick > gs.maxShotTick) {
-                    gs.currentShotTick = 0;
-                    //Shooting has a farther range than placing mines
-                    Projectile p = new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
-                            getX() + getWidth() / 2 - 12, getY() + getHeight() / 2 - 12, MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 8, targetX, targetY, 1200, getPlayerDamage());
-                    p.updateTarget();
-                    projectiles.add(p);
-                } else {
-                    currentMines--;
+                    GunSkill gs = (GunSkill) getSkills().get(0);
+                    if (gs.currentShotTick > gs.maxShotTick) {
+                        gs.currentShotTick = 0;
+                        //Shooting has a farther range than placing mines
+                        Projectile p = new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
+                                getX() + getWidth() / 2 - 12, getY() + getHeight() / 2 - 12, MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 8, targetX, targetY, 1200, getPlayerDamage());
+                        p.updateTarget();
+                        projectiles.add(p);
+                    } else {
+                        currentMines--;
+                    }
                 }
             }
+        } else {
+            createProjectile(targetX, targetY);
         }
     }
+
 
     public void createProjectile(Projectile p) {
         if (currentMines < maxMines) {

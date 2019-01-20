@@ -3,6 +3,7 @@ package com.kai.game.hud;
 import com.kai.game.core.GameObject;
 import com.kai.game.entities.Player;
 import com.kai.game.util.MFont;
+import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
 import com.kai.game.skills.*;
@@ -31,6 +32,10 @@ public class SelectionScreen extends GameObject {
 
     private final int abilityDescIncrement = (int)(30.0/600.0 * Screen.WINDOW_HEIGHT);
 
+    private final MRectangle playButton = new MRectangle(new MPoint(506, 533), new MPoint(694, 594));
+    private final MPoint playText = new MPoint(560, 580);
+    private boolean playHover = false;
+
     public SelectionScreen() {
         super(ResourceManager.getImage("selection.png", Screen.WINDOW_WIDTH, Screen.WINDOW_HEIGHT), 0, 0, 1200, 600);
 
@@ -52,6 +57,12 @@ public class SelectionScreen extends GameObject {
         for (Skill s: selectableAbilities) {
             s.updateSelfImage();
         }
+    }
+
+    public boolean checkHover(int mouseX, int mouseY) {
+        playHover = (mouseX > playButton.getTopLeft().getX() && mouseX < playButton.getBottomRight().getX() &&
+                mouseY > playButton.getTopLeft().getY() && mouseY < playButton.getBottomRight().getY()) && currentlySelected != null;
+        return playHover;
     }
 
     public static Skill getCurrentlySelected(Player p) {
@@ -85,7 +96,6 @@ public class SelectionScreen extends GameObject {
 
     @Override
     public void drawMe(Graphics g) {
-        //TODO: On the selection screen, instead of pressing enter, add a "play" button.
         g.drawImage(getSelfImage(), getX(), getY(), null);
 
         for (int i = 0; i < selectableAbilities.size(); i++) {
@@ -100,7 +110,7 @@ public class SelectionScreen extends GameObject {
         g.setFont(new MFont(1.2));
         g.drawString("Click on an skill to read what it does.", textDrawX.getX(), textDrawY.getY());
         g.drawString("This skill is activated by pressing E.", textDrawX.getX(), textDrawY2.getY());
-        g.drawString("Press enter to equip the currently selected skill.", textDrawX.getX(), textDrawY3.getY());
+        g.drawString("Have fun!", textDrawX.getX(), textDrawY3.getY());
 
         g.drawString("W/A/S/D to move.", textDrawX2.getX(), textDrawY.getY());
         g.drawString("Left click to place a mine.", textDrawX2.getX(), textDrawY2.getY());
@@ -111,6 +121,17 @@ public class SelectionScreen extends GameObject {
                 g.drawString(currentlySelected.description[i], textDrawX.getX(), textDrawY4.getY() + (i * abilityDescIncrement));
             }
         }
+
+        if (currentlySelected != null) {
+            g.setFont(new MFont(3.4));
+            if (playHover) {
+                g.setColor(new Color(56, 39, 255));
+                g.fillRect(playButton.getTopLeft().getX(), playButton.getTopLeft().getY(), playButton.getWidth(), playButton.getHeight());
+            }
+            g.setColor(Color.WHITE);
+            g.drawString("Play", playText.getX(), playText.getY());
+        }
+
 
     }
 

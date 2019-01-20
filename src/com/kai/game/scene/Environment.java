@@ -68,6 +68,10 @@ public class Environment extends GameObject {
         return collision;
     }
 
+    public void clearAllSceneObjects() {
+        sceneObjects.clear();
+    }
+
     public void addSceneObject(SceneObject s) {
         sceneObjects.add(s);
     }

@@ -11,19 +11,14 @@ import java.awt.*;
 
 public class Vampire extends Boss {
 
-    private static final double SPAWN_RATE = 2.5;
     private static final int PROJECTILE_VARIANCE = 200;
     private static int PROJECTILES_TO_SHOOT = 3;
 
-    private boolean immune;
-    private int currentSpawnTick, maxSpawnTick;
 
     public Vampire(int x, int y) {
         super(ResourceManager.getImage("VampireBoss.png"), x, y, 60, 90,
-                3, 280, "Vampire", 2, 1, 800, 6);
-        immune = false;
-        currentSpawnTick = maxSpawnTick;
-        maxSpawnTick = (int)(SPAWN_RATE * Parameters.FRAMES_PER_SECOND);
+                3, 280, "Vampire", 2, 1, 800, 6, 2.5);
+
     }
 
     @Override
@@ -70,21 +65,12 @@ public class Vampire extends Boss {
             case 6:
                 manageSpawning();
                 manageProjectileShooting(targetX, targetY);
-                altMoveTowards(targetX, targetY);
+                defaultMoveTowards(targetX, targetY);
                 break;
         }
 
     }
 
-    private void manageSpawning() {
-        currentSpawnTick++;
-        if (currentSpawnTick > maxSpawnTick) {
-            currentSpawnTick = 0;
-            for (int i = 0; i < 5; i++) {
-                LevelHandler.addEnemy(new Bat(LevelHandler.getXAwayFromPlayer(200), LevelHandler.getYAwayFromPlayer(200)));
-            }
-        }
-    }
 
 
 
@@ -110,7 +96,7 @@ public class Vampire extends Boss {
                 }
                 break;
             case 3:
-                if (timeTransition("stage 2", 10)) {
+                if (timeTransition("stage 3", 8)) {
                     //Switching to chasing phase.
                     nextStage();
 
@@ -129,7 +115,7 @@ public class Vampire extends Boss {
                 }
                 break;
             case 5:
-                if (timeTransition("stage 4", 15)) {
+                if (timeTransition("stage 5", 12)) {
                     //Switching to rage phase.
                     nextStage();
 
@@ -137,44 +123,31 @@ public class Vampire extends Boss {
                     leaveInvincibility();
                     setSpeed(2);
                     PROJECTILES_TO_SHOOT = 4;
-                    setAttacksPerSecond(2.5);
+                    setAttacksPerSecond(2);
                 }
                 break;
         }
     }
 
-    private void teleportToMiddle() {
-        setX(570);
-        setY(255);
+    @Override
+    public void spawnMinion() {
+        for (int i = 0; i < 5; i++) {
+            spawn(new Bat(LevelHandler.getXAwayFromPlayer(200), LevelHandler.getYAwayFromPlayer(200)));
+        }
     }
 
     //TODO: Replace these invincibility methods with a system of buffs/curses.
-    private void startInvincibility() {
+    @Override
+    public void startInvincibility() {
         setSelf(ResourceManager.getImage("VampireInvincible.png"));
-        immune = true;
+        setImmune(true);
     }
 
-    private void leaveInvincibility() {
+    @Override
+    public void leaveInvincibility() {
         setSelf(ResourceManager.getImage("VampireBoss.png"));
-        immune = false;
+        setImmune(false);
     }
 
-    @Override
-    public void takeDamage(int amount) {
-        if (!immune) {
-            super.takeDamage(amount);
-        }
-    }
 
-    @Override
-    public void drawMe(Graphics g) {
-        if (!immune) {
-            super.drawMe(g);
-        } else {
-            g.drawImage(getSelfImage(), getX(), getY(), null);
-            for (Projectile p: projectiles) {
-                p.drawMe(g);
-            }
-        }
-    }
 }

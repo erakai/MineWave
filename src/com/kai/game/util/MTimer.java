@@ -15,7 +15,7 @@ public class MTimer {
 
     public MTimer() {
         startTime = System.nanoTime();
-        markedTimes = new HashMap<String, Long>();
+        markedTimes = new HashMap<>();
         markedTimes.put("start", startTime);
     }
 

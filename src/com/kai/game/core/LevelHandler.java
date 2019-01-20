@@ -2,6 +2,8 @@ package com.kai.game.core;
 
 import com.kai.game.entities.SpecialDeath;
 import com.kai.game.entities.UsesProjectiles;
+import com.kai.game.entities.bosses.Boss;
+import com.kai.game.entities.bosses.LavaGiant;
 import com.kai.game.entities.bosses.Vampire;
 import com.kai.game.entities.enemies.*;
 import com.kai.game.util.MPoint;
@@ -74,11 +76,15 @@ public class LevelHandler implements Updatable {
         for (Enemy e: enemies) {
             if (e instanceof UsesProjectiles) {
                 ((UsesProjectiles) e).callAllProjectileCollisions(checkWith);
+                if (e instanceof Boss && e.checkCollision(Screen.getPlayer())) {
+                    ((Boss) e).meleeAttack(Screen.getPlayer());
+                }
             } else if (e.checkCollision(Screen.getPlayer())) {
                 e.attack(Screen.getPlayer());
-                if (checkForGameOver()) {
-                    Screen.playerDied(e);
-                }
+            }
+            if (checkForGameOver()) {
+                Screen.playerDied(e);
+                break;
             }
         }
 
@@ -155,6 +161,10 @@ public class LevelHandler implements Updatable {
                 enemies.add(new Vampire(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == MagicBall.class) {
                 enemies.add(new MagicBall(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+            } else if (c == Lavakut.class) {
+                enemies.add(new Lavakut(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+            } else if (c == LavaGiant.class) {
+                enemies.add(new LavaGiant(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             }
         }
     }
@@ -182,10 +192,11 @@ public class LevelHandler implements Updatable {
         }
 
         if (level == 9) {
+            //Displayed Level is 8
             wormLevel8();
         }
 
-        if (level >= 10 && level < 17) {
+        if (level >= 10 && level <= 16) {
             difficultyFive();
         }
 
@@ -194,12 +205,27 @@ public class LevelHandler implements Updatable {
         }
 
         if (level == 18) {
+            //displayed level is 16
             vampireLevel16();
         }
 
-        if (level > 18) {
+        if (level >= 19 && level <= 25) {
             difficultySix();
         }
+
+        if (level == 26) {
+            bossInc();
+        }
+
+        if (level == 27) {
+            //displayed level is 24
+            lavaLevel24();
+        }
+
+        if (level >= 28) {
+            difficultySeven();
+        }
+
 
 
     }
@@ -334,6 +360,36 @@ public class LevelHandler implements Updatable {
         }
     }
 
+    private void difficultySeven() {
+        switch(rand.nextInt(5)) {
+            case 0:
+                createNewEnemy(Turret.class, 1);
+                createNewEnemy(Lavakut.class, 2);
+                createNewEnemy(Worm.class, 1);
+                break;
+            case 1:
+                createNewEnemy(InsectNest.class, 1);
+                createNewEnemy(ArmoredInsect.class, 4);
+                createNewEnemy(Lavakut.class, 2);
+                break;
+            case 2:
+                createNewEnemy(Beetle.class, 3);
+                createNewEnemy(Lavakut.class, 3);
+                createNewEnemy(ArmoredInsect.class, 3);
+                break;
+            case 3:
+                createNewEnemy(Insect.class, 4);
+                createNewEnemy(MagicBall.class, 2);
+                createNewEnemy(Turret.class, 1);
+                break;
+            case 4:
+                createNewEnemy(InsectNest.class, 2);
+                createNewEnemy(ArmoredInsect.class, 2);
+                createNewEnemy(MagicBall.class, 4);
+                break;
+        }
+    }
+
     private void bossInc() {
         centerPlayer();
         Screen.getPlayer().removeAllMines();
@@ -356,7 +412,7 @@ public class LevelHandler implements Updatable {
     private void vampireLevel16() {
         createNewEnemy(Vampire.class, 1);
     }
-
+    private void lavaLevel24() { createNewEnemy(LavaGiant.class, 1);}
 
     private void centerPlayer() {
         Screen.getPlayer().setX(Screen.WINDOW_WIDTH/2 + (Screen.getPlayer().getWidth()/2));

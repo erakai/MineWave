@@ -11,9 +11,8 @@ public class Beetle extends ProjectileEnemy {
 
     public Beetle(int x, int y) {
         super(ResourceManager.getImage("beetle.png"), x, y, 40, 40,
-                2, 5, "Beetle", 3, 1.2, 1000);
+                2, 5, "Beetle", 4, 1, 1200);
     }
-    //aps:1.2
 
     @Override
     public void chase(int targetX, int targetY) {

@@ -97,6 +97,9 @@ public class Input {
                     break;
                 case "Selection Screen":
                     Screen.getSelectionScreen().abilitySelectionAttempt(mouseX, mouseY);
+                    if (Screen.getSelectionScreen().checkHover(mouseX, mouseY)) {
+                        Screen.transitionToScene(GameState.RUNNING);
+                    }
                     break;
                 case "Running":
                     Screen.getPlayer().createProjectile(mouseX, mouseY);
@@ -136,7 +139,7 @@ public class Input {
                 Screen.getMainMenu().checkHover((int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX), (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY));
                 break;
             case "Selection Screen":
-
+                Screen.getSelectionScreen().checkHover((int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX), (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY));
                 break;
             case "Running":
                 currentMouseX = (int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX);

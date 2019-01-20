@@ -22,7 +22,7 @@ public class ComboSkill extends Skill {
         p.removeAllMines();
 
         for (int i = 0 ; i < p.getMaxMines(); i++) {
-            p.createProjectile(tX + (int)(Math.random() * placementVariance), tY + (int)(Math.random() * placementVariance));
+            p.createProjectile(tX + (int)(Math.random() * placementVariance), tY + (int)(Math.random() * placementVariance), true);
         }
 
     }

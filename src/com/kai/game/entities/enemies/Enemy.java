@@ -83,6 +83,21 @@ public abstract class Enemy extends Entity {
         }
     }
 
+    protected void altMoveAwayFrom(int targetX, int targetY) {
+        if (getX() > targetX) {
+            moveRight();
+        }
+        if (getX() < targetX) {
+            moveLeft();
+        }
+        if (getY() > targetY) {
+            moveDown();
+        }
+        if (getY() < targetY) {
+            moveUp();
+        }
+    }
+
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
         g.setColor(Color.red);
@@ -113,6 +128,7 @@ public abstract class Enemy extends Entity {
 
     public void setAttacksPerSecond(double attacksPerSecond) {
         this.attacksPerSecond = attacksPerSecond;
+        this.maxDamageTick = (int)(Parameters.FRAMES_PER_SECOND/attacksPerSecond);
     }
 
     public double getAttacksPerSecond() {
