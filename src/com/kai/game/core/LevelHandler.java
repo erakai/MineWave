@@ -402,6 +402,8 @@ public class LevelHandler implements Updatable {
     private void wormLevel8() {
         MPoint scaledDistance = new MPoint(50, 50);
 
+        Screen.getEnvironment().setSelf(ResourceManager.getImage("background2.png"));
+
         createNewEnemy(Worm.class, 1);
         enemies.add(new Turret(scaledDistance.getX(), scaledDistance.getY())); // top left
         enemies.add(new Turret(Screen.WINDOW_WIDTH - scaledDistance.getX(), scaledDistance.getY())); // top right
@@ -411,6 +413,7 @@ public class LevelHandler implements Updatable {
 
     private void vampireLevel16() {
         createNewEnemy(Vampire.class, 1);
+        Screen.getEnvironment().setSelf(ResourceManager.getImage("background3.png"));
     }
     private void lavaLevel24() { createNewEnemy(LavaGiant.class, 1);}
 

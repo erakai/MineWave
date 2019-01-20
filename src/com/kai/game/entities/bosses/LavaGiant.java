@@ -30,7 +30,7 @@ public class LavaGiant extends Boss {
         switch(stage) {
             case 1: case 2: case 3: case 4:
                 projectiles.add(new LavakutProjectile(this, getHardX(), getHardY(), 16, 16
-                        , 7, tX, tY, getRange(), getDamage(), 2, 4, 2));
+                        , 7, tX, tY, getRange(), getDamage(), 1, 4, 3));
                 break;
             case 5:
                 int newTargetX = (int)(Math.random() * 1200);
@@ -38,7 +38,7 @@ public class LavaGiant extends Boss {
                 int newRange = (int)(Math.random() * 1200);
 
                 projectiles.add(new LavakutProjectile(this, getHardX(), getHardY(), 16, 16
-                        , 5, newTargetX, newTargetY, newRange, getDamage(), 2, 3, 2));
+                        , 5, newTargetX, newTargetY, newRange, getDamage(), 1, 3, 3));
                 break;
         }
     }
@@ -80,13 +80,13 @@ public class LavaGiant extends Boss {
             dropLavaTick++;
         }
         if (dropLavaTick > maxDropLavaTick) {
-            createLava(getHardX()-40, getHardY()-30);
+            createLava(getHardX(), getHardY());
             dropLavaTick = 0;
         }
     }
 
     private void createLava(int placementX, int placementY) {
-        spawn(new Lava(placementX, placementY, 15, 2, 1, true));
+        spawn(new Lava(placementX, placementY, 15, 1, 2, true));
     }
 
     /*
