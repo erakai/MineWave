@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class MainMenu extends GameObject {
 
-    private MPoint titleText = new MPoint(270, 240);
-    private MPoint clickToPlay = new MPoint(425, 470);
+    private MPoint titleText = new MPoint(280, 240);
+    private MPoint clickToPlay = new MPoint(440, 470);
     private MRectangle playButton = new MRectangle(new MPoint(405, 404), new MPoint(795, 496));
 
     private boolean playHover = false;

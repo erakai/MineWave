@@ -108,7 +108,7 @@ public class SelectionScreen extends GameObject {
 
         g.setColor(new Color(255, 255, 255));
         g.setFont(new MFont(1.2));
-        g.drawString("Click on an skill to read what it does.", textDrawX.getX(), textDrawY.getY());
+        g.drawString("Click on a skill to read what it does.", textDrawX.getX(), textDrawY.getY());
         g.drawString("This skill is activated by pressing E.", textDrawX.getX(), textDrawY2.getY());
         g.drawString("Have fun!", textDrawX.getX(), textDrawY3.getY());
 

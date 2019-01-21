@@ -6,9 +6,7 @@ import com.kai.game.entities.Entity;
 import com.kai.game.entities.Projectile;
 import com.kai.game.entities.enemies.Bat;
 import com.kai.game.entities.enemies.ProjectileEnemy;
-import com.kai.game.util.MTimer;
-import com.kai.game.util.Parameters;
-import com.kai.game.util.ResourceManager;
+import com.kai.game.util.*;
 
 import java.awt.*;
 
@@ -19,6 +17,8 @@ public abstract class Boss extends ProjectileEnemy {
     protected double SPAWN_RATE = 2.5;
 
     protected int currentSpawnTick, maxSpawnTick;
+
+    protected Image healthBar;
 
     private int meleeDamageTick, maxMeleeDamageTick;
     //TODO: Draw boss health bar somewhere where it can be much longer and not directly above the boss.
@@ -35,6 +35,8 @@ public abstract class Boss extends ProjectileEnemy {
     Boss(Image self, int x, int y, int width, int height, int speed, int maxHealth, String name,
                 int damage, double attacksPerSecond, int range, int maxStages, double spawnRate) {
         super(self, x, y, width, height, speed, maxHealth, name, damage, attacksPerSecond, range);
+
+        healthBar = ResourceManager.getImage("BossHealthBar.png");
 
         this.SPAWN_RATE = spawnRate;
         this.stage = 1;
@@ -121,17 +123,22 @@ public abstract class Boss extends ProjectileEnemy {
     }
 
 
+    private MPoint healthBarPoint = new MPoint(0, 600-47);
+    private MRectangle healthBarRectangle = new MRectangle(new MPoint(16, healthBarPoint.getY()+16), new MPoint(1183, healthBarPoint.getY()+31));
 
     @Override
     public void drawMe(Graphics g) {
         if (!immune) {
-            super.drawMe(g);
+            g.setColor(Color.RED);
         } else {
-            g.drawImage(getSelfImage(), getX(), getY(), null);
-            for (Projectile p: projectiles) {
-                p.drawMe(g);
-            }
+            g.setColor(Color.gray);
         }
+        g.drawImage(getSelfImage(), getX(), getY(), null);
+        for (Projectile p: projectiles) {
+            p.drawMe(g);
+        }
+        g.drawImage(healthBar, healthBarPoint.getX(), healthBarPoint.getY(), null);
+        g.fillRect(healthBarRectangle.getTopLeft().getX(), healthBarRectangle.getTopLeft().getY(), ((int) ( getHealth() / getMaxHealth() * healthBarRectangle.getWidth())), healthBarRectangle.getHeight());
     }
 
     public void setSPAWN_RATE(double SPAWN_RATE) {

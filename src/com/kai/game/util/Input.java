@@ -70,8 +70,27 @@ public class Input {
                     if (keycode == 65 || keycode == 87 || keycode == 68 || keycode == 83) {
                         Screen.getPlayer().movementKeyReleased(keycode);
                     }
+                    //E
                     if (keycode == 69) {
                         Screen.getPlayer().useStarterSkill(currentMouseX, currentMouseY);
+                    }
+                    //F
+                    if (keycode == 70) {
+                        if (Screen.getPlayer().getSkills().size() >= 4) {
+                            Screen.getPlayer().getSkills().get(3).use(currentMouseX, currentMouseY);
+                        }
+                    }
+                    //R
+                    if (keycode == 82) {
+                        if (Screen.getPlayer().getSkills().size() >= 2) {
+                            Screen.getPlayer().getSkills().get(1).use(currentMouseX, currentMouseY);
+                        }
+                    }
+                    //T
+                    if (keycode == 84) {
+                        if (Screen.getPlayer().getSkills().size() >= 3) {
+                            Screen.getPlayer().getSkills().get(2).use(currentMouseX, currentMouseY);
+                        }
                     }
                     break;
                 case "Death Screen":

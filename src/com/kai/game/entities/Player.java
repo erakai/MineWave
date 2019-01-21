@@ -3,10 +3,9 @@ package com.kai.game.entities;
 import com.kai.game.core.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
-import com.kai.game.skills.GunSkill;
+import com.kai.game.skills.*;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
-import com.kai.game.skills.Skill;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -48,6 +47,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
         projectiles = new ArrayList<>();
         removeProjectileQueue = new ArrayList<>();
+
+
     }
 
     @Override

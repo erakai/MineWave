@@ -52,6 +52,8 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     private static boolean wasResized = false;
     //Connection to the server for leaderboards
     private static ClientConnection connection;
+    //The player HUD
+    private static InGameDisplay inGameDisplay;
 
     public Screen(JFrame owner) {
         toUpdate = new ArrayList<>();
@@ -74,16 +76,17 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
             }
         });
 
+        inGameDisplay = new InGameDisplay(0, 1200);
     }
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
+        return new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT + InGameDisplay.ALLOCATED_HEIGHT);
     }
 
     public void updateDimension() {
         Screen.WINDOW_WIDTH = this.getWidth();
-        Screen.WINDOW_HEIGHT = this.getHeight();
+        Screen.WINDOW_HEIGHT = this.getHeight() - InGameDisplay.ALLOCATED_HEIGHT;
     }
 
     @Override
@@ -115,6 +118,8 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         for (GameObject UI: userInterface) {
             UI.drawMe(g);
         }
+
+        inGameDisplay.drawMe(g);
 
     }
 
@@ -158,6 +163,12 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
                 gameOver();
             }
         }
+
+        inGameDisplay.update();
+    }
+
+    public static boolean checkState(GameState checkAgainst) {
+        return (state == checkAgainst);
     }
 
     private void gameOver() {
@@ -233,7 +244,6 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         toUpdate.clear();
         userInterface.clear();
 
-
         switch(newState.getName()) {
             case "Menu":
                 mainMenu = new MainMenu();
@@ -249,10 +259,9 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
                 player = new Player(WINDOW_WIDTH/2,WINDOW_HEIGHT/2, 22, 60);
                 addUpdatable(player);
 
-                levelHandler = new LevelHandler(24);
+                levelHandler = new LevelHandler(1);
                 addUpdatable(levelHandler);
 
-                addUpdatable(new InGameDisplay(310, 500));
 
                 break;
             case "Death Screen":

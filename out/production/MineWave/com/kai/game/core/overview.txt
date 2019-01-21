@@ -142,6 +142,10 @@ Changelog:
         - Lava Giant rage phase attacks per second 7 -> 10
         - Lava Giant rage phase now heals him for 100
         - Lava Giant clears all lava on death
+        - BossIncomingSign now spawns the enemy itself
+        - Changed the in game hud to be below the screen (it's ugly right now though)
+        - Added in a way for the player to equip skills in the code
+        - Boss health bar (Besides worm because its not really a boss) is now displayed at the bottom of the screen
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
@@ -169,17 +173,13 @@ Future:
 
 
 priority:
-have bossincomingsign be given the class of the boss and then summon it before killing itself
-move in game isplay downand off the gameplay screen
-put boss health bar down there
-put skills not inbetween health and mines
 display stats (max mines, range, speed, damage, defense, # of mines placed, size?, maybe regen?)
 ^ use a stat manager thing attached to player
-have a 2d array of rooms in levelhanler, rename roomhandler
+have a 2d array of rooms in level handler, rename room handler
 have a room instance that manges each room so rooms are 'saved'
-after all enemies are killed arrows point at availbe irections, walk off screen
+after all enemies are killed arrows point at available directions, walk off screen
 similar to ambush
 have 2 ring slots in in game display
-lootinstance/loot classes, rings moify stats and have rarities
-turn gunskill into a ring
+loot instance/loot classes, rings modify stats and have rarities, higher rarities give passives
+turn gun skill into a ring
 have rings grant skills?

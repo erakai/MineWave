@@ -3,6 +3,8 @@ package com.kai.game.hud;
 import com.kai.game.core.GameObject;
 import com.kai.game.core.Updatable;
 import com.kai.game.entities.Player;
+import com.kai.game.util.GameState;
+import com.kai.game.util.MFont;
 import com.kai.game.util.Parameters;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
@@ -12,93 +14,102 @@ import java.awt.*;
 
 public class InGameDisplay extends GameObject implements Updatable {
 
+    public static final int ALLOCATED_HEIGHT = 145;
+
     private double healthToDraw;
     private int maxHealthToDraw;
     private int minesToDraw;
     private int maxMinesToDraw;
     private int currentLevelToDraw;
-    private Skill skillToDraw;
+    private Skill[] skillsToDraw;
 
-    //TODO: Draw in game display and all your stats beneath the actual gameplay screen.
+    //TODO: Make InGameDisplay compatible with resizing the screen.
 
     public InGameDisplay(int x, int y) {
-        super(ResourceManager.getImage("IngameHUD.png", (int)(600.0/1200.0 * Screen.WINDOW_WIDTH), (int)(100.0/600.0 * Screen.WINDOW_HEIGHT)), x, y, 600, 100);
+        super(ResourceManager.getImage("IngameHUD.png"), 0, 600, 1200, ALLOCATED_HEIGHT);
         healthToDraw = 1;
         maxHealthToDraw = 1;
         minesToDraw = 0;
         maxMinesToDraw = 1;
+        skillsToDraw = new Skill[4];
     }
 
     @Override
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
 
-        //Drawing current health:
-        g.setColor(Color.RED);
-        g.fillRect(getScaledX(311), getScaledY(535), (int)((double)healthToDraw/maxHealthToDraw * getScaledX(264)) , getScaledY(29));
+        if (Screen.checkState(GameState.RUNNING)) {
+            //Drawing current health:
+            g.setColor(Color.RED);
+            g.fillRect(getScaledX(16), getScaledY(19), (int) ( healthToDraw / maxHealthToDraw * 350), 42);
 
-        //Drawing current mine count:
-        g.setColor(Color.YELLOW);
-        g.fillRect(getScaledX(648), getScaledY(535), (int)((((double)minesToDraw / maxMinesToDraw)) * getScaledX(264)), getScaledY(29));
+            //Drawing current mine count:
+            g.setColor(Color.YELLOW);
+            g.fillRect(getScaledX(16), getScaledY(84), (int) ((((double) minesToDraw / maxMinesToDraw)) * 350), 42);
 
-        //Drawing current level:
-        g.setFont(Parameters.ORIGINAL_FONT);
-        g.setColor(Color.RED);
-        g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/1.5)))));
-        g.drawString("Level: " + currentLevelToDraw, getScaledX(570), getScaledY(595));
+            //Drawing current level:
+            g.setFont(Parameters.ORIGINAL_FONT);
+            g.setColor(Color.CYAN);
+            g.setFont(new MFont(1.4));
+            g.drawString("Level: " + currentLevelToDraw, getScaledX(27), getScaledY(78));
 
-        //TODO: Wrap drawing a skill in a method.
-        //Drawing the first playerSkill:
-        g.setColor(Color.WHITE);
-        g.setFont(Parameters.ORIGINAL_FONT);
-        g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/0.6)))));
-        if (!skillToDraw.isPassive()) {
-            g.drawString("E", getScaledX(606), getScaledY(518));
+            //Drawing the player skills:
+            for (int i = 0; i < skillsToDraw.length; i++) {
+                if (skillsToDraw[i] != null) {
+                    if (i < 2) {
+                        drawSkill(g, skillsToDraw[i], getScaledX(432), getScaledY(19 + ((77 - 19) * (i))));
+                    } else {
+                        drawSkill(g, skillsToDraw[i], getScaledX(512), getScaledY(19 + ((77 - 19) * (i-2))));
+                    }
+                }
+            }
+
+            //Draw skill key binds:
+            g.setColor(Color.WHITE);
+            g.setFont(Parameters.ORIGINAL_FONT);
+            g.setFont(new MFont(0.6));
+            g.drawString("E", getScaledX(422), getScaledY(44));
+            g.drawString("T", getScaledX(502), getScaledY(44));
+            g.drawString("R", getScaledX(422), getScaledY(102));
+            g.drawString("F", getScaledX(502), getScaledY(102));
         }
-        if (skillToDraw.checkCooldown()) {
-            g.drawImage(skillToDraw.getSelfImage(), getScaledX(585), getScaledY(522), null);
+    }
+
+    private void drawSkill(Graphics g, Skill toDraw, int x, int y) {
+        if (toDraw.checkCooldown()) {
+            g.drawImage(toDraw.getSelfImage(), x, y, null);
         } else {
-            drawCooldownBox(g, getScaledX(585), getScaledY(522), skillToDraw);
+            drawCooldownBox(g, x, y, toDraw);
         }
     }
 
     private void drawCooldownBox(Graphics g, int bX, int bY, Skill onCooldown) {
         g.setColor(Color.BLACK);
-        g.fillRect(bX, bY, getScaledX(50), getScaledY(50));
+        g.fillRect(bX, bY,50, 50);
         g.setColor(Color.WHITE);
         g.setFont(Parameters.ORIGINAL_FONT);
-        g.setFont( new Font(g.getFont().getFontName(), Font.PLAIN, (int)(g.getFont().getSize()*(Screen.WINDOW_WIDTH/(1200.0/1.5)))));
+        g.setFont(new MFont(1.5));
         if (onCooldown.secondsUntilReady() < 10) {
-            g.drawString(String.valueOf(onCooldown.secondsUntilReady()), getScaledX(603), getScaledY(550));
+            g.drawString(String.valueOf(onCooldown.secondsUntilReady()), bX + 20, bY + 30);
         } else {
-            g.drawString(String.valueOf(onCooldown.secondsUntilReady()), getScaledX(598), getScaledY(550));
+            g.drawString(String.valueOf(onCooldown.secondsUntilReady()), bX + 15, bY + 30);
         }
     }
 
     @Override
     public void update() {
-        healthToDraw = getPlayer().getHealth();
-        maxHealthToDraw = getPlayer().getMaxHealth();
-        minesToDraw = getPlayer().getCurrentMines();
-        maxMinesToDraw = getPlayer().getMaxMines();
-        currentLevelToDraw = Screen.getLevelHandler().getCurrentLevel();
-        skillToDraw = getPlayer().getSkills().get(0);
-    }
-
-    public void setHealthToDraw(int healthToDraw) {
-        this.healthToDraw = healthToDraw;
-    }
-
-    public void setMaxHealthToDraw(int maxHealthToDraw) {
-        this.maxHealthToDraw = maxHealthToDraw;
-    }
-
-    public void setMinesToDraw(int minesToDraw) {
-        this.minesToDraw = minesToDraw;
-    }
-
-    public void setMaxMinesToDraw(int maxMinesToDraw) {
-        this.maxMinesToDraw = maxMinesToDraw;
+        if (Screen.checkState(GameState.RUNNING)) {
+            healthToDraw = getPlayer().getHealth();
+            maxHealthToDraw = getPlayer().getMaxHealth();
+            minesToDraw = getPlayer().getCurrentMines();
+            maxMinesToDraw = getPlayer().getMaxMines();
+            currentLevelToDraw = Screen.getLevelHandler().getCurrentLevel();
+            for (int i = 0; i < getPlayer().getSkills().size(); i++) {
+                if ( i < 4) {
+                    skillsToDraw[i] = getPlayer().getSkills().get(i);
+                }
+            }
+        }
     }
 
     private Player getPlayer() {
@@ -106,10 +117,10 @@ public class InGameDisplay extends GameObject implements Updatable {
     }
 
     private int getScaledX(int oldWidth) {
-        return (int)(oldWidth/600.0 * this.getWidth());
+        return (oldWidth);
     }
 
     private int getScaledY(int oldHeight) {
-        return (int)(oldHeight/100.0 * this.getHeight());
+        return (Screen.WINDOW_HEIGHT + oldHeight);
     }
 }
