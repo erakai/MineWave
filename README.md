@@ -17,7 +17,6 @@ Wave-based game with enemies progressing in difficulty, where the player must su
   - An online leaderboard.
 
 ## Utilizes:
-
   - Java Swing
 
 ## Contributors:
@@ -25,6 +24,17 @@ Wave-based game with enemies progressing in difficulty, where the player must su
   - Kai
   - Daniel
   - Hirod
+  
+  
+## Screenshots:
 
+![](showcase/selectionscreen.png)
 
+![](showcase/wormboss.png)
+
+![](showcase/lavaboss.png)
+
+![](showcase/deathprompt.png)
+
+![](showcase/onlineleaderboard.png)
 

@@ -249,7 +249,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
                 player = new Player(WINDOW_WIDTH/2,WINDOW_HEIGHT/2, 22, 60);
                 addUpdatable(player);
 
-                levelHandler = new LevelHandler(1);
+                levelHandler = new LevelHandler(24);
                 addUpdatable(levelHandler);
 
                 addUpdatable(new InGameDisplay(310, 500));

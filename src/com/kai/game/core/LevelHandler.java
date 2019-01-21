@@ -371,18 +371,16 @@ public class LevelHandler implements Updatable {
     }
 
     private void wormLevel8() {
-
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background2.png"));
         addEnemy(new BossIncomingSign(500, 150, 5, Worm.class));
-
-
     }
 
     private void vampireLevel16() {
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background3.png"));
         addEnemy(new BossIncomingSign(500, 150, 5, Vampire.class));
     }
-    private void lavaLevel24() {         addEnemy(new BossIncomingSign(500, 150, 5, LavaGiant.class));
+    private void lavaLevel24() {
+        addEnemy(new BossIncomingSign(500, 150, 5, LavaGiant.class));
     }
 
     private void centerPlayer() {
