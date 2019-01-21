@@ -75,7 +75,7 @@ Changelog:
         - Added MTimer
 
     1/12/19:
-        - Added VampireBoss
+        - Added Vampire boss on level 16
         - Added another (equally terrible) background after level 8
 
     1/13/19:
@@ -97,6 +97,7 @@ Changelog:
         - Online leaderboard works!
         - Project now has everything original mine wave did :)
         - Set up a vps using aws, server will now be running 24/7
+        - Shared with Hirod
 
     1/16/19:
         - Adding a highlight bar around your place on leaderboards
@@ -111,7 +112,7 @@ Changelog:
 
     1/17/19:
         - Player range of 750 added (circle is a little ugly atm)
-        - ServerThread now writes leaderboard.txt to outside of the jar
+        - ServerThread now writes leaderboard.txt outside of the jar
         - Server now creates the text file if it does not already exist
         - Server now logs to a file
 
@@ -129,11 +130,18 @@ Changelog:
         - Added Lava Giant Boss on level 24
         - Added difficulty seven for >24 levels
         - Fixed a bug where multiple deaths could be highlighted on the leaderboard
+        - Vampire uses default move towards
         - Vampire first minion phase 10sec -> 8 sec
         - Vampire second minion phase 15sec -> 12 sec
         - Vampire rage phase attacks per second 2.5 -> 2
         - Changed background1 and added background3
-        - Fixed an issue where players could die to lava without actually touching it
+        - Fixed an issue where players could die to lava without actually touching it (this might not be fixed)
+
+    1/20/19:
+        - Lava Giant rage phase enemy spawns per 1.6 sec -> per 3.0 sec
+        - Lava Giant rage phase attacks per second 7 -> 10
+        - Lava Giant rage phase now heals him for 100
+        - Lava Giant clears all lava on death
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
@@ -157,5 +165,21 @@ Future:
     - Similarly to Ambush, go through rooms and have a map
     - More Bosses
     - Sound
+    - long term have persistent characters/accounts/learn sql an stuff
 
-if i ever implement accounts/character/character saving, have gun skill be unlocked once you hit level 16 or something
+
+priority:
+have bossincomingsign be given the class of the boss and then summon it before killing itself
+move in game isplay downand off the gameplay screen
+put boss health bar down there
+put skills not inbetween health and mines
+display stats (max mines, range, speed, damage, defense, # of mines placed, size?, maybe regen?)
+^ use a stat manager thing attached to player
+have a 2d array of rooms in levelhanler, rename roomhandler
+have a room instance that manges each room so rooms are 'saved'
+after all enemies are killed arrows point at availbe irections, walk off screen
+similar to ambush
+have 2 ring slots in in game display
+lootinstance/loot classes, rings moify stats and have rarities
+turn gunskill into a ring
+have rings grant skills?

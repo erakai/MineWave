@@ -21,7 +21,6 @@ public class LevelHandler implements Updatable {
     private static List<Enemy> toAddQueue;
 
     private static int currentLevel;
-    private static int displayedLevel;
     private static Random rand;
 
     //The closest distance that an enemy will spawn to the player.
@@ -31,7 +30,6 @@ public class LevelHandler implements Updatable {
         enemies = new ArrayList<>();
         toAddQueue = new ArrayList<>();
         LevelHandler.currentLevel = startingLevel;
-        displayedLevel = startingLevel;
         rand = new Random();
         transitionToLevel(currentLevel);
     }
@@ -62,11 +60,11 @@ public class LevelHandler implements Updatable {
     }
 
     public void update() {
-        checkForLevelCompletion();
-        checkEnemyCollisions();
         if (!toAddQueue.isEmpty()) {
             injectQueue();
         }
+        checkForLevelCompletion();
+        checkEnemyCollisions();
     }
 
     private void checkEnemyCollisions() {
@@ -132,7 +130,6 @@ public class LevelHandler implements Updatable {
 
     private void checkForLevelCompletion() {
         if (enemies.isEmpty() && toAddQueue.isEmpty()) {
-            displayedLevel++;
             currentLevel++;
             transitionToLevel(currentLevel);
         }
@@ -142,29 +139,27 @@ public class LevelHandler implements Updatable {
     public void createNewEnemy(Class c, int amount) {
         for (int i = 0; i < amount; i++) {
             if (c == Insect.class) {
-                enemies.add(new Insect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new Insect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Beetle.class) {
-                enemies.add(new Beetle(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new Beetle(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == InsectNest.class) {
-                enemies.add(new InsectNest(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new InsectNest(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == ArmoredInsect.class) {
-                enemies.add(new ArmoredInsect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+               addEnemy(new ArmoredInsect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Turret.class) {
-                enemies.add(new Turret(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new Turret(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Worm.class) {
-                enemies.add(new Worm(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
-            } else if (c == BossIncomingSign.class) {
-                enemies.add(new BossIncomingSign(500, 150, 6));
+                addEnemy(new Worm(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Bat.class) {
-                enemies.add(new Bat(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new Bat(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Vampire.class) {
-                enemies.add(new Vampire(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new Vampire(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == MagicBall.class) {
-                enemies.add(new MagicBall(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new MagicBall(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Lavakut.class) {
-                enemies.add(new Lavakut(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+               addEnemy(new Lavakut(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == LavaGiant.class) {
-                enemies.add(new LavaGiant(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new LavaGiant(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             }
         }
     }
@@ -188,41 +183,26 @@ public class LevelHandler implements Updatable {
         }
 
         if (level == 8) {
-            bossInc();
-        }
-
-        if (level == 9) {
-            //Displayed Level is 8
             wormLevel8();
         }
 
-        if (level >= 10 && level <= 16) {
+        if (level >= 9 && level <= 15) {
             difficultyFive();
         }
 
-        if (level == 17) {
-            bossInc();
-        }
-
-        if (level == 18) {
-            //displayed level is 16
+        if (level == 16) {
             vampireLevel16();
         }
 
-        if (level >= 19 && level <= 25) {
+        if (level >= 17 && level <= 23) {
             difficultySix();
         }
 
-        if (level == 26) {
-            bossInc();
-        }
-
-        if (level == 27) {
-            //displayed level is 24
+        if (level == 24) {
             lavaLevel24();
         }
 
-        if (level >= 28) {
+        if (level >= 25) {
             difficultySeven();
         }
 
@@ -390,32 +370,20 @@ public class LevelHandler implements Updatable {
         }
     }
 
-    private void bossInc() {
-        centerPlayer();
-        Screen.getPlayer().removeAllMines();
-
-        createNewEnemy(BossIncomingSign.class, 1);
-        //Since it doesn't really count as a level;
-        displayedLevel--;
-    }
-
     private void wormLevel8() {
-        MPoint scaledDistance = new MPoint(50, 50);
 
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background2.png"));
+        addEnemy(new BossIncomingSign(500, 150, 5, Worm.class));
 
-        createNewEnemy(Worm.class, 1);
-        enemies.add(new Turret(scaledDistance.getX(), scaledDistance.getY())); // top left
-        enemies.add(new Turret(Screen.WINDOW_WIDTH - scaledDistance.getX(), scaledDistance.getY())); // top right
-        enemies.add(new Turret(scaledDistance.getX(), Screen.WINDOW_HEIGHT - scaledDistance.getY() - Turret.TURRET_HEIGHT)); // bottom left
-        enemies.add(new Turret(Screen.WINDOW_WIDTH - scaledDistance.getX(), Screen.WINDOW_HEIGHT - scaledDistance.getY() - Turret.TURRET_HEIGHT)); // bottom right
+
     }
 
     private void vampireLevel16() {
-        createNewEnemy(Vampire.class, 1);
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background3.png"));
+        addEnemy(new BossIncomingSign(500, 150, 5, Vampire.class));
     }
-    private void lavaLevel24() { createNewEnemy(LavaGiant.class, 1);}
+    private void lavaLevel24() {         addEnemy(new BossIncomingSign(500, 150, 5, LavaGiant.class));
+    }
 
     private void centerPlayer() {
         Screen.getPlayer().setX(Screen.WINDOW_WIDTH/2 + (Screen.getPlayer().getWidth()/2));
@@ -426,21 +394,23 @@ public class LevelHandler implements Updatable {
         return currentLevel;
     }
 
-    public int getDisplayedLevel() {
-        return displayedLevel;
-    }
 
     private static final MRectangle BOSS_INC_SIZE = new MRectangle(200, 50);
     private class BossIncomingSign extends Enemy {
 
         private int duration;
         private long start, current;
+        private Class bossToSpawn;
 
-        public BossIncomingSign(int x, int y, int duration) {
+        public BossIncomingSign(int x, int y, int duration, Class bossToSpawn) {
             super(ResourceManager.getImage("bossinc.png", BOSS_INC_SIZE.getWidth(), BOSS_INC_SIZE.getHeight()), x, y,
                     BOSS_INC_SIZE.getWidth(), BOSS_INC_SIZE.getHeight(), 0, 1000000, "Boss Incoming Sign", 0, 1);
             this.duration = duration;
             this.start = System.currentTimeMillis();
+            this.bossToSpawn = bossToSpawn;
+
+            centerPlayer();
+            Screen.getPlayer().removeAllMines();
 
         }
 
@@ -461,6 +431,15 @@ public class LevelHandler implements Updatable {
         @Override
         public void update() {
             if (current - start > (duration * 1000)) {
+                createNewEnemy(bossToSpawn, 1);
+                if (bossToSpawn == Worm.class) {
+                    MPoint scaledDistance = new MPoint(50, 50);
+
+                    addEnemy(new Turret(scaledDistance.getX(), scaledDistance.getY())); // top left
+                    addEnemy(new Turret(Screen.WINDOW_WIDTH - scaledDistance.getX(), scaledDistance.getY())); // top right
+                    addEnemy(new Turret(scaledDistance.getX(), Screen.WINDOW_HEIGHT - scaledDistance.getY() - Turret.TURRET_HEIGHT)); // bottom left
+                    addEnemy(new Turret(Screen.WINDOW_WIDTH - scaledDistance.getX(), Screen.WINDOW_HEIGHT - scaledDistance.getY() - Turret.TURRET_HEIGHT)); // bottom right
+                }
                 setHealth(0);
             }
         }

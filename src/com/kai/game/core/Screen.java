@@ -200,7 +200,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         if (e == null) {
             e = "null";
         }
-        return new DeathScreen.Death(s, e, getPlayer().getSkills().get(0).getName().replaceAll("Skill", ""), getLevelHandler().getDisplayedLevel());
+        return new DeathScreen.Death(s, e, getPlayer().getSkills().get(0).getName().replaceAll("Skill", ""), getLevelHandler().getCurrentLevel());
         //return DeathScreen.createDeath(s, e, getPlayer().getSkills().get(0).getName(), getLevelHandler().getDisplayedLevel());
     }
 

@@ -2,6 +2,7 @@ package com.kai.game.entities.bosses;
 
 import com.kai.game.core.LevelHandler;
 import com.kai.game.core.Screen;
+import com.kai.game.entities.SpecialDeath;
 import com.kai.game.entities.enemies.Lavakut;
 import com.kai.game.scene.Lava;
 import com.kai.game.util.Parameters;
@@ -9,7 +10,7 @@ import com.kai.game.util.ResourceManager;
 import com.kai.game.entities.enemies.Lavakut.LavakutProjectile;
 
 
-public class LavaGiant extends Boss {
+public class LavaGiant extends Boss implements SpecialDeath {
 
     private static final double DROP_LAVA_RATE = 0.2;
 
@@ -37,7 +38,7 @@ public class LavaGiant extends Boss {
                 int newTargetY = (int)(Math.random() * 600);
                 int newRange = (int)(Math.random() * 1200);
 
-                projectiles.add(new LavakutProjectile(this, getHardX(), getHardY(), 16, 16
+                projectiles.add(new LavakutProjectile(this, getHardX()+ getWidth()/2, getHardY() + getHeight()/2, 16, 16
                         , 5, newTargetX, newTargetY, newRange, getDamage(), 1, 3, 3));
                 break;
         }
@@ -137,7 +138,9 @@ public class LavaGiant extends Boss {
                     Screen.getEnvironment().clearAllSceneObjects();
                     setSpeed(0);
                     teleportToMiddle();
-                    setAttacksPerSecond(7);
+                    heal(100);
+                    setSPAWN_RATE(3);
+                    setAttacksPerSecond(10);
                 }
                 break;
         }
@@ -160,4 +163,8 @@ public class LavaGiant extends Boss {
         setImmune(false);
     }
 
+    @Override
+    public void onDeath() {
+        Screen.getEnvironment().clearAllSceneObjects();
+    }
 }
