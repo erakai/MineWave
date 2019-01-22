@@ -3,10 +3,7 @@ package com.kai.game.hud;
 import com.kai.game.core.GameObject;
 import com.kai.game.core.Updatable;
 import com.kai.game.entities.Player;
-import com.kai.game.util.GameState;
-import com.kai.game.util.MFont;
-import com.kai.game.util.Parameters;
-import com.kai.game.util.ResourceManager;
+import com.kai.game.util.*;
 import com.kai.game.core.Screen;
 import com.kai.game.skills.Skill;
 
@@ -35,7 +32,14 @@ public class InGameDisplay extends GameObject implements Updatable {
         skillsToDraw = new Skill[4];
     }
 
-    @Override
+
+    private MPoint healthText = new MPoint(getScaledX(280), getScaledY(48));
+    private MPoint mineText = new MPoint(healthText.getHardX(), getScaledY(113));
+
+    private MPoint damageText = new MPoint(getScaledX(588), getScaledY(52));
+    private MPoint rangeText = new MPoint(damageText.getHardX(), getScaledY(104));
+    private MPoint defenseText = new MPoint(getScaledX(852), damageText.getHardY());
+    private MPoint speedText = new MPoint(defenseText.getHardX(), rangeText.getHardY());
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
 
@@ -75,7 +79,18 @@ public class InGameDisplay extends GameObject implements Updatable {
             g.drawString("F", getScaledX(502), getScaledY(102));
 
             //Draw player stats:
-            //draw current health/max health on the health bar and current mines/max mines on the mine bar
+            g.setColor(Color.CYAN);
+            g.setFont(new MFont(2));
+            g.drawString(((int)healthToDraw) + "/" + maxHealthToDraw, healthText.getX(), healthText.getY());
+            g.drawString(minesToDraw + "/" + maxMinesToDraw, mineText.getX(), mineText.getY());
+
+            g.setColor(new Color(50, 153, 200));
+            g.setFont(new MFont(1.8));
+            g.drawString("Damage   " + damageToDraw, damageText.getX(), damageText.getY());
+            g.drawString("Range     " + rangeToDraw, rangeText.getX(), rangeText.getY());
+            g.drawString("Defense  " + defenseToDraw, defenseText.getX(), defenseText.getY());
+            g.drawString("Speed     " + speedToDraw, speedText.getX(), speedText.getY());
+
         }
     }
 
