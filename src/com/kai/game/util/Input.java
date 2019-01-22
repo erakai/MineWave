@@ -4,6 +4,7 @@ package com.kai.game.util;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.core.Screen;
 import com.kai.game.items.Item;
+import com.kai.game.items.ItemLoader;
 
 import java.awt.*;
 import java.util.ArrayList;

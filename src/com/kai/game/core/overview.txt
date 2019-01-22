@@ -157,6 +157,9 @@ Changelog:
         - Work on implementing the rings everywhere
         - items.png created, rings will be copied from Ambush for now
         - Player equipping items works
+        - Removed gun skill, the effect is now a keyword for items (it's compatible with combo/great mine as well now)
+        - Added the HUD for items when you mouse over them
+        - Item's now have a background of their rarity's color when equipped
 
 
 Possible way to have effects:

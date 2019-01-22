@@ -9,23 +9,23 @@ public class StatManager {
     StatManager should house all stats of the attached player.
 
     = Stats =
-        * Max Mines
+        * max nines
             - The max amount of mines you can have placed at once
             - Affects things like combo
             - Starts at 7
-        * Range
+        * range
             - Radius of range circle = range * 25
             - Starts at 13
-        * Speed
+        * speed
             - How many pixels the player can move per frame
             - Starts at 4
-        * Damage
+        * damage
             - How much damage one mine does to an enemy
             - Starts at 5
-        * Defense
+        * defense
             - Damage taken = enemy damage * ((100 - player defense) / 100.0)
             - Starts at 5
-        * Max Life
+        * max health
             - Whenever max life is gained/lost, gain/lose that much current life
             - Starts at 20
     */

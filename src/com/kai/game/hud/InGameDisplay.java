@@ -46,6 +46,9 @@ public class InGameDisplay extends GameObject implements Updatable {
     private MPoint firstRingSlot = new MPoint(getScaledX(1123), getScaledY(24));
     private MPoint secondRingSlot = new MPoint(getScaledX(1123), getScaledY(82));
 
+    private MRectangle ringSlotOne = new MRectangle(new MPoint(1120, getScaledY(21)), new MPoint(1166, getScaledY(67)));
+    private MRectangle ringSlotTwo = new MRectangle(new MPoint(1120, getScaledY(79)), new MPoint(1166, getScaledY(125)));
+
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
 
@@ -104,11 +107,15 @@ public class InGameDisplay extends GameObject implements Updatable {
             if (playerRings[0] != null) {
                 playerRings[0].setX(firstRingSlot.getHardX());
                 playerRings[0].setY(firstRingSlot.getHardY());
+                Item.setRarityColor(playerRings[0].getRarity(), g);
+                g.fillRect(ringSlotOne.getTopLeft().getX(), ringSlotOne.getTopLeft().getY(), ringSlotOne.getWidth(), ringSlotOne.getHeight());
                 playerRings[0].drawMe(g);
             }
             if (playerRings[1] != null) {
                 playerRings[1].setX(secondRingSlot.getHardX());
                 playerRings[1].setY(secondRingSlot.getHardY());
+                Item.setRarityColor(playerRings[1].getRarity(), g);
+                g.fillRect(ringSlotTwo.getTopLeft().getX(), ringSlotTwo.getTopLeft().getY(), ringSlotTwo.getWidth(), ringSlotTwo.getHeight());
                 playerRings[1].drawMe(g);
             }
         }

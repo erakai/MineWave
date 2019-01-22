@@ -10,3 +10,11 @@ image: 8 0
 * TeleportSkill
 = Created by magic users generations ago, this ring is imbued with power, allowing the wearer to teleport on command.
 ----
+name: Speckled Chain
+rarity: 4
+image: 24 0
+! SHOOT
+* 5 max health
+* 5 defense
+= Twisted and rusted from use, this chain seems to belong more in ancient history then the present.
+----

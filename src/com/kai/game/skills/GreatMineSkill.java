@@ -27,8 +27,20 @@ public class GreatMineSkill extends Skill {
             p.addToRemoveQueue(p.getProjectiles().get(0));
         }
 
+        int bigProjSpeed = 0;
+        int bigProjRange = 0;
+        int bigProjX = (int)(tX-(p.MINE_SIZE.getWidth() * sizeMultiplier /2.0));
+        int bigProjY =  (tY-(p.MINE_SIZE.getHeight() * sizeMultiplier /2));
+        if (p.SHOOT) {
+            bigProjX = p.getCenterX() - (p.MINE_SIZE.getWidth() * sizeMultiplier / 2);
+            bigProjY = p.getCenterY() - (p.MINE_SIZE.getHeight() * sizeMultiplier / 2);
+            bigProjRange = 1200;
+            bigProjSpeed = 8;
+        }
+
+
         p.createProjectile(new Projectile(p, ResourceManager.getImage("Mine.png", p.MINE_SIZE.getWidth() * sizeMultiplier, p.MINE_SIZE.getHeight() * sizeMultiplier),
-                (int)(tX-(p.MINE_SIZE.getWidth() * sizeMultiplier /2.0)), (tY-(p.MINE_SIZE.getHeight() * sizeMultiplier /2)),
-                p.MINE_SIZE.getWidth() * sizeMultiplier, p.MINE_SIZE.getHeight() * sizeMultiplier, 0, tX, tY,0, p.getPlayerDamage() * damageMultiplier));
+               bigProjX, bigProjY ,
+                p.MINE_SIZE.getWidth() * sizeMultiplier, p.MINE_SIZE.getHeight() * sizeMultiplier, bigProjSpeed, tX, tY,bigProjRange, p.getPlayerDamage() * damageMultiplier));
     }
 }

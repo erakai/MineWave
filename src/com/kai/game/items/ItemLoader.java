@@ -3,6 +3,7 @@ package com.kai.game.items;
 import com.kai.game.core.Screen;
 import com.kai.game.entities.Player;
 import com.kai.game.skills.Skill;
+import com.kai.game.util.Parameters;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,13 +32,16 @@ public class ItemLoader {
         3 - Rare
         4 - Mystic
 
-    Format of an item (have any number of stats/skills):
+    Format of an item (have any number of stats/skills/special keywords):
+    You can find the stat names in game/entities/StatManager.java
+    You can find the skill names in game/skills
 
         name: [item name]
         rarity: [rarity number]
         image: [x position of item in items.png] [y position of item in items.png]
         * [amount] [stat name]
         * [skill name]
+        ! [special keyword]
         = [description]
         ----
 
@@ -70,7 +74,7 @@ public class ItemLoader {
                     imageCoordinates[1] = Integer.valueOf(parts[2]);
                 } else if (parts[0].equals("*")) {
                     if (parts[1].matches("-?\\d+(\\.\\d+)?")) {
-                        itemStats.put(parts[2], Integer.valueOf(parts[1]));
+                        itemStats.put(currentLine.split(parts[1])[1].substring(1), Integer.valueOf(parts[1]));
                     } else {
                         possibleBehaviors.add(new ItemBehavior() {
                             public void onEquip(Player owner) {
@@ -99,6 +103,22 @@ public class ItemLoader {
     }
 
     private static ItemBehavior getBehaviorForKeyword(String keyword) {
+        if (keyword.equals("! SHOOT")) {
+            return new ItemBehavior() {
+                public void onEquip(Player owner) {
+                    double SECONDS_PER_SHOT = 0.25;
+                    owner.maxShotTick = (int)(SECONDS_PER_SHOT * Parameters.FRAMES_PER_SECOND);
+                    owner.currentShotTick = owner.maxShotTick;
+                    owner.SHOOT = true;
+                }
+                public void onUnEquip(Player owner) {
+                    owner.SHOOT = false;
+                }
+                public String getDescription() {
+                    return "Mines are now bullets!";
+                }
+            };
+        }
         return null;
     }
 

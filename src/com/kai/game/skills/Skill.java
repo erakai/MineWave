@@ -67,8 +67,6 @@ public abstract class Skill {
                 return new ComboSkill(p);
             case "GreatMineSkill":
                 return new GreatMineSkill(p);
-            case "GunSkill":
-                return new GunSkill(p);
             default:
                 return null;
         }

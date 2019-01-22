@@ -44,11 +44,12 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         removeProjectileQueue = new ArrayList<>();
 
         rings = new Item[2];
-
-        equipRing(0, ItemLoader.getItem("Starter Ring"));
-        equipRing(1, ItemLoader.getItem("Wizard's Ring"));
     }
 
+    public void takeDamage(double amount) {
+        //  - Damage taken = enemy damage * ((100 - player defense) / 100.0)
+        super.takeDamage(amount * ((100-getDefense())/ 100.0));
+    }
 
     public Item equipRing(int index, Item item) {
         item.onEquip(this);
@@ -72,6 +73,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         }
     }
 
+    public int currentShotTick, maxShotTick;
     public void createProjectile(int targetX, int targetY, boolean ignoreRange) {
         if (ignoreRange) {
             if (currentMines < getMaxMines()) {
@@ -80,9 +82,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
                     projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
                             (int) (targetX - (MINE_SIZE.getHardWidth() / 2.0)), (targetY - (MINE_SIZE.getHardHeight() / 2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
                 } else {
-                    GunSkill gs = (GunSkill) getSkills().get(0);
-                    if (gs.currentShotTick > gs.maxShotTick) {
-                        gs.currentShotTick = 0;
+                    if (currentShotTick > maxShotTick) {
+                        currentShotTick = 0;
                         //Shooting has a farther range than placing mines
                         Projectile p = new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
                                 getX() + getWidth() / 2 - 12, getY() + getHeight() / 2 - 12, MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 8, targetX, targetY, 1200, getPlayerDamage());
@@ -160,7 +161,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
                 break;
         }
         //Drawing range circle (unless using gunSkill)
-        if (!(getSkills().get(0) instanceof GunSkill)) {
+        if (!SHOOT) {
             g.setColor(new Color(83, 90, 106));
             g.drawOval( (getCenterX() - getPlayerRange()), (getCenterY() - getPlayerRange()), getPlayerRange()*2, getPlayerRange()*2);
         }
@@ -226,7 +227,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
 
         if (SHOOT) {
-            ((GunSkill)getSkills().get(0)).currentShotTick++;
+            currentShotTick++;
         }
     }
 
@@ -333,8 +334,5 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     public int getDefense() { return playerStats.getStat("defense"); }
 
-    public void takeDamage(double amount) {
-        //  - Damage taken = enemy damage * ((100 - player defense) / 100.0)
-        super.takeDamage(amount * ((100-getDefense())/ 100.0));
-    }
+
 }
