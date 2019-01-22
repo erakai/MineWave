@@ -1,5 +1,6 @@
 package com.kai.game.entities.enemies;
 
+import com.kai.game.items.LootInstance;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
 
@@ -74,4 +75,8 @@ public class Worm extends Enemy {
         }
     }
 
+    @Override
+    public void onDeath() {
+        Screen.getLevelHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 10, false));
+    }
 }

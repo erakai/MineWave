@@ -6,6 +6,7 @@ import com.kai.game.entities.bosses.Boss;
 import com.kai.game.entities.bosses.LavaGiant;
 import com.kai.game.entities.bosses.Vampire;
 import com.kai.game.entities.enemies.*;
+import com.kai.game.items.LootInstance;
 import com.kai.game.util.MPoint;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.Parameters;
@@ -20,6 +21,8 @@ public class LevelHandler implements Updatable {
     private static List<Enemy> enemies;
     private static List<Enemy> toAddQueue;
 
+    private static List<LootInstance> roomLoot;
+
     private static int currentLevel;
     private static Random rand;
 
@@ -29,14 +32,19 @@ public class LevelHandler implements Updatable {
     LevelHandler(int startingLevel) {
         enemies = new ArrayList<>();
         toAddQueue = new ArrayList<>();
+        roomLoot = new ArrayList<>();
         LevelHandler.currentLevel = startingLevel;
         rand = new Random();
         transitionToLevel(currentLevel);
+
     }
 
-    void drawAllEnemies(Graphics g) {
+    void drawAllRoomContents(Graphics g) {
         for (Enemy e: enemies) {
             e.drawMe(g);
+        }
+        for (LootInstance l: roomLoot) {
+            l.drawMe(g);
         }
     }
 
@@ -65,6 +73,26 @@ public class LevelHandler implements Updatable {
         }
         checkForLevelCompletion();
         checkEnemyCollisions();
+    }
+
+    public void updateLoot() {
+        List<LootInstance> removeQ = new ArrayList<>();
+        for (LootInstance lI: roomLoot) {
+            if (lI.getTimer().getSecondsSinceStart() > lI.getDuration()) {
+                removeQ.add(lI);
+            }
+
+            lI.checkIfStandingOn(Screen.getPlayer());
+
+            if (lI.getContainedItems().size() == 0) {
+                removeQ.add(lI);
+            }
+        }
+        roomLoot.removeAll(removeQ);
+    }
+
+    public void newLootInstance(LootInstance lI) {
+        roomLoot.add(lI);
     }
 
     private void checkEnemyCollisions() {
@@ -392,6 +420,9 @@ public class LevelHandler implements Updatable {
         return currentLevel;
     }
 
+    public List<LootInstance> getRoomLoot() {
+        return roomLoot;
+    }
 
     private static final MRectangle BOSS_INC_SIZE = new MRectangle(200, 50);
     private class BossIncomingSign extends Enemy {
@@ -442,5 +473,7 @@ public class LevelHandler implements Updatable {
             }
         }
     }
+
+
 
 }

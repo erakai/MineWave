@@ -58,7 +58,7 @@ public class Item extends GameObject implements ItemBehavior {
 
         int stringHeight = g.getFontMetrics().getAscent() + 5;
         int stringWidth = (int)(g.getFontMetrics().stringWidth(description) * 0.90);
-        int totalStringHeight = stringHeight * (4 + stats.size() + (behaviors.size()-1));
+        int totalStringHeight = stringHeight * (5 + stats.size() + (behaviors.size()-1));
 
         g.setColor(new Color(50, 78, 105));
         g.fillRect(10, 10, stringWidth, totalStringHeight+10);
@@ -70,11 +70,15 @@ public class Item extends GameObject implements ItemBehavior {
 
         g.setFont(new MFont(1));
         g.drawString(description, nameText.getX(), nameText.getY() + (stringHeight*2));
+        int i = 1;
+
+        g.setColor(Color.WHITE);
+        g.drawLine(nameText.getX(),nameText.getY() + (stringHeight * (2 + i)) , stringWidth-5, nameText.getY() + (stringHeight * (2 + i) - 5));
+        i++;
 
         g.setFont(new MFont(1.2));
         g.setColor(new Color(187, 187, 187));
 
-        int i = 1;
         for (String stat: stats.keySet()) {
             String properStat = stat.substring(0, 1).toUpperCase() + stat.substring(1);
             g.drawString(properStat + ": " + stats.get(stat), nameText.getX(), nameText.getY() + (stringHeight * (2+i)));

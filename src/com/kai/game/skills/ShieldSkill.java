@@ -22,10 +22,15 @@ public class ShieldSkill extends Skill {
         p.removeAllMines();
 
         p.createProjectile(x+p.getScaledWidth(30), y+p.getScaledHeight(-10), true);
+        p.currentShotTick = 2000;
         p.createProjectile(x+p.getScaledWidth(-10), y+p.getScaledHeight(-10), true);
+        p.currentShotTick = 2000;
         p.createProjectile(x+p.getScaledWidth(30), y+p.getScaledHeight(30), true);
+        p.currentShotTick = 2000;
         p.createProjectile(x+p.getScaledWidth(-10), y+p.getScaledHeight(30), true);
+        p.currentShotTick = 2000;
         p.createProjectile(x+p.getScaledWidth(-10), y+p.getScaledHeight(70), true);
+        p.currentShotTick = 2000;
         p.createProjectile(x+p.getScaledWidth(30), y+p.getScaledHeight(70), true);
 
     }

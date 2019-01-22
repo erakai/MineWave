@@ -115,7 +115,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
         //LevelHandler manages all enemies.
         if (levelHandler != null) {
-            levelHandler.drawAllEnemies(g);
+            levelHandler.drawAllRoomContents(g);
         }
 
         for (GameObject UI: userInterface) {
@@ -143,6 +143,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
 
         if (levelHandler != null) {
             levelHandler.updateEnemies();
+            levelHandler.updateLoot();
         }
 
         if (wasResized) {

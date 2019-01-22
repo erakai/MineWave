@@ -84,7 +84,7 @@ public class ItemLoader {
                                 owner.unEquipSkill(currentLine.substring(2));
                             }
                             public String getDescription() {
-                                return "Grants TeleportSkill";
+                                return ("Grants " + currentLine.substring(2).replaceAll("Skill", ""));
                             }
                         });
                     }
@@ -141,4 +141,7 @@ public class ItemLoader {
         return new Item(items.get(itemName));
     }
 
+    public static HashMap<String, Item> getAllItems() {
+        return items;
+    }
 }

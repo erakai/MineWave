@@ -1,9 +1,11 @@
 package com.kai.game.entities.bosses;
 
 
+import com.kai.game.core.Screen;
 import com.kai.game.entities.Entity;
 import com.kai.game.entities.Projectile;
 import com.kai.game.entities.enemies.ProjectileEnemy;
+import com.kai.game.items.LootInstance;
 import com.kai.game.util.*;
 
 import java.awt.*;
@@ -142,5 +144,10 @@ public abstract class Boss extends ProjectileEnemy {
     public void setSPAWN_RATE(double SPAWN_RATE) {
         this.SPAWN_RATE = SPAWN_RATE;
         maxSpawnTick = (int)(SPAWN_RATE * Parameters.FRAMES_PER_SECOND);
+    }
+
+    @Override
+    public void onDeath() {
+        Screen.getLevelHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 20, true));
     }
 }

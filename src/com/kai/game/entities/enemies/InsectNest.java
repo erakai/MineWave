@@ -6,7 +6,7 @@ import com.kai.game.core.LevelHandler;
 import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
 
-public class InsectNest extends Enemy  implements SpecialDeath {
+public class InsectNest extends Enemy  {
 
     public InsectNest(int x, int y) {
         super(ResourceManager.getImage("insectNest.png"),
@@ -32,6 +32,7 @@ public class InsectNest extends Enemy  implements SpecialDeath {
 
     @Override
     public void onDeath() {
+        super.onDeath();
         spawn(new Insect(getX()+(getWidth()/2), getY()+(getHeight()/2)));
         spawn(new Insect(getX(), getY()));
     }

@@ -18,3 +18,11 @@ image: 24 0
 * 5 defense
 = Twisted and rusted from use, this chain seems to belong more in ancient history then the present.
 ----
+name: Skillfully Attuned Ring
+rarity: 3
+image: 16 0
+* ShieldSkill
+* ShieldSkill
+* GreatMineSkill
+= Passed down through countless generations, this ring has magic embedded in every crevice.
+----

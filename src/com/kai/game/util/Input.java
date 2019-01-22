@@ -5,6 +5,7 @@ import com.kai.game.hud.SelectionScreen;
 import com.kai.game.core.Screen;
 import com.kai.game.items.Item;
 import com.kai.game.items.ItemLoader;
+import com.kai.game.items.LootInstance;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -124,6 +125,10 @@ public class Input {
                     break;
                 case "Running":
                     Screen.getPlayer().createProjectile(mouseX, mouseY);
+
+                    for (LootInstance l: Screen.getLevelHandler().getRoomLoot()) {
+                        l.testClicked(Screen.getPlayer(), mouseX, mouseY);
+                    }
                     break;
                 case "Death Screen":
                     if (Screen.getDeathScreen().testHover(mouseX, mouseY)) {
@@ -169,6 +174,12 @@ public class Input {
                 for (Item i: Screen.getPlayer().getRings()) {
                     if (i != null) {
                         i.checkHover(currentMouseX, currentMouseY);
+                    }
+                }
+
+                for (LootInstance l: Screen.getLevelHandler().getRoomLoot()) {
+                    for (Item item: l.getContainedItems()) {
+                        item.checkHover(currentMouseX, currentMouseY);
                     }
                 }
                 break;

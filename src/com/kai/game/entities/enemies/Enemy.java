@@ -3,12 +3,14 @@ package com.kai.game.entities.enemies;
 import com.kai.game.core.LevelHandler;
 import com.kai.game.entities.Entity;
 import com.kai.game.core.Screen;
+import com.kai.game.entities.SpecialDeath;
+import com.kai.game.items.LootInstance;
 import com.kai.game.scene.SceneObject;
 import com.kai.game.util.Parameters;
 
 import java.awt.*;
 
-public abstract class Enemy extends Entity {
+public abstract class Enemy extends Entity implements SpecialDeath {
     private String name;
     private int damage;
     private double attacksPerSecond;
@@ -133,5 +135,10 @@ public abstract class Enemy extends Entity {
 
     public double getAttacksPerSecond() {
         return attacksPerSecond;
+    }
+
+    @Override
+    public void onDeath() {
+        Screen.getLevelHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY()));
     }
 }
