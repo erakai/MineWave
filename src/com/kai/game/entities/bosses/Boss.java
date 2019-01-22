@@ -1,10 +1,8 @@
 package com.kai.game.entities.bosses;
 
 
-import com.kai.game.core.LevelHandler;
 import com.kai.game.entities.Entity;
 import com.kai.game.entities.Projectile;
-import com.kai.game.entities.enemies.Bat;
 import com.kai.game.entities.enemies.ProjectileEnemy;
 import com.kai.game.util.*;
 
@@ -108,7 +106,7 @@ public abstract class Boss extends ProjectileEnemy {
     }
 
     @Override
-    public void takeDamage(int amount) {
+    public void takeDamage(double amount) {
         if (!immune) {
             super.takeDamage(amount);
         }
@@ -124,7 +122,7 @@ public abstract class Boss extends ProjectileEnemy {
 
 
     private MPoint healthBarPoint = new MPoint(0, 600-47);
-    private MRectangle healthBarRectangle = new MRectangle(new MPoint(16, healthBarPoint.getY()+16), new MPoint(1183, healthBarPoint.getY()+31));
+    private MRectangle healthBarRectangle = new MRectangle(new MPoint(16, healthBarPoint.getHardY()+16), new MPoint(1183, healthBarPoint.getHardY()+31));
 
     @Override
     public void drawMe(Graphics g) {

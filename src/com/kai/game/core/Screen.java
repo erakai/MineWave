@@ -6,6 +6,7 @@ import com.kai.game.hud.DeathScreen;
 import com.kai.game.hud.InGameDisplay;
 import com.kai.game.hud.MainMenu;
 import com.kai.game.hud.SelectionScreen;
+import com.kai.game.items.ItemLoader;
 import com.kai.game.scene.Environment;
 import com.kai.game.scene.SceneObject;
 import com.kai.game.skills.Skill;
@@ -77,6 +78,8 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         });
 
         inGameDisplay = new InGameDisplay(0, 1200);
+
+        ItemLoader loader = new ItemLoader();
     }
 
     @Override

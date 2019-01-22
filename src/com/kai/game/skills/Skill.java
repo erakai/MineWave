@@ -2,10 +2,12 @@ package com.kai.game.skills;
 
 import com.kai.game.entities.Entity;
 import com.kai.game.core.Screen;
+import com.kai.game.entities.Player;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public abstract class Skill {
     private String name;
@@ -55,6 +57,21 @@ public abstract class Skill {
         return false;
     }
 
+    public static Skill getFreshSkill(String skillName, Player p) {
+        switch (skillName) {
+            case "TeleportSkill":
+                return new TeleportSkill(p);
+            case "ShieldSkill":
+                return new ShieldSkill(p);
+            case "ComboSkill":
+                return new ComboSkill(p);
+            case "GreatMineSkill":
+                return new GreatMineSkill(p);
+            default:
+                return null;
+        }
+    }
+
     public abstract void _use(int tX, int tY);
 
     public void setLastUsed(long lastUsed) {
@@ -99,5 +116,18 @@ public abstract class Skill {
 
     public void setPassive(boolean passive) {
         this.passive = passive;
+    }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "name='" + name + '\'' +
+                ", owner=" + owner +
+                ", selfImage=" + selfImage +
+                ", description=" + Arrays.toString(description) +
+                ", cooldown=" + cooldown +
+                ", lastUsed=" + lastUsed +
+                ", passive=" + passive +
+                '}';
     }
 }

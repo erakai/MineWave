@@ -12,6 +12,8 @@ All new notes and changes will be put here.
 
 All TODOs/planned changes can be found using IntelliJ's to-do finder thing.
 
+//TODO: Update the showcase screenshots.
+
 Changelog:
 
     12/25/18:
@@ -145,7 +147,20 @@ Changelog:
         - BossIncomingSign now spawns the enemy itself
         - Changed the in game hud to be below the screen (it's ugly right now though)
         - Added in a way for the player to equip skills in the code
-        - Boss health bar (Besides worm because its not really a boss) is now displayed at the bottom of the screen
+        - Boss health bar is now displayed at the bottom of the screen (Besides worm because its not really a boss)\
+
+    1/21/19:
+        - Implemented StatManager
+        - Stats/health/mines are now written in text on the screen
+        - Item/ItemLoader/item.txt/ItemBehavior all created
+        - Items are now loaded from item.txt into ItemLoader.items on game start
+        - Work on implementing the rings everywhere
+        - items.png created, rings will be copied from Ambush for now
+        - Player equipping items works
+        - Removed gun skill, the effect is now a keyword for items (it's compatible with combo/great mine as well now)
+        - Added the HUD for items when you mouse over them
+        - Item's now have a background of their rarity's color when equipped
+
 
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
@@ -173,13 +188,10 @@ Future:
 
 
 priority:
-display stats (max mines, range, speed, damage, defense, # of mines placed, size?, maybe regen?)
-^ use a stat manager thing attached to player
 have a 2d array of rooms in level handler, rename room handler
 have a room instance that manges each room so rooms are 'saved'
 after all enemies are killed arrows point at available directions, walk off screen
 similar to ambush
-have 2 ring slots in in game display
-loot instance/loot classes, rings modify stats and have rarities, higher rarities give passives
 turn gun skill into a ring
-have rings grant skills?
+
+

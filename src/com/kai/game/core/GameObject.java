@@ -30,6 +30,12 @@ public abstract class GameObject {
                 (otherObject.getHardY()+otherObject.getHeight() > getHardY()));
     }
 
+    public double distanceTo (int tX, int tY) {
+        double a = Math.abs( (getCenterX()) - tX);
+        double b = Math.abs( (getCenterY()) - tY);
+        return(Math.sqrt((a*a) + (b*b)));
+    }
+
     public void updateSelfImage() {
         if (getSelfImage() != null) {
             setSelf(ResourceManager.resizeImage(getSelfImage(), getWidth(), getHeight()));
