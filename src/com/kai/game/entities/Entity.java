@@ -33,25 +33,25 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
 
     public void moveUp() {
         if (getY() > 0) {
-            setY(getHardY()-speed);
+            setY(getHardY()-getSpeed());
         }
     }
 
     public void moveDown() {
         if (getY() < Screen.WINDOW_HEIGHT-getHeight()) {
-            setY(getHardY()+speed);
+            setY(getHardY()+getSpeed());
         }
     }
 
     public void moveRight() {
         if (getX() < Screen.WINDOW_WIDTH-getWidth()) {
-            setX(getHardX()+speed);
+            setX(getHardX()+getSpeed());
         }
     }
 
     public void moveLeft() {
          if (getX() > 0) {
-             setX(getHardX() - speed);
+             setX(getHardX() - getSpeed());
          }
     }
 
@@ -75,7 +75,7 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
         this.speed = speed;
     }
 
-    public void takeDamage(int amount) {
+    public void takeDamage(double amount) {
         this.health -= amount;
     }
 

@@ -21,6 +21,7 @@ public class InGameDisplay extends GameObject implements Updatable {
     private int minesToDraw;
     private int maxMinesToDraw;
     private int currentLevelToDraw;
+    private int damageToDraw, defenseToDraw, speedToDraw, rangeToDraw;
     private Skill[] skillsToDraw;
 
     //TODO: Make InGameDisplay compatible with resizing the screen.
@@ -72,6 +73,9 @@ public class InGameDisplay extends GameObject implements Updatable {
             g.drawString("T", getScaledX(502), getScaledY(44));
             g.drawString("R", getScaledX(422), getScaledY(102));
             g.drawString("F", getScaledX(502), getScaledY(102));
+
+            //Draw player stats:
+            //draw current health/max health on the health bar and current mines/max mines on the mine bar
         }
     }
 
@@ -104,6 +108,10 @@ public class InGameDisplay extends GameObject implements Updatable {
             minesToDraw = getPlayer().getCurrentMines();
             maxMinesToDraw = getPlayer().getMaxMines();
             currentLevelToDraw = Screen.getLevelHandler().getCurrentLevel();
+            defenseToDraw = getPlayer().getDefense();
+            speedToDraw = getPlayer().getSpeed();
+            rangeToDraw = getPlayer().getSmallPlayerRange();
+            damageToDraw = getPlayer().getPlayerDamage();
             for (int i = 0; i < getPlayer().getSkills().size(); i++) {
                 if ( i < 4) {
                     skillsToDraw[i] = getPlayer().getSkills().get(i);
