@@ -12,6 +12,8 @@ All new notes and changes will be put here.
 
 All TODOs/planned changes can be found using IntelliJ's to-do finder thing.
 
+//TODO: Update the showcase screenshots.
+
 Changelog:
 
     12/25/18:
@@ -150,6 +152,11 @@ Changelog:
     1/21/19:
         - Implemented StatManager
         - Stats/health/mines are now written in text on the screen
+        - Item/ItemLoader/item.txt/ItemBehavior all created
+        - Items are now loaded from item.txt into ItemLoader.items on game start
+        - Work on implementing the rings everywhere
+        - items.png created, rings will be copied from Ambush for now
+        - Player equipping items works
 
 
 Possible way to have effects:
@@ -182,9 +189,6 @@ have a 2d array of rooms in level handler, rename room handler
 have a room instance that manges each room so rooms are 'saved'
 after all enemies are killed arrows point at available directions, walk off screen
 similar to ambush
-have 2 ring slots in in game display
-loot instance/loot classes, rings modify stats and have rarities, higher rarities give passives
 turn gun skill into a ring
-have rings grant skills?
 
-for items have everything just be written in a text file (or xml if big brain) and parse through items for stats
+

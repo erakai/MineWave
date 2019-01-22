@@ -74,10 +74,10 @@ public class ItemLoader {
                     } else {
                         possibleBehaviors.add(new ItemBehavior() {
                             public void onEquip(Player owner) {
-                                owner.equipSkill(Skill.getFreshSkill(currentLine.replaceAll("\\*", ""), Screen.getPlayer()));
+                                owner.equipSkill(Skill.getFreshSkill(currentLine.substring(2),owner));
                             }
                             public void onUnEquip(Player owner) {
-                                owner.unEquipSkill(currentLine);
+                                owner.unEquipSkill(currentLine.substring(2));
                             }
                             public String getDescription() {
                                 return "Grants TeleportSkill";
@@ -116,6 +116,7 @@ public class ItemLoader {
         return stringBuilder.toString();
     }
 
+    //TODO: Make this not case sensitive (very easy):
     public static Item getItem(String itemName) {
         return new Item(items.get(itemName));
     }

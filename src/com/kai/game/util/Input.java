@@ -3,6 +3,7 @@ package com.kai.game.util;
 
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.core.Screen;
+import com.kai.game.items.Item;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -163,6 +164,12 @@ public class Input {
             case "Running":
                 currentMouseX = (int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX);
                 currentMouseY = (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY);
+
+                for (Item i: Screen.getPlayer().getRings()) {
+                    if (i != null) {
+                        i.checkHover(currentMouseX, currentMouseY);
+                    }
+                }
                 break;
             case "Death Screen":
                 Screen.getDeathScreen().testHover((int) (MouseInfo.getPointerInfo().getLocation().getX() - mouseX), (int) (MouseInfo.getPointerInfo().getLocation().getY() - mouseY));

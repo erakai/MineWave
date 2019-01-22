@@ -17,8 +17,10 @@ public class Item extends GameObject implements ItemBehavior {
     private List<ItemBehavior> behaviors;
     private int[] imageCoordinates;
 
+    private boolean hoveredOver = false;
+
     public Item(String name, int rarity, String description, HashMap<String, Integer> stats, List<ItemBehavior> behaviors, int[] imageCoordinates) {
-        super(ResourceManager.getItemImage(imageCoordinates[0], imageCoordinates[1], 48, 48), -50, -50, 48, 48);
+        super(ResourceManager.getItemImage(imageCoordinates[0], imageCoordinates[1], 40, 40), -50, -50, 40, 40);
         this.name = name;
         this.imageCoordinates = imageCoordinates;
         this.stats = stats;
@@ -34,15 +36,32 @@ public class Item extends GameObject implements ItemBehavior {
     @Override
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
+        if (hoveredOver) {
+            drawHUD(g);
+        }
+    }
+
+    private void drawHUD(Graphics g) {
+
+    }
+
+    public void checkHover(int mX, int mY) {
+        hoveredOver = distanceTo(mX, mY) <= getWidth()/2;
     }
 
     @Override
     public void onEquip(Player owner) {
         for (String stat: getStats().keySet()) {
             owner.increaseStat(stat, stats.get(stat));
+            if (stat.equals("max health")) {
+                owner.heal(stats.get(stat));
+            }
         }
         for (ItemBehavior b: behaviors) {
-            b.onEquip(owner);
+            //TODO: I shouldn't have to be checking if the item behaviors are null, but for some reason a null behavior is added.
+            if (b != null) {
+                b.onEquip(owner);
+            }
         }
     }
 
@@ -50,9 +69,17 @@ public class Item extends GameObject implements ItemBehavior {
     public void onUnEquip(Player owner) {
         for (String stat: getStats().keySet()) {
             owner.decreaseStat(stat, stats.get(stat));
+            if (stat.equals("max health")) {
+                if (owner.getHealth() - stats.get(stat) < 1) {
+                    owner.heal(owner.getHealth() - stats.get(stat) + 1);
+                }
+                owner.takeDamage(stats.get(stat));
+            }
         }
         for (ItemBehavior b: behaviors) {
-            b.onUnEquip(owner);
+            if (b != null) {
+                b.onUnEquip(owner);
+            }
         }
     }
 

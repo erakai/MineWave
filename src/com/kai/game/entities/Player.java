@@ -3,6 +3,8 @@ package com.kai.game.entities;
 import com.kai.game.core.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
+import com.kai.game.items.Item;
+import com.kai.game.items.ItemLoader;
 import com.kai.game.skills.*;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
@@ -26,6 +28,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     public boolean SHOOT = false;
     private String killedBy;
 
+    private Item[] rings;
+
     public Player(int x, int y, int width, int height) {
         super(null, x, y, width, height, 4, 20);
         this.dir = "up";
@@ -34,11 +38,28 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         playerStats = new StatManager(this, 20, 5, 5, 4, 13, 7);
 
         skills = new ArrayList<>();
-
         equipSkill(SelectionScreen.getCurrentlySelected(this));
 
         projectiles = new ArrayList<>();
         removeProjectileQueue = new ArrayList<>();
+
+        rings = new Item[2];
+
+        equipRing(0, ItemLoader.getItem("Starter Ring"));
+        equipRing(1, ItemLoader.getItem("Wizard's Ring"));
+    }
+
+
+    public Item equipRing(int index, Item item) {
+        item.onEquip(this);
+        if (rings[index] != null) {
+            Item oldRing = rings[index];
+            oldRing.onUnEquip(this);
+            rings[index] = item;
+            return oldRing;
+        }
+        rings[index] = item;
+        return null;
     }
 
     public void createProjectile(int targetX, int targetY) {
@@ -154,7 +175,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     public void unEquipSkill(String toUnEquip) {
         for (int i = getSkills().size()-1; i > -1; i--) {
-            if (getSkills().get(i).getName() == toUnEquip) {
+            if (getSkills().get(i).getName().equals(toUnEquip)) {
                 unEquipSkill(getSkills().get(i));
                 break;
             }
@@ -252,11 +273,11 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     }
 
     public void increaseStat(String stat, int amount) {
-        playerStats.increaseStat(stat, playerStats.getStat(stat) + amount);
+        playerStats.increaseStat(stat, amount);
     }
 
     public void decreaseStat(String stat, int amount) {
-        playerStats.decreaseStat(stat, playerStats.getStat(stat) - amount);
+        playerStats.decreaseStat(stat, amount);
     }
 
     @Override
@@ -306,7 +327,9 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     public HashMap<String, Integer> getStats() { return playerStats.getStats(); }
 
-
+    public Item[] getRings() {
+        return rings;
+    }
 
     public int getDefense() { return playerStats.getStat("defense"); }
 

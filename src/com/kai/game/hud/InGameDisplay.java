@@ -3,6 +3,7 @@ package com.kai.game.hud;
 import com.kai.game.core.GameObject;
 import com.kai.game.core.Updatable;
 import com.kai.game.entities.Player;
+import com.kai.game.items.Item;
 import com.kai.game.util.*;
 import com.kai.game.core.Screen;
 import com.kai.game.skills.Skill;
@@ -20,6 +21,7 @@ public class InGameDisplay extends GameObject implements Updatable {
     private int currentLevelToDraw;
     private int damageToDraw, defenseToDraw, speedToDraw, rangeToDraw;
     private Skill[] skillsToDraw;
+    private Item[] playerRings;
 
     //TODO: Make InGameDisplay compatible with resizing the screen.
 
@@ -40,6 +42,10 @@ public class InGameDisplay extends GameObject implements Updatable {
     private MPoint rangeText = new MPoint(damageText.getHardX(), getScaledY(104));
     private MPoint defenseText = new MPoint(getScaledX(852), damageText.getHardY());
     private MPoint speedText = new MPoint(defenseText.getHardX(), rangeText.getHardY());
+
+    private MPoint firstRingSlot = new MPoint(getScaledX(1123), getScaledY(24));
+    private MPoint secondRingSlot = new MPoint(getScaledX(1123), getScaledY(82));
+
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
 
@@ -91,6 +97,20 @@ public class InGameDisplay extends GameObject implements Updatable {
             g.drawString("Defense  " + defenseToDraw, defenseText.getX(), defenseText.getY());
             g.drawString("Speed     " + speedToDraw, speedText.getX(), speedText.getY());
 
+            //Drawing player rings:
+
+            //holy shit why am i setting their location 60 times a second what the fuck
+            //TODO: CHANGE THIS FUCKING ABOMINATION MAKE IT STOP
+            if (playerRings[0] != null) {
+                playerRings[0].setX(firstRingSlot.getHardX());
+                playerRings[0].setY(firstRingSlot.getHardY());
+                playerRings[0].drawMe(g);
+            }
+            if (playerRings[1] != null) {
+                playerRings[1].setX(secondRingSlot.getHardX());
+                playerRings[1].setY(secondRingSlot.getHardY());
+                playerRings[1].drawMe(g);
+            }
         }
     }
 
@@ -115,6 +135,9 @@ public class InGameDisplay extends GameObject implements Updatable {
         }
     }
 
+
+    // i dont even want to think about how wasteful this is
+    //TODO: fix this horrible  update method
     @Override
     public void update() {
         if (Screen.checkState(GameState.RUNNING)) {
@@ -127,6 +150,8 @@ public class InGameDisplay extends GameObject implements Updatable {
             speedToDraw = getPlayer().getSpeed();
             rangeToDraw = getPlayer().getSmallPlayerRange();
             damageToDraw = getPlayer().getPlayerDamage();
+            playerRings = getPlayer().getRings();
+            skillsToDraw = new Skill[4];
             for (int i = 0; i < getPlayer().getSkills().size(); i++) {
                 if ( i < 4) {
                     skillsToDraw[i] = getPlayer().getSkills().get(i);

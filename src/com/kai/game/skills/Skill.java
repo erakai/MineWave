@@ -7,6 +7,7 @@ import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public abstract class Skill {
     private String name;
@@ -117,5 +118,18 @@ public abstract class Skill {
 
     public void setPassive(boolean passive) {
         this.passive = passive;
+    }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "name='" + name + '\'' +
+                ", owner=" + owner +
+                ", selfImage=" + selfImage +
+                ", description=" + Arrays.toString(description) +
+                ", cooldown=" + cooldown +
+                ", lastUsed=" + lastUsed +
+                ", passive=" + passive +
+                '}';
     }
 }
