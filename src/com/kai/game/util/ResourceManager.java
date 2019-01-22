@@ -31,6 +31,10 @@ public class ResourceManager {
         return (begin.getScaledInstance(width, height, Image.SCALE_FAST));
     }
 
+    public static Image getItemImage(int x, int y, int width, int height) {
+        return getImage("items.png").getSubimage(x, y, 8, 8).getScaledInstance(width, height, Image.SCALE_FAST);
+    }
+
 
     /*
     THE BELOW METHODS ARE TAKEN FROM https://code.google.com/archive/p/game-engine-for-java/source.

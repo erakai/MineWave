@@ -66,20 +66,7 @@ public class SelectionScreen extends GameObject {
     }
 
     public static Skill getCurrentlySelected(Player p) {
-        switch (currentlySelected.getName()) {
-            case "TeleportSkill":
-                return new TeleportSkill(p);
-            case "ShieldSkill":
-                return new ShieldSkill(p);
-            case "ComboSkill":
-                return new ComboSkill(p);
-            case "GreatMineSkill":
-                return new GreatMineSkill(p);
-            case "GunSkill":
-                return new GunSkill(p);
-            default:
-                return null;
-        }
+        return Skill.getFreshSkill(currentlySelected.getName(), p);
     }
 
     public void abilitySelectionAttempt(int mouseX, int mouseY) {

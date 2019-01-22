@@ -2,6 +2,7 @@ package com.kai.game.skills;
 
 import com.kai.game.entities.Entity;
 import com.kai.game.core.Screen;
+import com.kai.game.entities.Player;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
 
@@ -53,6 +54,23 @@ public abstract class Skill {
             return true;
         }
         return false;
+    }
+
+    public static Skill getFreshSkill(String skillName, Player p) {
+        switch (skillName) {
+            case "TeleportSkill":
+                return new TeleportSkill(p);
+            case "ShieldSkill":
+                return new ShieldSkill(p);
+            case "ComboSkill":
+                return new ComboSkill(p);
+            case "GreatMineSkill":
+                return new GreatMineSkill(p);
+            case "GunSkill":
+                return new GunSkill(p);
+            default:
+                return null;
+        }
     }
 
     public abstract void _use(int tX, int tY);

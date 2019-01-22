@@ -150,6 +150,17 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         skills.add(toEquip);
     }
 
+    public void unEquipSkill(Skill toUnEquip) { skills.remove(toUnEquip);}
+
+    public void unEquipSkill(String toUnEquip) {
+        for (int i = getSkills().size()-1; i > -1; i--) {
+            if (getSkills().get(i).getName() == toUnEquip) {
+                unEquipSkill(getSkills().get(i));
+                break;
+            }
+        }
+    }
+
     public List<Skill> getSkills() {
         return skills;
     }
@@ -240,6 +251,14 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         }
     }
 
+    public void increaseStat(String stat, int amount) {
+        playerStats.increaseStat(stat, playerStats.getStat(stat) + amount);
+    }
+
+    public void decreaseStat(String stat, int amount) {
+        playerStats.decreaseStat(stat, playerStats.getStat(stat) - amount);
+    }
+
     @Override
     public void attack(Entity target) {
         attack(target, getPlayerDamage());
@@ -286,6 +305,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     public int getMaxHealth() { return playerStats.getStat("max health"); }
 
     public HashMap<String, Integer> getStats() { return playerStats.getStats(); }
+
+
 
     public int getDefense() { return playerStats.getStat("defense"); }
 

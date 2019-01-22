@@ -1,0 +1,12 @@
+name: Starter Ring
+rarity: 1
+image: 0 0
+* 5 defense
+= A ring customarily given as a gesture of good faith to any beginner adventurers.
+----
+name: Wizard's Ring
+rarity: 2
+image: 8 0
+* TeleportSkill
+= Created by magic users generations ago, this ring is imbued with power, allowing the wearer to teleport on command.
+----
