@@ -17,38 +17,102 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class LevelHandler implements Updatable {
-    private static List<Enemy> enemies;
-    private static List<Enemy> toAddQueue;
+import static com.kai.game.core.RoomHandler.getXAwayFromPlayer;
+import static com.kai.game.core.RoomHandler.getYAwayFromPlayer;
 
-    private static List<LootInstance> roomLoot;
+public class RoomInstance implements Updatable {
+    private List<Enemy> enemies;
+    private List<LootInstance> roomLoot;
+    private List<Enemy> toAddQueue;
 
-    private static int currentLevel;
-    private static Random rand;
+    private Random rand;
+    private boolean canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
+    private Image upArrow, leftArrow, downArrow, rightArrow;
 
-    //The closest distance that an enemy will spawn to the player.
-    private static final int MIN_DISTANCE_FROM_PLAYER = 80;
+    public RoomInstance(int roomLevel) {
+        //TODO: Link each room instance to it's own environment.
+        Screen.getEnvironment().clearAllSceneObjects();
+        Screen.getPlayer().removeAllMines();
 
-    LevelHandler(int startingLevel) {
         enemies = new ArrayList<>();
-        toAddQueue = new ArrayList<>();
         roomLoot = new ArrayList<>();
-        LevelHandler.currentLevel = startingLevel;
+        toAddQueue = new ArrayList<>();
         rand = new Random();
-        transitionToLevel(currentLevel);
 
+        upArrow = ResourceManager.getImage("arrow.png");
+        leftArrow = ResourceManager.rotate(upArrow, 270);
+        downArrow = ResourceManager.rotate(upArrow, 180);
+        rightArrow = ResourceManager.rotate(upArrow, 90);
+
+        generateLevel(roomLevel);
+        updateAvailableDirections();
     }
 
-    void drawAllRoomContents(Graphics g) {
+    public void drawRoom(Graphics g) {
         for (Enemy e: enemies) {
             e.drawMe(g);
         }
         for (LootInstance l: roomLoot) {
             l.drawMe(g);
         }
+        if (isEnemiesEmpty()) {
+            drawArrows(g);
+        }
     }
 
-    void updateEnemies() {
+    public void updateAvailableDirections() {
+        RoomInstance[][] rooms = RoomHandler.getRoomArray();
+        int currentX = RoomHandler.getCurrentRoomX();
+        int currentY = RoomHandler.getCurrentRoomY();
+        canMoveUp = true;
+        canMoveDown = true;
+        canMoveRight = true;
+        canMoveLeft = true;
+
+        //TODO: what the fuck am i doing make it stop please rewrite this
+        try {
+            if (!(rooms[currentY][currentX+1] == null)) {
+                canMoveRight = false;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) { canMoveRight = false; }
+        try {
+            if (!(rooms[currentY][currentX-1] == null)) {
+                canMoveLeft = false;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) { canMoveLeft = false; }
+        try {
+            if (!(rooms[currentY+1][currentX] == null)) {
+                canMoveDown = false;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) { canMoveDown = false; }
+        try {
+            if (!(rooms[currentY-1][currentX] == null)) {
+                canMoveUp = false;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) { canMoveUp = false; }
+    }
+
+    private MPoint upArrowPoint = new MPoint(575, 10);
+    private MPoint leftArrowPoint = new MPoint(10, 275);
+    private MPoint downArrowPoint = new MPoint(575, 540);
+    private MPoint rightArrowPoint = new MPoint(1140, 275);
+
+    private void drawArrows(Graphics g) {
+        if (canMoveUp) {
+            g.drawImage(upArrow, upArrowPoint.getX(), upArrowPoint.getY(), null);
+        }
+        if (canMoveDown) {
+            g.drawImage(downArrow, downArrowPoint.getX(), downArrowPoint.getY(), null);
+        }
+        if (canMoveLeft) {
+            g.drawImage(leftArrow, leftArrowPoint.getX(), leftArrowPoint.getY(), null);
+        }
+        if (canMoveRight) {
+            g.drawImage(rightArrow, rightArrowPoint.getX(), rightArrowPoint.getY(), null);
+        }
+    }
+
+    public void updateEnemies() {
         List<Enemy> toRemove = new ArrayList<>();
         for (Enemy e: enemies) {
             e.update();
@@ -60,37 +124,13 @@ public class LevelHandler implements Updatable {
         }
         enemies.removeAll(toRemove);
 
-        chasePlayer();
-
-        Screen.getEnvironment().sceneCollisions(Screen.getPlayer());
-    }
-
-    public void update() {
         if (!toAddQueue.isEmpty()) {
             injectQueue();
         }
-        checkForLevelCompletion();
-        checkEnemyCollisions();
-    }
 
-    public void updateLoot() {
-        List<LootInstance> removeQ = new ArrayList<>();
-        for (LootInstance lI: roomLoot) {
-            if (lI.getTimer().getSecondsSinceStart() > lI.getDuration()) {
-                removeQ.add(lI);
-            }
+        chasePlayer();
 
-            lI.checkIfStandingOn(Screen.getPlayer());
-
-            if (lI.getContainedItems().size() == 0) {
-                removeQ.add(lI);
-            }
-        }
-        roomLoot.removeAll(removeQ);
-    }
-
-    public void newLootInstance(LootInstance lI) {
-        roomLoot.add(lI);
+        Screen.getEnvironment().sceneCollisions(Screen.getPlayer());
     }
 
     private void checkEnemyCollisions() {
@@ -115,8 +155,16 @@ public class LevelHandler implements Updatable {
         Screen.getPlayer().callAllProjectileCollisions(new ArrayList<>(enemies));
     }
 
-    public boolean checkForGameOver() {
-        return (Screen.getPlayer().getHealth() < 1);
+    public void updateLoot() {
+        List<LootInstance> removeQ = new ArrayList<>();
+        for (LootInstance lI: roomLoot) {
+            lI.checkIfStandingOn(Screen.getPlayer());
+
+            if (lI.getContainedItems().size() == 0) {
+                removeQ.add(lI);
+            }
+        }
+        roomLoot.removeAll(removeQ);
     }
 
     private void chasePlayer() {
@@ -125,28 +173,8 @@ public class LevelHandler implements Updatable {
         }
     }
 
-    public static int getXAwayFromPlayer(int enemyWidth) {
-        int rx;
-        do {
-            rx = rand.nextInt(Screen.WINDOW_WIDTH);
-        } while (((Math.abs(Screen.getPlayer().getX() - rx) < MIN_DISTANCE_FROM_PLAYER)
-                || !(rx > 0))
-                || !(rx+enemyWidth < Screen.WINDOW_WIDTH));
-        return rx;
-    }
-
-    public static int getYAwayFromPlayer(int enemyHeight) {
-        int ry;
-        do {
-            ry = rand.nextInt(Screen.WINDOW_HEIGHT);
-        } while	(((Math.abs(Screen.getPlayer().getY() - ry) < MIN_DISTANCE_FROM_PLAYER)
-                || !(ry > 0))
-                || !(ry+enemyHeight < Screen.WINDOW_HEIGHT));
-        return ry;
-    }
-
-    public static void addEnemy(Enemy e) {
-        toAddQueue.add(e);
+    public void update() {
+        checkEnemyCollisions();
     }
 
     private void injectQueue() {
@@ -154,11 +182,40 @@ public class LevelHandler implements Updatable {
         toAddQueue.clear();
     }
 
-    private void checkForLevelCompletion() {
-        if (enemies.isEmpty() && toAddQueue.isEmpty()) {
-            currentLevel++;
-            transitionToLevel(currentLevel);
-        }
+    public boolean checkForGameOver() {
+        return (Screen.getPlayer().getHealth() < 1);
+    }
+
+    public void addEnemy(Enemy e) {
+        toAddQueue.add(e);
+    }
+
+    public boolean isEnemiesEmpty() {
+        return enemies.isEmpty();
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public List<LootInstance> getRoomLoot() {
+        return roomLoot;
+    }
+
+    public boolean isCanMoveUp() {
+        return canMoveUp;
+    }
+
+    public boolean isCanMoveDown() {
+        return canMoveDown;
+    }
+
+    public boolean isCanMoveRight() {
+        return canMoveRight;
+    }
+
+    public boolean isCanMoveLeft() {
+        return canMoveLeft;
     }
 
     private static final int DEFAULT_MIN_DISTANCE = 200;
@@ -171,7 +228,7 @@ public class LevelHandler implements Updatable {
             } else if (c == InsectNest.class) {
                 addEnemy(new InsectNest(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == ArmoredInsect.class) {
-               addEnemy(new ArmoredInsect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new ArmoredInsect(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Turret.class) {
                 addEnemy(new Turret(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Worm.class) {
@@ -183,7 +240,7 @@ public class LevelHandler implements Updatable {
             } else if (c == MagicBall.class) {
                 addEnemy(new MagicBall(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == Lavakut.class) {
-               addEnemy(new Lavakut(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+                addEnemy(new Lavakut(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == LavaGiant.class) {
                 addEnemy(new LavaGiant(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             }
@@ -191,7 +248,7 @@ public class LevelHandler implements Updatable {
     }
 
     //TODO: Replace presets with semi-randomly generated levels (assign each enemy a threat level).
-    private void transitionToLevel(int level) {
+    private void generateLevel(int level) {
         if (level == 1) {
             difficultyOne();
         }
@@ -257,7 +314,6 @@ public class LevelHandler implements Updatable {
                 break;
         }
     }
-
     private void difficultyThree() {
         switch (rand.nextInt(4)) {
             case 0:
@@ -280,7 +336,6 @@ public class LevelHandler implements Updatable {
                 break;
         }
     }
-
     private void difficultyFour() {
         switch (rand.nextInt(5)) {
             case 0:
@@ -305,7 +360,6 @@ public class LevelHandler implements Updatable {
                 break;
         }
     }
-
     private void difficultyFive() {
         switch (rand.nextInt(6)) {
             case 0:
@@ -334,7 +388,6 @@ public class LevelHandler implements Updatable {
                 break;
         }
     }
-
     private void difficultySix() {
         switch(rand.nextInt(5)) {
             case 0:
@@ -365,7 +418,6 @@ public class LevelHandler implements Updatable {
                 break;
         }
     }
-
     private void difficultySeven() {
         switch(rand.nextInt(5)) {
             case 0:
@@ -395,32 +447,24 @@ public class LevelHandler implements Updatable {
                 break;
         }
     }
-
     private void wormLevel8() {
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background2.png"));
         addEnemy(new BossIncomingSign(500, 150, 5, Worm.class));
     }
-
     private void vampireLevel16() {
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background3.png"));
         addEnemy(new BossIncomingSign(500, 150, 5, Vampire.class));
     }
     private void lavaLevel24() {
+        Screen.getEnvironment().setSelf(ResourceManager.getImage("background4.png"));
         addEnemy(new BossIncomingSign(500, 150, 5, LavaGiant.class));
     }
-
-    private void centerPlayer() {
+    public static void centerPlayer() {
         Screen.getPlayer().setX(Screen.WINDOW_WIDTH/2 + (Screen.getPlayer().getWidth()/2));
         Screen.getPlayer().setY(Screen.WINDOW_HEIGHT/2 + (Screen.getPlayer().getHeight()/2));
     }
 
-    public int getCurrentLevel() {
-        return currentLevel;
-    }
 
-    public List<LootInstance> getRoomLoot() {
-        return roomLoot;
-    }
 
     private static final MRectangle BOSS_INC_SIZE = new MRectangle(200, 50);
     private class BossIncomingSign extends Enemy {
@@ -476,7 +520,6 @@ public class LevelHandler implements Updatable {
 
         }
     }
-
 
 
 }

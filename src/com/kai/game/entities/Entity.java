@@ -1,6 +1,7 @@
 package com.kai.game.entities;
 
 import com.kai.game.core.GameObject;
+import com.kai.game.core.RoomHandler;
 import com.kai.game.core.Updatable;
 import com.kai.game.core.Screen;
 import com.kai.game.util.Parameters;
@@ -25,30 +26,44 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
         return distanceTo(otherEntity.getX(), otherEntity.getY());
     }
 
-
-
     public void moveUp() {
-        if (getY() > 0) {
+        if (Screen.getRoomHandler().isEnemiesEmpty()) {
+            if (getY() > 0 || (RoomHandler.getCurrentRoomY() != 0)) {
+                setY(getHardY()-getSpeed());
+            }
+        } else if (getY() > 0) {
             setY(getHardY()-getSpeed());
         }
     }
 
     public void moveDown() {
-        if (getY() < Screen.WINDOW_HEIGHT-getHeight()) {
+        if (Screen.getRoomHandler().isEnemiesEmpty()) {
+            if ((getY() < Screen.WINDOW_HEIGHT-getHeight() || (RoomHandler.getCurrentRoomY() != RoomHandler.getRoomArray().length-1))) {
+                setY(getHardY()+getSpeed());
+            }
+        } else if ((getY() < Screen.WINDOW_HEIGHT-getHeight())) {
             setY(getHardY()+getSpeed());
         }
     }
 
     public void moveRight() {
-        if (getX() < Screen.WINDOW_WIDTH-getWidth()) {
+        if (Screen.getRoomHandler().isEnemiesEmpty()) {
+            if ((getX() < Screen.WINDOW_WIDTH-getWidth() || (RoomHandler.getCurrentRoomX() != RoomHandler.getRoomArray().length-1))) {
+                setX(getHardX()+getSpeed());
+            }
+        } else if ((getX() < Screen.WINDOW_WIDTH-getWidth())) {
             setX(getHardX()+getSpeed());
         }
     }
 
     public void moveLeft() {
-         if (getX() > 0) {
-             setX(getHardX() - getSpeed());
-         }
+        if (Screen.getRoomHandler().isEnemiesEmpty()) {
+            if (getX() > 0 || (RoomHandler.getCurrentRoomX() != 0)) {
+                setX(getHardX()-getSpeed());
+            }
+        } else if (getX() > 0) {
+            setX(getHardX()-getSpeed());
+        }
     }
 
     public int getMaxHealth() {

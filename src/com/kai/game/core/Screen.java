@@ -36,7 +36,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
     //Handles the player.
     private static Player player;
     //Handles level management and enemies.
-    private static LevelHandler levelHandler;
+    private static RoomHandler roomHandler;
     //The death/end screen of the program
     private static DeathScreen deathScreen;
     //The starting screen of the program
@@ -113,9 +113,9 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
             }
         }
 
-        //LevelHandler manages all enemies.
-        if (levelHandler != null) {
-            levelHandler.drawAllRoomContents(g);
+        //RoomHandler manages all enemies.
+        if (roomHandler != null) {
+            roomHandler.drawAllRoomContents(g);
         }
 
         for (GameObject UI: userInterface) {
@@ -141,9 +141,9 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
             environment.updateSceneObjects();
         }
 
-        if (levelHandler != null) {
-            levelHandler.updateEnemies();
-            levelHandler.updateLoot();
+        if (roomHandler != null) {
+            roomHandler.updateEnemies();
+            roomHandler.updateLoot();
         }
 
         if (wasResized) {
@@ -215,8 +215,8 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         if (e == null) {
             e = "null";
         }
-        return new DeathScreen.Death(s, e, getPlayer().getSkills().get(0).getName().replaceAll("Skill", ""), getLevelHandler().getCurrentLevel());
-        //return DeathScreen.createDeath(s, e, getPlayer().getSkills().get(0).getName(), getLevelHandler().getDisplayedLevel());
+        return new DeathScreen.Death(s, e, getPlayer().getSkills().get(0).getName().replaceAll("Skill", ""), getRoomHandler().getCurrentLevel());
+        //return DeathScreen.createDeath(s, e, getPlayer().getSkills().get(0).getName(), getRoomHandler().getDisplayedLevel());
     }
 
     public void animate() {
@@ -240,7 +240,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         state = newState;
         environment = null;
         player = null;
-        levelHandler = null;
+        roomHandler = null;
         deathScreen = null;
         mainMenu = null;
         selectionScreen = null;
@@ -263,10 +263,10 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
                 player = new Player(WINDOW_WIDTH/2,WINDOW_HEIGHT/2, 22, 60);
                 addUpdatable(player);
 
-                levelHandler = new LevelHandler(1);
-                addUpdatable(levelHandler);
+                roomHandler = new RoomHandler(1);
 
 
+                addUpdatable(roomHandler);
                 break;
             case "Death Screen":
                 deathScreen = new DeathScreen();
@@ -295,7 +295,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
         return player;
     }
 
-    public static LevelHandler getLevelHandler() { return levelHandler; }
+    public static RoomHandler getRoomHandler() { return roomHandler; }
 
     public static MainMenu getMainMenu() {
         return mainMenu;

@@ -20,8 +20,8 @@ image: 24 0
 ----
 name: Skillfully Attuned Ring
 rarity: 3
-image: 16 0
-* ShieldSkill
+image: 48 0
+* 1 damage
 * ShieldSkill
 * GreatMineSkill
 = Passed down through countless generations, this ring has magic embedded in every crevice.
@@ -38,4 +38,11 @@ image: 40 0
 * 1 max mines
 * 1 damage
 = Traditionally used by trappers in the fog, these rings are now rare and sought after.
+----
+name: Glistening Greened Ring
+rarity: 1
+image: 56 0
+* 1 max health
+* 1 speed
+= The green makes this practically perfect camouflage!
 ----

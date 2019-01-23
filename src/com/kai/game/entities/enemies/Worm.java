@@ -77,6 +77,6 @@ public class Worm extends Enemy {
 
     @Override
     public void onDeath() {
-        Screen.getLevelHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 10, false));
+        Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 10, true, true));
     }
 }

@@ -32,8 +32,21 @@ public class ItemLoader {
         3 - Rare
         4 - Mystic
 
+    Stats:
+        * max mines
+            - The max amount of mines you can have placed at once
+        * range
+            - Radius of range circle = range * 25
+        * speed
+            - How many pixels the player can move per frame
+        * damage
+            - How much damage one mine does to an enemy
+        * defense
+            - Damage taken = enemy damage * ((100 - player defense) / 100.0)
+        * max health
+            - Whenever max life is gained/lost, gain/lose that much current life
+
     Format of an item (have any number of stats/skills/special keywords):
-    You can find the stat names in game/entities/StatManager.java
     You can find the skill names in game/skills
 
         name: [item name]

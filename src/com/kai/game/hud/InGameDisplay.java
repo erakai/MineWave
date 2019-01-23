@@ -65,7 +65,7 @@ public class InGameDisplay extends GameObject implements Updatable {
             g.setFont(Parameters.ORIGINAL_FONT);
             g.setColor(Color.CYAN);
             g.setFont(new MFont(1.4));
-            g.drawString("Level: " + currentLevelToDraw, getScaledX(27), getScaledY(78));
+            g.drawString("Room Difficulty: " + currentLevelToDraw, getScaledX(27), getScaledY(78));
 
             //Drawing the player skills:
             for (int i = 0; i < skillsToDraw.length; i++) {
@@ -152,7 +152,7 @@ public class InGameDisplay extends GameObject implements Updatable {
             maxHealthToDraw = getPlayer().getMaxHealth();
             minesToDraw = getPlayer().getCurrentMines();
             maxMinesToDraw = getPlayer().getMaxMines();
-            currentLevelToDraw = Screen.getLevelHandler().getCurrentLevel();
+            currentLevelToDraw = Screen.getRoomHandler().getCurrentLevel();
             defenseToDraw = getPlayer().getDefense();
             speedToDraw = getPlayer().getSpeed();
             rangeToDraw = getPlayer().getSmallPlayerRange();

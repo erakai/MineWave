@@ -1,13 +1,9 @@
 package com.kai.game.entities.bosses;
 
-import com.kai.game.core.LevelHandler;
-import com.kai.game.core.Screen;
+import com.kai.game.core.RoomHandler;
 import com.kai.game.entities.Projectile;
 import com.kai.game.entities.enemies.Bat;
-import com.kai.game.util.Parameters;
 import com.kai.game.util.ResourceManager;
-
-import java.awt.*;
 
 public class Vampire extends Boss {
 
@@ -132,7 +128,7 @@ public class Vampire extends Boss {
     @Override
     public void spawnMinion() {
         for (int i = 0; i < 5; i++) {
-            spawn(new Bat(LevelHandler.getXAwayFromPlayer(200), LevelHandler.getYAwayFromPlayer(200)));
+            spawn(new Bat(RoomHandler.getXAwayFromPlayer(200), RoomHandler.getYAwayFromPlayer(200)));
         }
     }
 
