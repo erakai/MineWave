@@ -124,10 +124,11 @@ public class Input {
                     }
                     break;
                 case "Running":
-                    Screen.getPlayer().createProjectile(mouseX, mouseY);
-
-                    for (LootInstance l: Screen.getLevelHandler().getRoomLoot()) {
-                        l.testClicked(Screen.getPlayer(), mouseX, mouseY);
+                    if (!Screen.getPlayer().checkRingSwap(mouseX, mouseY)) {
+                        Screen.getPlayer().createProjectile(mouseX, mouseY);
+                        for (LootInstance l : Screen.getLevelHandler().getRoomLoot()) {
+                            l.testClicked(Screen.getPlayer(), mouseX, mouseY);
+                        }
                     }
                     break;
                 case "Death Screen":
@@ -178,8 +179,10 @@ public class Input {
                 }
 
                 for (LootInstance l: Screen.getLevelHandler().getRoomLoot()) {
-                    for (Item item: l.getContainedItems()) {
-                        item.checkHover(currentMouseX, currentMouseY);
+                    if (l.isDisplayContents()) {
+                        for (Item item : l.getContainedItems()) {
+                            item.checkHover(currentMouseX, currentMouseY);
+                        }
                     }
                 }
                 break;

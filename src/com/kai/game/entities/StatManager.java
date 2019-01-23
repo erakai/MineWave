@@ -9,7 +9,7 @@ public class StatManager {
     StatManager should house all stats of the attached player.
 
     = Stats =
-        * max nines
+        * max mines
             - The max amount of mines you can have placed at once
             - Affects things like combo
             - Starts at 7

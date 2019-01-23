@@ -35,7 +35,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         this.dir = "up";
         currentMines = 0;
 
-        playerStats = new StatManager(this, 20, 5, 5, 4, 13, 7);
+        playerStats = new StatManager(this, 20, 5, 5, 4, 12, 7);
 
         skills = new ArrayList<>();
         equipSkill(SelectionScreen.getCurrentlySelected(this));
@@ -55,15 +55,40 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     }
 
     public Item equipRing(int index, Item item) {
-        item.onEquip(this);
         if (rings[index] != null) {
             Item oldRing = rings[index];
             oldRing.onUnEquip(this);
+            item.onEquip(this);
             rings[index] = item;
             return oldRing;
         }
+        item.onEquip(this);
         rings[index] = item;
         return null;
+    }
+
+    public boolean checkRingSwap(int mouseX, int mouseY) {
+        if (rings[0] != null && rings[1] != null) {
+            if (rings[0].distanceTo(mouseX, mouseY) <= 35 || rings[1].distanceTo(mouseX, mouseY) <=35) {
+                Item temp = rings[0];
+                rings[0] = rings[1];
+                rings[1] = temp;
+                return true;
+            }
+        } else if (rings[0] != null) {
+            if (rings[0].distanceTo(mouseX, mouseY) <= 35) {
+                rings[1] = rings[0];
+                rings[0] = null;
+                return true;
+            }
+        } else if (rings[1] != null) {
+            if (rings[1].distanceTo(mouseX, mouseY) <=35) {
+                rings[0] = rings[1];
+                rings[1] = null;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void createProjectile(int targetX, int targetY) {

@@ -53,7 +53,6 @@ public class Item extends GameObject implements ItemBehavior {
         STATS
         BEHAVIOR DESCRIPTIONS
          */
-
         g.setFont(new MFont(1.2));
 
         int stringHeight = g.getFontMetrics().getAscent() + 5;
@@ -73,7 +72,7 @@ public class Item extends GameObject implements ItemBehavior {
         int i = 1;
 
         g.setColor(Color.WHITE);
-        g.drawLine(nameText.getX(),nameText.getY() + (stringHeight * (2 + i)) , stringWidth-5, nameText.getY() + (stringHeight * (2 + i) - 5));
+        g.drawLine(nameText.getX(),nameText.getY() + (stringHeight * (2 + i)) - 5 , stringWidth-5, nameText.getY() + (stringHeight * (2 + i) - 5));
         i++;
 
         g.setFont(new MFont(1.2));
@@ -126,8 +125,9 @@ public class Item extends GameObject implements ItemBehavior {
     }
 
     public void checkHover(int mX, int mY) {
-        hoveredOver = distanceTo(mX, mY) <= (getWidth()+10)/2;
+        hoveredOver = (distanceTo(mX, mY) <= (getWidth()+10)/2);
     }
+
 
     @Override
     public void onEquip(Player owner) {

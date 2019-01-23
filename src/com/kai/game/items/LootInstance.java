@@ -10,9 +10,7 @@ import com.kai.game.util.ResourceManager;
 
 import java.awt.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
 
 public class LootInstance extends GameObject {
@@ -35,7 +33,7 @@ public class LootInstance extends GameObject {
         this.lootInstanceContents = ResourceManager.getImage("LootInstanceContents.png");
         timer = new MTimer();
 
-        duration = 10;
+        duration = 15;
 
         containedItems = new ArrayList<>();
         populateLoot();
@@ -47,32 +45,39 @@ public class LootInstance extends GameObject {
     }
 
     public void testClicked(Player owner, int mouseX, int mouseY) {
-        for (int i = 0;i < containedItems.size(); i++) {
-            if (containedItems.get(i).distanceTo(mouseX, mouseY) <= 35) {
-                Item newEquip = containedItems.get(i);
-                int index = (int)(Math.random() * 2);
-                Item oldEquip = null;
-                if (owner.getRings()[index] != null) {
-                    oldEquip = owner.getRings()[index];
-                }
-                owner.equipRing(index, newEquip);
-                if (oldEquip != null) {
-                    containedItems.set(i, oldEquip);
-                } else {
-                    containedItems.remove(i);
+        if (displayContents) {
+            for (int i = 0; i < containedItems.size(); i++) {
+                if (containedItems.get(i).distanceTo(mouseX, mouseY) <= 35) {
+                    Item newEquip = containedItems.get(i);
+                    int index = 0;
+                    if (owner.getRings()[1] == null) {
+                        index = 1;
+                    }
+                    Item oldEquip = owner.equipRing(index, newEquip);
+                    if (oldEquip != null) {
+                        containedItems.set(i, oldEquip);
+                    } else {
+                        containedItems.remove(i);
+                        i--;
+                    }
                 }
             }
         }
     }
 
     private MPoint contentPoint = new MPoint(968, 518);
-    private MPoint contentLength = new MPoint(50, 34);
+    private MPoint contentLength = new MPoint(50, 22);
 
     @Override
     public void drawMe(Graphics g) {
         g.drawImage(getSelfImage(), getX(), getY(), null);
         if (displayContents) {
             drawContents(g);
+        } else {
+            for (Item item: containedItems) {
+                item.setX(-100);
+                item.setY(-100);
+            }
         }
     }
 
@@ -80,7 +85,10 @@ public class LootInstance extends GameObject {
         g.drawImage(lootInstanceContents, contentPoint.getX(), contentPoint.getY(), null);
         for (int i = 0; i < containedItems.size(); i++) {
             Item item = containedItems.get(i);
-            item.setX(contentPoint.getX() + (21 + (i* contentLength.getX())));
+            Item.setRarityColor(item.getRarity(), g);
+            g.fillRect(contentPoint.getX() + (18 + (i* contentLength.getX())), contentPoint.getY() + (contentLength.getY() - 4), 46, 46);
+            g.setColor(Color.RED);
+            item.setX(contentPoint.getX() + (22 + (i* contentLength.getX())));
             item.setY(contentPoint.getY() + (contentLength.getY()));
             item.drawMe(g);
         }
@@ -104,6 +112,7 @@ public class LootInstance extends GameObject {
         }
         if (randomNumber(10000) <= Parameters.MYSTIC_CHANCE * 10000 * lootChanceMultiplier) {
             duration *= 2;
+            setSelf(ResourceManager.getImage("chestmystic.png", getWidth(), getHeight()));
             addItemToLoot(getRandomItem(4));
         }
     }
@@ -114,12 +123,13 @@ public class LootInstance extends GameObject {
 
     private Item getRandomItem(int rarity) {
         HashMap<String, Item> allPossibleItems = ItemLoader.getAllItems();
-        for (String name: allPossibleItems.keySet()) {
-            if (allPossibleItems.get(name).getRarity() == rarity) {
-                return ItemLoader.getItem(name);
-            }
-        }
-        return null;
+        Item item;
+        do {
+            Object[] keys = allPossibleItems.keySet().toArray();
+            String name =  (String)keys[new Random().nextInt(keys.length)];
+            item = ItemLoader.getItem(name);
+        } while (!(item.getRarity() == rarity));
+        return item;
     }
 
     private int randomNumber(int range) {
@@ -136,5 +146,9 @@ public class LootInstance extends GameObject {
 
     public int getDuration() {
         return duration;
+    }
+
+    public boolean isDisplayContents() {
+        return displayContents;
     }
 }

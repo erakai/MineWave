@@ -97,7 +97,7 @@ public class ItemLoader {
             if (itemName != "null" && itemRarity != -1 && itemDescription != "null") {
                 Item newItem = new Item(itemName, itemRarity, itemDescription, itemStats, possibleBehaviors, imageCoordinates);
                 items.put(itemName, newItem);
-                System.out.println(newItem);
+                //System.out.println(newItem);
             }
         }
     }
@@ -112,7 +112,9 @@ public class ItemLoader {
                     owner.SHOOT = true;
                 }
                 public void onUnEquip(Player owner) {
-                    owner.SHOOT = false;
+                    if (!(owner.getRings()[0].getName().equals("Speckled Chain") && owner.getRings()[1].getName().equals("Speckled Chain"))) {
+                        owner.SHOOT = false;
+                    }
                 }
                 public String getDescription() {
                     return "Mines are now bullets!";

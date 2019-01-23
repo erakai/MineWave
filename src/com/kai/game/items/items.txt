@@ -29,6 +29,13 @@ image: 16 0
 name: Ring of the Wayfarer
 rarity: 1
 image: 32 0
-* 5 range
+* 3 range
 = Used by scouts searching for their destiny, this piece of jewelry extends the sight of the wearer.
+----
+name: Trapper's Ring
+rarity: 2
+image: 40 0
+* 1 max mines
+* 1 damage
+= Traditionally used by trappers in the fog, these rings are now rare and sought after.
 ----

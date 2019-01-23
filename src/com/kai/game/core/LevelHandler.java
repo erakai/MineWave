@@ -53,9 +53,7 @@ public class LevelHandler implements Updatable {
         for (Enemy e: enemies) {
             e.update();
             if ((int)e.getHealth() < 1) {
-                if (e instanceof SpecialDeath) {
-                    ((SpecialDeath) e).onDeath();
-                }
+                ((SpecialDeath) e).onDeath();
                 toRemove.add(e);
             }
             Screen.getEnvironment().sceneCollisions(e);
@@ -471,6 +469,11 @@ public class LevelHandler implements Updatable {
                 }
                 setHealth(0);
             }
+        }
+
+        @Override
+        public void onDeath() {
+
         }
     }
 

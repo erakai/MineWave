@@ -7,6 +7,8 @@ import com.kai.game.util.ResourceManager;
 import com.kai.game.core.Screen;
 
 public class InsectNest extends Enemy  {
+    private static final int MAX_SPAWNED_INSECTS = 5;
+    private int spawnedInsects = 0;
 
     public InsectNest(int x, int y) {
         super(ResourceManager.getImage("insectNest.png"),
@@ -20,6 +22,10 @@ public class InsectNest extends Enemy  {
     public void chase(int targetX, int targetY) {
         if (getDamageTick() >= getMaxDamageTick()) {
             spawn(new Insect(getX() + (getWidth()/2), getY() + (getHeight()/2)));
+            spawnedInsects++;
+            if (spawnedInsects >= MAX_SPAWNED_INSECTS) {
+                setHealth(0);
+            }
             setDamageTick(0);
         }
     }
