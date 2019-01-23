@@ -1,6 +1,7 @@
 package com.kai.game.entities.enemies;
 
 import com.kai.game.core.Screen;
+import com.kai.game.items.LootInstance;
 import com.kai.game.util.ResourceManager;
 
 import java.awt.*;
@@ -16,4 +17,12 @@ public class Bat extends Enemy {
         defaultMoveTowards(targetX, targetY);
     }
 
+    @Override
+    public void onDeath() {
+        if (Screen.getRoomHandler().getCurrentLevel() > 16) {
+            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 0.5,false, true));
+        } else {
+            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 0.5, true, true));
+        }
+    }
 }

@@ -46,3 +46,10 @@ image: 56 0
 * 1 speed
 = The green makes this practically perfect camouflage!
 ----
+name: COMBO-BREAKER
+rarity: 4
+image: 0 8
+* 12 max mines
+* ComboSkill
+= COMBOOOOOOOOOOO--BREAKkERRR-RRRRRRRRRRRR
+----

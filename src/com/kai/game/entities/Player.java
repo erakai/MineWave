@@ -35,7 +35,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         this.dir = "up";
         currentMines = 0;
 
-        playerStats = new StatManager(this, 20, 5, 5, 4, 12, 7);
+        playerStats = new StatManager(this, 20, 5, 5, 4, 12, 4);
 
         skills = new ArrayList<>();
         equipSkill(SelectionScreen.getCurrentlySelected(this));
@@ -45,8 +45,6 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
         rings = new Item[2];
 
-        //equipRing(0, ItemLoader.getItem("Skillfully Attuned Ring"));
-        //equipRing(1, ItemLoader.getItem("Speckled Chain"));
     }
 
     public void takeDamage(double amount) {
