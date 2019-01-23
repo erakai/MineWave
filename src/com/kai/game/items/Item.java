@@ -21,8 +21,10 @@ public class Item extends GameObject implements ItemBehavior {
 
     private boolean hoveredOver = false;
 
+    private static MPoint rectD = new MPoint(40, 40);
+
     public Item(String name, int rarity, String description, HashMap<String, Integer> stats, List<ItemBehavior> behaviors, int[] imageCoordinates) {
-        super(ResourceManager.getItemImage(imageCoordinates[0], imageCoordinates[1], 40, 40), -50, -50, 40, 40);
+        super(ResourceManager.getItemImage(imageCoordinates[0], imageCoordinates[1], rectD.getX(), rectD.getY()), -50, -50, 40, 40);
         this.name = name;
         this.imageCoordinates = imageCoordinates;
         this.stats = stats;

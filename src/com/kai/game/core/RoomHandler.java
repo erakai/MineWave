@@ -24,6 +24,13 @@ public class RoomHandler implements Updatable {
         enterRoom(0, 0);
     }
 
+    public void updateSelfImage() {
+        for (LootInstance l: getCurrentRoom().getRoomLoot()) {
+            l.updateSelfImage();
+            l.updateImages();
+        }
+    }
+
     public static RoomInstance getCurrentRoom() {
         return rooms[currentRoomY][currentRoomX];
     }
@@ -47,6 +54,7 @@ public class RoomHandler implements Updatable {
         }
         currentRoomX = nX;
         currentRoomY = nY;
+        getCurrentRoom().entered();
     }
 
     void drawAllRoomContents(Graphics g) {

@@ -159,6 +159,9 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
             if (environment != null) {
                 environment.updateSelfImage();
             }
+            if (roomHandler != null) {
+                roomHandler.updateSelfImage();
+            }
             wasResized = false;
         }
 

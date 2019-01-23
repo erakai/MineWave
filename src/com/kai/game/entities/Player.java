@@ -45,6 +45,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
         rings = new Item[2];
 
+
     }
 
     public void takeDamage(double amount) {

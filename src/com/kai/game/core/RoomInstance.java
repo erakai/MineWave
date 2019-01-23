@@ -45,7 +45,11 @@ public class RoomInstance implements Updatable {
         rightArrow = ResourceManager.rotate(upArrow, 90);
 
         generateLevel(roomLevel);
+    }
+
+    public void entered() {
         updateAvailableDirections();
+
     }
 
     public void drawRoom(Graphics g) {

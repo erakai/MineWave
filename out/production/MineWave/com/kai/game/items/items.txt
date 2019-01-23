@@ -12,17 +12,16 @@ image: 8 0
 ----
 name: Speckled Chain
 rarity: 4
-image: 24 0
+image: 16 0
 ! SHOOT
 * 5 max health
-* -1 speed
 = Twisted and rusted from use, this chain seems to belong more in ancient history then the present.
 ----
 name: Skillfully Attuned Ring
 rarity: 3
 image: 48 0
 * 1 damage
-* ShieldSkill
+* GreatMineSkill
 * GreatMineSkill
 = Passed down through countless generations, this ring has magic embedded in every crevice.
 ----
@@ -52,4 +51,11 @@ image: 0 8
 * 12 max mines
 * ComboSkill
 = COMBOOOOOOOOOOO--BREAKkERRR-RRRRRRRRRRRR
+----
+name: Battleforged Steel Ring
+rarity: 3
+image: 24 0
+* 35 defense
+* ShieldSkill
+= Hardened through years of use, this ring will turn even the weakest of men into hardened veterans.
 ----

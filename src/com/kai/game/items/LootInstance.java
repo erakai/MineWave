@@ -62,6 +62,7 @@ public class LootInstance extends GameObject {
 
     private MPoint contentPoint = new MPoint(968, 518);
     private MPoint contentLength = new MPoint(50, 22);
+    private MPoint contentRectD = new MPoint(46, 46);
 
     @Override
     public void drawMe(Graphics g) {
@@ -76,15 +77,19 @@ public class LootInstance extends GameObject {
         }
     }
 
+    private MPoint rectL = new MPoint(232, 82);
+    public void updateImages() {
+        this.lootInstanceContents = ResourceManager.getImage("LootInstanceContents.png", rectL.getX(), rectL.getY());
+    }
+
     private void drawContents(Graphics g) {
         g.drawImage(lootInstanceContents, contentPoint.getX(), contentPoint.getY(), null);
         for (int i = 0; i < containedItems.size(); i++) {
             Item item = containedItems.get(i);
             Item.setRarityColor(item.getRarity(), g);
-            g.fillRect(contentPoint.getX() + (18 + (i* contentLength.getX())), contentPoint.getY() + (contentLength.getY() - 4), 46, 46);
-            g.setColor(Color.RED);
-            item.setX(contentPoint.getX() + (22 + (i* contentLength.getX())));
-            item.setY(contentPoint.getY() + (contentLength.getY()));
+            g.fillRect(contentPoint.getX() + (18 + (i* contentLength.getX())), contentPoint.getY() + (contentLength.getY()), contentRectD.getX(), contentRectD.getY());
+            item.setX(contentPoint.getHardX() + (22 + (i* contentLength.getHardX())));
+            item.setY(contentPoint.getHardY() + (contentLength.getHardY()));
             item.drawMe(g);
         }
     }

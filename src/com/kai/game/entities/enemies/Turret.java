@@ -30,28 +30,28 @@ public class Turret extends ProjectileEnemy {
 
 
         projectiles.add(new Projectile(this, self
-                , getHardX(), getHardY(), 31, 31, 2, getX()-500, getY()-500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getHardX()-500, getHardY()-500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getHardX(), getHardY(), 31, 31, 2, getX()-500,         getY(), getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getHardX()-500,         getHardY(), getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getHardX(), getHardY(), 31, 31, 2, getX()-500, getY()+500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getHardX()-500, getHardY()+500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                ,getHardX(), getHardY(), 31, 31, 2, getX()+500, getY()+500, getRange(), getDamage()));
+                ,getHardX(), getHardY(), 31, 31, 2, getHardX()+500, getHardY()+500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getHardX(), getHardY(), 31, 31, 2, getX()+500,         getY(), getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getHardX()+500,         getHardY(), getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getHardX(), getHardY(), 31, 31, 2, getX()+500, getY()-500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getHardX()+500, getHardY()-500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getHardX(), getHardY(), 31, 31, 2, getX(), getY()-500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2, getHardX(), getHardY()-500, getRange(), getDamage()));
 
         projectiles.add(new Projectile(this, self
-                , getHardX(), getHardY(), 31, 31, 2,         getX(),     getY()+500, getRange(), getDamage()));
+                , getHardX(), getHardY(), 31, 31, 2,         getHardX(),     getHardY()+500, getRange(), getDamage()));
 
     }
 
