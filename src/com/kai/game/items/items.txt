@@ -1,7 +1,7 @@
 name: Starter Ring
 rarity: 1
 image: 0 0
-* 5 defense
+* 15 defense
 = A ring customarily given as a gesture of good faith to any beginner adventurers.
 ----
 name: Wizard's Ring
@@ -15,7 +15,7 @@ rarity: 4
 image: 24 0
 ! SHOOT
 * 5 max health
-* 5 defense
+* -1 speed
 = Twisted and rusted from use, this chain seems to belong more in ancient history then the present.
 ----
 name: Skillfully Attuned Ring
@@ -25,4 +25,10 @@ image: 16 0
 * ShieldSkill
 * GreatMineSkill
 = Passed down through countless generations, this ring has magic embedded in every crevice.
+----
+name: Ring of the Wayfarer
+rarity: 1
+image: 32 0
+* 5 range
+= Used by scouts searching for their destiny, this piece of jewelry extends the sight of the wearer.
 ----
