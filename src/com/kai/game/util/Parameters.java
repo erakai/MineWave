@@ -23,7 +23,7 @@ public class Parameters {
     //The drop chance of items without any boosts
     public static final double COMMON_CHANCE = 0.08;
     public static final double UNCOMMON_CHANCE = 0.03;
-    public static final double RARE_CHANCE = 0.008;
+    public static final double RARE_CHANCE = 0.006;
     public static final double MYSTIC_CHANCE = 0.0025; //0.0025
 
 

@@ -4,7 +4,6 @@ package com.kai.game.util;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.core.Screen;
 import com.kai.game.items.Item;
-import com.kai.game.items.ItemLoader;
 import com.kai.game.items.LootInstance;
 
 import java.awt.*;
@@ -126,7 +125,7 @@ public class Input {
                 case "Running":
                     if (!Screen.getPlayer().checkRingSwap(mouseX, mouseY)) {
                         Screen.getPlayer().createProjectile(mouseX, mouseY);
-                        for (LootInstance l : Screen.getLevelHandler().getRoomLoot()) {
+                        for (LootInstance l : Screen.getRoomHandler().getRoomLoot()) {
                             l.testClicked(Screen.getPlayer(), mouseX, mouseY);
                         }
                     }
@@ -178,7 +177,7 @@ public class Input {
                     }
                 }
 
-                for (LootInstance l: Screen.getLevelHandler().getRoomLoot()) {
+                for (LootInstance l: Screen.getRoomHandler().getRoomLoot()) {
                     if (l.isDisplayContents()) {
                         for (Item item : l.getContainedItems()) {
                             item.checkHover(currentMouseX, currentMouseY);

@@ -1,10 +1,7 @@
 package com.kai.game.entities.enemies;
 
 import com.kai.game.entities.Entity;
-import com.kai.game.entities.SpecialDeath;
-import com.kai.game.core.LevelHandler;
 import com.kai.game.util.ResourceManager;
-import com.kai.game.core.Screen;
 
 public class InsectNest extends Enemy  {
     private static final int MAX_SPAWNED_INSECTS = 5;

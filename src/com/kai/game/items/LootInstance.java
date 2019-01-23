@@ -16,24 +16,19 @@ import java.util.List;
 public class LootInstance extends GameObject {
     //A multiplier of 2 means the drop chances are doubled.
     private double lootChanceMultiplier;
-    //If true, no common items will be dropped.
-    private boolean onlyHighTier;
+    //If true, no common or uncommon items will be dropped.
+    private boolean dropCommons, dropUncommons;
     private List<Item> containedItems;
     private boolean displayContents = false;
 
     private Image lootInstanceContents;
-    private MTimer timer;
 
-    private int duration;
-
-    public LootInstance(int x, int y, double lootChanceMultiplier, boolean onlyHighTier) {
+    public LootInstance(int x, int y, double lootChanceMultiplier, boolean dropCommons, boolean dropUncommons) {
         super(ResourceManager.getImage("chest.png", 48, 32), x, y, 48, 32);
         this.lootChanceMultiplier = lootChanceMultiplier;
-        this.onlyHighTier = onlyHighTier;
+        this.dropCommons = dropCommons;
+        this.dropUncommons = dropUncommons;
         this.lootInstanceContents = ResourceManager.getImage("LootInstanceContents.png");
-        timer = new MTimer();
-
-        duration = 15;
 
         containedItems = new ArrayList<>();
         populateLoot();
@@ -41,7 +36,7 @@ public class LootInstance extends GameObject {
     }
 
     public LootInstance(int x, int y) {
-        this(x, y, 1, false);
+        this(x, y, 1, true, true);
     }
 
     public void testClicked(Player owner, int mouseX, int mouseY) {
@@ -99,19 +94,21 @@ public class LootInstance extends GameObject {
     }
 
     private void populateLoot() {
-        if (!onlyHighTier) {
+        if (dropCommons) {
             if (randomNumber(10000) <= (Parameters.COMMON_CHANCE * 10000 * lootChanceMultiplier)) {
                 addItemToLoot(getRandomItem(1));
             }
         }
-        if (randomNumber(10000) <= (Parameters.UNCOMMON_CHANCE * 10000 * lootChanceMultiplier)) {
-            addItemToLoot(getRandomItem(2));
+        if (dropUncommons) {
+            if (randomNumber(10000) <= (Parameters.UNCOMMON_CHANCE * 10000 * lootChanceMultiplier)) {
+                addItemToLoot(getRandomItem(2));
+            }
         }
         if (randomNumber(10000) <= Parameters.RARE_CHANCE * 10000 * lootChanceMultiplier) {
+            setSelf(ResourceManager.getImage("chestrare.png", getWidth(), getHeight()));
             addItemToLoot(getRandomItem(3));
         }
         if (randomNumber(10000) <= Parameters.MYSTIC_CHANCE * 10000 * lootChanceMultiplier) {
-            duration *= 2;
             setSelf(ResourceManager.getImage("chestmystic.png", getWidth(), getHeight()));
             addItemToLoot(getRandomItem(4));
         }
@@ -138,14 +135,6 @@ public class LootInstance extends GameObject {
 
     public List<Item> getContainedItems() {
         return containedItems;
-    }
-
-    public MTimer getTimer() {
-        return timer;
-    }
-
-    public int getDuration() {
-        return duration;
     }
 
     public boolean isDisplayContents() {

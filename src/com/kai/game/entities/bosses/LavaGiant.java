@@ -1,6 +1,6 @@
 package com.kai.game.entities.bosses;
 
-import com.kai.game.core.LevelHandler;
+import com.kai.game.core.RoomHandler;
 import com.kai.game.core.Screen;
 import com.kai.game.entities.SpecialDeath;
 import com.kai.game.entities.enemies.Lavakut;
@@ -148,7 +148,7 @@ public class LavaGiant extends Boss implements SpecialDeath {
 
     @Override
     public void spawnMinion() {
-        spawn(new Lavakut(LevelHandler.getXAwayFromPlayer(300), LevelHandler.getYAwayFromPlayer(300)));
+        spawn(new Lavakut(RoomHandler.getXAwayFromPlayer(300), RoomHandler.getYAwayFromPlayer(300)));
     }
 
     @Override

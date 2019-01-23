@@ -94,13 +94,13 @@ public class SelectionScreen extends GameObject {
 
         g.setColor(new Color(255, 255, 255));
         g.setFont(new MFont(1.2));
-        g.drawString("Click on a skill to read what it does.", textDrawX.getX(), textDrawY.getY());
-        g.drawString("This skill is activated by pressing E.", textDrawX.getX(), textDrawY2.getY());
-        g.drawString("Have fun!", textDrawX.getX(), textDrawY3.getY());
+        g.drawString("Welcome to MineWave!", textDrawX.getX(), textDrawY.getY());
+        g.drawString("Click on a starter skill to read what it does.", textDrawX.getX(), textDrawY2.getY());
+        g.drawString("This skill is activated by pressing E.", textDrawX.getX(), textDrawY3.getY());
 
         g.drawString("W/A/S/D to move.", textDrawX2.getX(), textDrawY.getY());
         g.drawString("Left click to place a mine.", textDrawX2.getX(), textDrawY2.getY());
-        g.drawString("Max of 7 mines at once.", textDrawX2.getX(), textDrawY3.getY());
+        g.drawString("Have fun!", textDrawX2.getX(), textDrawY3.getY());
 
         if (currentlySelected != null) {
             for (int i = 0; i<currentlySelected.description.length; i++) {

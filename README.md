@@ -32,6 +32,8 @@ Wave-based game with enemies progressing in difficulty, where the player must su
 
 ![](showcase/wormboss.png)
 
+![](showcase/gameplay.png)
+
 ![](showcase/lavaboss.png)
 
 ![](showcase/deathprompt.png)

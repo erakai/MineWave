@@ -148,6 +148,6 @@ public abstract class Boss extends ProjectileEnemy {
 
     @Override
     public void onDeath() {
-        Screen.getLevelHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 20, true));
+        Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 80, false, false));
     }
 }

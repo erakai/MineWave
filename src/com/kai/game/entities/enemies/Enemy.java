@@ -1,6 +1,6 @@
 package com.kai.game.entities.enemies;
 
-import com.kai.game.core.LevelHandler;
+import com.kai.game.core.RoomHandler;
 import com.kai.game.entities.Entity;
 import com.kai.game.core.Screen;
 import com.kai.game.entities.SpecialDeath;
@@ -61,7 +61,7 @@ public abstract class Enemy extends Entity implements SpecialDeath {
     }
 
     protected void spawn(Enemy e) {
-        LevelHandler.addEnemy(e);
+        RoomHandler.addEnemy(e);
     }
 
     protected void spawn(SceneObject so) {
@@ -139,6 +139,10 @@ public abstract class Enemy extends Entity implements SpecialDeath {
 
     @Override
     public void onDeath() {
-        Screen.getLevelHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY()));
+        if (Screen.getRoomHandler().getCurrentLevel() > 16) {
+            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 1,false, true));
+        } else {
+            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY()));
+        }
     }
 }
