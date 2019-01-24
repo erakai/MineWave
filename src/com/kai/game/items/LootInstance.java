@@ -87,7 +87,7 @@ public class LootInstance extends GameObject {
         for (int i = 0; i < containedItems.size(); i++) {
             Item item = containedItems.get(i);
             Item.setRarityColor(item.getRarity(), g);
-            g.fillRect(contentPoint.getX() + (18 + (i* contentLength.getX())), contentPoint.getY() + (contentLength.getY()), contentRectD.getX(), contentRectD.getY());
+            g.fillRect(contentPoint.getX() + (18 + (i* contentLength.getX())), contentPoint.getY() + (contentLength.getY()-4), contentRectD.getX(), contentRectD.getY());
             item.setX(contentPoint.getHardX() + (22 + (i* contentLength.getHardX())));
             item.setY(contentPoint.getHardY() + (contentLength.getHardY()));
             item.drawMe(g);

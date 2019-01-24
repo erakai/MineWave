@@ -59,3 +59,10 @@ image: 24 0
 * ShieldSkill
 = Hardened through years of use, this ring will turn even the weakest of men into hardened veterans.
 ----
+name: Multiplicity
+rarity: 4
+image: 8 8
+* 2 mines placed
+* 1 max mines
+= Why do something once when you can do it more than once?
+----

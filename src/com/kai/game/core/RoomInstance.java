@@ -31,9 +31,6 @@ public class RoomInstance implements Updatable {
 
     public RoomInstance(int roomLevel) {
         //TODO: Link each room instance to it's own environment.
-        Screen.getEnvironment().clearAllSceneObjects();
-        Screen.getPlayer().removeAllMines();
-
         enemies = new ArrayList<>();
         roomLoot = new ArrayList<>();
         toAddQueue = new ArrayList<>();
@@ -49,7 +46,8 @@ public class RoomInstance implements Updatable {
 
     public void entered() {
         updateAvailableDirections();
-
+        Screen.getEnvironment().clearAllSceneObjects();
+        Screen.getPlayer().removeAllMines();
     }
 
     public void drawRoom(Graphics g) {

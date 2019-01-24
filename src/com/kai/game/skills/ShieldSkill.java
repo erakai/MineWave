@@ -9,7 +9,7 @@ public class ShieldSkill extends Skill {
         super("ShieldSkill", owner, ResourceManager.getImage("ShieldImage.png", Skill.SKILL_SIZE.getWidth(), Skill.SKILL_SIZE.getHeight()), 6,
                 new String[] {
                         "Shield: 6 second cooldown.",
-                        "Creates a protective barrier of mines around the player.",
+                        "Places up to 6 mines around the player.",
                 });
     }
 

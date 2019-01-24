@@ -82,7 +82,11 @@ public class Item extends GameObject implements ItemBehavior {
 
         for (String stat: stats.keySet()) {
             String properStat = stat.substring(0, 1).toUpperCase() + stat.substring(1);
-            g.drawString(properStat + ": " + stats.get(stat), nameText.getX(), nameText.getY() + (stringHeight * (2+i)));
+            if (stats.get(stat) > -1) {
+                g.drawString(properStat + ": +" + stats.get(stat), nameText.getX(), nameText.getY() + (stringHeight * (2+i)));
+            } else {
+                g.drawString(properStat + ": " + stats.get(stat), nameText.getX(), nameText.getY() + (stringHeight * (2 + i)));
+            }
             i++;
         }
 

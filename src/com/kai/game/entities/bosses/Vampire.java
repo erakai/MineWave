@@ -115,11 +115,11 @@ public class Vampire extends Boss {
                     //Switching to rage phase.
                     nextStage();
 
-                    maxSpawnTick *= 1.5;
+                    maxSpawnTick *= 1.3;
                     leaveInvincibility();
                     setSpeed(2);
                     PROJECTILES_TO_SHOOT = 4;
-                    setAttacksPerSecond(2);
+                    setAttacksPerSecond(1.8);
                 }
                 break;
         }

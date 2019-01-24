@@ -43,6 +43,7 @@ public class StatManager {
         stats.put("speed", startingSpeed);
         stats.put("range", startingRange);
         stats.put("max mines", startingMaxMines);
+        stats.put("mines placed", 1);
     }
 
     public void increaseStat(String stat, int amount) {

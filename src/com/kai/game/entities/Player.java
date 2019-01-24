@@ -45,7 +45,6 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
         rings = new Item[2];
 
-
     }
 
     public void takeDamage(double amount) {
@@ -102,27 +101,31 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     public int currentShotTick, maxShotTick;
     public void createProjectile(int targetX, int targetY, boolean ignoreRange) {
-        if (ignoreRange) {
-            if (currentMines < getMaxMines()) {
-                currentMines++;
-                if (!SHOOT) {
-                    projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
-                            (int) (targetX - (MINE_SIZE.getHardWidth() / 2.0)), (targetY - (MINE_SIZE.getHardHeight() / 2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
-                } else {
-                    if (currentShotTick > maxShotTick) {
-                        currentShotTick = 0;
-                        //Shooting has a farther range than placing mines
-                        Projectile p = new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
-                                getX() + getWidth() / 2 - 12, getY() + getHeight() / 2 - 12, MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 8, targetX, targetY, 1200, getPlayerDamage());
-                        p.updateTarget();
-                        projectiles.add(p);
+        for (int i = 0; i < getStats().get("mines placed"); i++) {
+            targetX = targetX + (i * (int)(Math.random() * 17 - 8) + (5 * (int)(Math.random() * 3 - 1)));
+            targetY = targetY + (i * (int)(Math.random() * 17 - 8) + (5 * (int)(Math.random() * 3 - 1)));
+            if (ignoreRange) {
+                if (currentMines < getMaxMines()) {
+                    currentMines++;
+                    if (!SHOOT) {
+                        projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
+                                (int) (targetX - (MINE_SIZE.getHardWidth() / 2.0)), (targetY - (MINE_SIZE.getHardHeight() / 2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
                     } else {
-                        currentMines--;
+                        if (currentShotTick > maxShotTick) {
+                            currentShotTick = 0;
+                            //Shooting has a farther range than placing mines
+                            Projectile p = new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
+                                    getX() + getWidth() / 2 - 12, getY() + getHeight() / 2 - 12, MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 8, targetX, targetY, 1200, getPlayerDamage());
+                            p.updateTarget();
+                            projectiles.add(p);
+                        } else {
+                            currentMines--;
+                        }
                     }
                 }
+            } else {
+                createProjectile(targetX, targetY);
             }
-        } else {
-            createProjectile(targetX, targetY);
         }
     }
 
@@ -187,7 +190,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
                 g.fillRect(getX()+ getScaledWidth(1), getY()+ getScaledHeight(28),  getScaledWidth(6), getScaledHeight(24));
                 break;
         }
-        //Drawing range circle (unless using gunSkill)
+        //Drawing range circle (unless shooting)
         if (!SHOOT) {
             g.setColor(new Color(83, 90, 106));
             g.drawOval( (getCenterX() - getPlayerRange()), (getCenterY() - getPlayerRange()), getPlayerRange()*2, getPlayerRange()*2);

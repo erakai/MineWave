@@ -108,14 +108,14 @@ public class InGameDisplay extends GameObject implements Updatable {
                 playerRings[0].setX(firstRingSlot.getHardX());
                 playerRings[0].setY(firstRingSlot.getHardY());
                 Item.setRarityColor(playerRings[0].getRarity(), g);
-                g.fillRect(ringSlotOne.getTopLeft().getX(), ringSlotOne.getTopLeft().getY(), ringSlotOne.getWidth(), ringSlotOne.getHeight()+3);
+                g.fillRect(ringSlotOne.getTopLeft().getX(), ringSlotOne.getTopLeft().getY(), ringSlotOne.getWidth(), ringSlotOne.getHeight());
                 playerRings[0].drawMe(g);
             }
             if (playerRings[1] != null) {
                 playerRings[1].setX(secondRingSlot.getHardX());
                 playerRings[1].setY(secondRingSlot.getHardY());
                 Item.setRarityColor(playerRings[1].getRarity(), g);
-                g.fillRect(ringSlotTwo.getTopLeft().getX(), ringSlotTwo.getTopLeft().getY(), ringSlotTwo.getWidth(), ringSlotTwo.getHeight()+3);
+                g.fillRect(ringSlotTwo.getTopLeft().getX(), ringSlotTwo.getTopLeft().getY(), ringSlotTwo.getWidth(), ringSlotTwo.getHeight());
                 playerRings[1].drawMe(g);
             }
         }
