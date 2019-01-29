@@ -44,13 +44,15 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         removeProjectileQueue = new ArrayList<>();
 
         rings = new Item[2];
-
+        equipRing(0, ItemLoader.getItem("Rejuvenation Ring"));
     }
 
     public void takeDamage(double amount) {
         //  - Damage taken = enemy damage * ((100 - player defense) / 100.0)
         super.takeDamage(amount * ((100-getDefense())/ 100.0));
     }
+
+
 
     public Item equipRing(int index, Item item) {
         if (rings[index] != null) {
@@ -125,6 +127,10 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
                 }
             } else {
                 createProjectile(targetX, targetY);
+            }
+
+            if (i < getStats().get("mines placed")-1) {
+                currentShotTick = 1000;
             }
         }
     }
@@ -363,6 +369,8 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     }
 
     public int getDefense() { return playerStats.getStat("defense"); }
+
+
 
 
 }

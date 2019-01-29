@@ -44,6 +44,7 @@ public class StatManager {
         stats.put("range", startingRange);
         stats.put("max mines", startingMaxMines);
         stats.put("mines placed", 1);
+        stats.put("life on kill", 0);
     }
 
     public void increaseStat(String stat, int amount) {

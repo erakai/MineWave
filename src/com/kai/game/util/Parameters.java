@@ -25,6 +25,6 @@ public class Parameters {
     public static final double UNCOMMON_CHANCE = 0.03; // 3.0%
     public static final double RARE_CHANCE = 0.006; // 0.6%
     public static final double MYSTIC_CHANCE = 0.0025; // 0.25%
-
+    public static final double TWISTED_CHANCE = 0.0005; //0.05%
 
 }

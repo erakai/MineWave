@@ -8,7 +8,7 @@ import com.kai.game.util.ResourceManager;
 public class Vampire extends Boss {
 
     private static final int PROJECTILE_VARIANCE = 200;
-    private static int PROJECTILES_TO_SHOOT = 3;
+    private int PROJECTILES_TO_SHOOT = 3;
 
 
     public Vampire(int x, int y) {

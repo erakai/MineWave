@@ -186,6 +186,20 @@ Changelog:
         - Fixed turrets not shooting projectiles correctly when the screen was resized
         - New Ring
 
+    1/24/19:
+        - Multiplicity will now interact properly with Speckled Chain
+        - New Common Ring
+
+    1/25/19:
+        - Fixed an issue where vampire would buff itself so hard it lasted between runs
+        - New Rarity
+        - New very balanced Ring
+
+    1/28/19:
+        - Fixed life on kill
+        - Added Rejuvenation Ring
+        - Added HealSkill (a little op atm)
+
 Possible way to have effects:
     have effect (implements updatable) class that takes in an entity, duration, and effect type
     and has methods to modify the values but saves og values
@@ -201,9 +215,7 @@ Future Enemy Possibilities:
     - Buzzsaws/lasers/Something to restrict movement.
 
 Future:
-    - Items
     - Traits
-    - Stats
     - More things to chose from when creating your character
     - Similarly to Ambush, go through rooms and have a map
     - More Bosses

@@ -108,6 +108,8 @@ public class Item extends GameObject implements ItemBehavior {
                 return "Rare";
             case 4:
                 return "Mystic";
+            case 5:
+                return "Twisted";
             default:
                 return null;
         }
@@ -127,6 +129,9 @@ public class Item extends GameObject implements ItemBehavior {
             case 4:
                 g.setColor(Color.RED);
                 break;
+            case 5:
+                g.setColor(new Color(183, 45, 116));
+                break;
         }
     }
 
@@ -140,7 +145,11 @@ public class Item extends GameObject implements ItemBehavior {
         for (String stat: getStats().keySet()) {
             owner.increaseStat(stat, stats.get(stat));
             if (stat.equals("max health")) {
-                owner.heal(stats.get(stat));
+                owner.setMaxHealth(owner.getStats().get(stat));
+                owner.setHealth(owner.getHealth() + (stats.get(stat)));
+                if (owner.getHealth() < 1) {
+                    owner.setHealth(1);
+                }
             }
         }
         for (ItemBehavior b: behaviors) {
@@ -156,7 +165,8 @@ public class Item extends GameObject implements ItemBehavior {
         for (String stat: getStats().keySet()) {
             owner.decreaseStat(stat, stats.get(stat));
             if (stat.equals("max health")) {
-                owner.takeDamage(stats.get(stat));
+                owner.setMaxHealth(owner.getStats().get(stat));
+                owner.setHealth(owner.getHealth() - stats.get(stat));
                 if (owner.getHealth() < 1) {
                     owner.setHealth(1);
                     //TODO: This could be abused. Fix.

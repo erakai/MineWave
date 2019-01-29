@@ -266,7 +266,7 @@ public class Screen extends JPanel implements KeyListener, MouseListener {
                 player = new Player(WINDOW_WIDTH/2,WINDOW_HEIGHT/2, 22, 60);
                 addUpdatable(player);
 
-                roomHandler = new RoomHandler(1);
+                roomHandler = new RoomHandler(0);
 
 
                 addUpdatable(roomHandler);

@@ -14,8 +14,11 @@ public abstract class Skill {
     private Entity owner;
     private Image selfImage;
 
+    //TODO: Add a HUD that shows the description of the skill when the skill is hovered over in the hot bar.
+
     public String[] description;
 
+    //TODO: Instead of a cooldown, make it so you have to kill x enemies to recharge a skill (to balance out heal).
     private int cooldown;
 
     private long lastUsed;
@@ -67,6 +70,8 @@ public abstract class Skill {
                 return new ComboSkill(p);
             case "GreatMineSkill":
                 return new GreatMineSkill(p);
+            case "HealSkill":
+                return new HealSkill(p);
             default:
                 return null;
         }

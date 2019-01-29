@@ -20,7 +20,7 @@ public class RoomHandler implements Updatable {
         RoomHandler.currentLevel = startingLevel;
         rand = new Random();
         rooms = new RoomInstance[50][50];
-        currentLevel = 0;
+        currentLevel = startingLevel;
         enterRoom(0, 0);
     }
 

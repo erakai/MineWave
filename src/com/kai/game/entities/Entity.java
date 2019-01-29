@@ -10,7 +10,7 @@ import java.awt.*;
 
 public abstract class Entity extends GameObject implements Updatable, DoesCombat {
     private int speed;
-    private final int maxHealth;
+    private int maxHealth;
     private double health;
 
     //TODO: Set up a system where behaviors and stats for entities are not client sided.
@@ -64,6 +64,11 @@ public abstract class Entity extends GameObject implements Updatable, DoesCombat
         } else if (getX() > 0) {
             setX(getHardX()-getSpeed());
         }
+    }
+
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public int getMaxHealth() {

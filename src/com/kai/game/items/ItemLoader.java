@@ -32,7 +32,7 @@ public class ItemLoader {
         3 - Rare
         4 - Mystic
 
-    Stats:
+    Stats (view ALL stats in game/entities/StatManager.java):
         * max mines
             - The max amount of mines you can have placed at once
         * range
@@ -63,7 +63,8 @@ public class ItemLoader {
         Rare items should be powerful and give a noticeable benefit.
         Any item that grants a skill should be at least rare (maybe uncommon if it gives nothing else)
         Anything that gives a unique effect or passive should be mystic.
-        Mystic rings will typically have a special case in getBehaviorForKeyword().
+        Mystic items will typically have a special case in getBehaviorForKeyword().
+        Twisted items are intentionally overpowered and should not be considered when designing anything.
      */
 
     private static void loadItems() {
@@ -90,15 +91,11 @@ public class ItemLoader {
                         itemStats.put(currentLine.split(parts[1])[1].substring(1), Integer.valueOf(parts[1]));
                     } else {
                         possibleBehaviors.add(new ItemBehavior() {
-                            public void onEquip(Player owner) {
-                                owner.equipSkill(Skill.getFreshSkill(currentLine.substring(2),owner));
-                            }
+                            public void onEquip(Player owner) { owner.equipSkill(Skill.getFreshSkill(currentLine.substring(2),owner)); }
                             public void onUnEquip(Player owner) {
                                 owner.unEquipSkill(currentLine.substring(2));
                             }
-                            public String getDescription() {
-                                return ("Grants " + currentLine.substring(2).replaceAll("Skill", ""));
-                            }
+                            public String getDescription() { return ("Grants " + currentLine.substring(2).replaceAll("Skill", "")); }
                         });
                     }
                 } else if (parts[0].equals("=")) {
@@ -109,6 +106,7 @@ public class ItemLoader {
             }
             if (itemName != "null" && itemRarity != -1 && itemDescription != "null") {
                 Item newItem = new Item(itemName, itemRarity, itemDescription, itemStats, possibleBehaviors, imageCoordinates);
+                System.out.println(newItem);
                 items.put(itemName, newItem);
                 //System.out.println(newItem);
             }

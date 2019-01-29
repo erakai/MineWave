@@ -15,7 +15,7 @@ rarity: 4
 image: 16 0
 ! SHOOT
 * 5 max health
-= Twisted and rusted from use, this chain seems to belong more in ancient history then the present.
+= Twisted and rusted from use, this chain seems to belong more in ancient history than the present.
 ----
 name: Skillfully Attuned Ring
 rarity: 3
@@ -35,7 +35,7 @@ name: Trapper's Ring
 rarity: 2
 image: 40 0
 * 1 max mines
-* 1 damage
+* 1 range
 = Traditionally used by trappers in the fog, these rings are now rare and sought after.
 ----
 name: Glistening Greened Ring
@@ -65,4 +65,24 @@ image: 8 8
 * 2 mines placed
 * 1 max mines
 = Why do something once when you can do it more than once?
+----
+name: Ring of Turquoise Peril
+rarity: 1
+image: 16 8
+* 1 damage
+= A little bit here, a little bit there - it adds up.
+----
+name: One-Eyed Mask
+rarity: 5
+image: 24 8
+* 1 life on kill
+* -5 max health
+=TWhether we wanted it or not, we've stepped into a war with the Cabal on Mars.
+----
+name: Rejuvenation Ring
+rarity: 3
+image: 32 8
+* HealSkill
+* -1 max health
+= Have you ever wondered what it would be like to have a piece of god on your finger?
 ----
