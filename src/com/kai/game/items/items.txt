@@ -46,9 +46,9 @@ image: 56 0
 = The green makes this practically perfect camouflage!
 ----
 name: COMBO-BREAKER
-rarity: 4
+rarity: 3
 image: 0 8
-* 12 max mines
+* 4 max mines
 * ComboSkill
 = COMBOOOOOOOOOOO--BREAKkERRR-RRRRRRRRRRRR
 ----
@@ -77,12 +77,12 @@ rarity: 5
 image: 24 8
 * 1 life on kill
 * -5 max health
-=TWhether we wanted it or not, we've stepped into a war with the Cabal on Mars.
+=Whether we wanted it or not, we've stepped into a war with the Cabal on Mars.
 ----
-name: Rejuvenation Ring
-rarity: 3
+name: Ring of the Sacrificial Lamb
+rarity: 4
 image: 32 8
 * HealSkill
-* -1 max health
+! SACRIFICE
 = Have you ever wondered what it would be like to have a piece of god on your finger?
 ----

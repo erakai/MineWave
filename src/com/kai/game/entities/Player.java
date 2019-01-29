@@ -44,7 +44,6 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         removeProjectileQueue = new ArrayList<>();
 
         rings = new Item[2];
-        equipRing(0, ItemLoader.getItem("Rejuvenation Ring"));
     }
 
     public void takeDamage(double amount) {

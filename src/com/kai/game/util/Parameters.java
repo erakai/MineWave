@@ -12,8 +12,7 @@ public class Parameters {
     //This font is set in /game/hud/MainMenu. Holds the user's system's default font.
     public static Font ORIGINAL_FONT;
 
-    //The information for connecting to Server for leaderboard data
-    //54.193.51.83
+    //The information for connecting to Server for leaderboard data (should be 54.193.51.83 and 8701)
     public static final String SERVER_NAME = "54.193.51.83";
     public static final int SERVER_PORT = 8701;
 
@@ -21,10 +20,11 @@ public class Parameters {
     public static final int TIMEOUT_LENGTH = 1000;
 
     //The drop chance of items without any boosts
-    public static final double COMMON_CHANCE = 0.07; // 7.0%
-    public static final double UNCOMMON_CHANCE = 0.03; // 3.0%
-    public static final double RARE_CHANCE = 0.006; // 0.6%
-    public static final double MYSTIC_CHANCE = 0.0025; // 0.25%
-    public static final double TWISTED_CHANCE = 0.0005; //0.05%
+    public static final double GLOBAL_LOOT_BOOST = 1;
+    public static final double COMMON_CHANCE = 0.07 * GLOBAL_LOOT_BOOST; // 7.0%
+    public static final double UNCOMMON_CHANCE = 0.03 * GLOBAL_LOOT_BOOST; // 3.0%
+    public static final double RARE_CHANCE = 0.006 * GLOBAL_LOOT_BOOST; // 0.6%
+    public static final double MYSTIC_CHANCE = 0.0025 * GLOBAL_LOOT_BOOST; // 0.25%
+    public static final double TWISTED_CHANCE = 0.0005 * GLOBAL_LOOT_BOOST; //0.05%
 
 }

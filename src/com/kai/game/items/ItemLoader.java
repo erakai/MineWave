@@ -63,8 +63,12 @@ public class ItemLoader {
         Rare items should be powerful and give a noticeable benefit.
         Any item that grants a skill should be at least rare (maybe uncommon if it gives nothing else)
         Anything that gives a unique effect or passive should be mystic.
-        Mystic items will typically have a special case in getBehaviorForKeyword().
+        Mystic items will usually be the only ones to have a special case in getBehaviorForKeyword().
         Twisted items are intentionally overpowered and should not be considered when designing anything.
+
+     Ring Ideas:
+        - A ring that makes you immune to lava or bats or something
+        - A ring that increases your drop chances
      */
 
     private static void loadItems() {
@@ -128,11 +132,16 @@ public class ItemLoader {
                     }
                 }
                 public String getDescription() {
-                    return "Mines are now bullets!";
+                    return "Mines are now bullets";
                 }
             };
-
-
+        }
+        if (keyword.equals("! SACRIFICE")) {
+            return new ItemBehavior() {
+                public void onEquip(Player owner) { }
+                public void onUnEquip(Player owner) { }
+                public String getDescription() { return "Permanently wound yourself upon healing"; }
+            };
         }
         return null;
     }
