@@ -20,11 +20,12 @@ public class Parameters {
     public static final int TIMEOUT_LENGTH = 1000;
 
     //The drop chance of items without any boosts
-    public static final double GLOBAL_LOOT_BOOST = 1;
-    public static final double COMMON_CHANCE = 0.07 * GLOBAL_LOOT_BOOST; // 7.0%
-    public static final double UNCOMMON_CHANCE = 0.03 * GLOBAL_LOOT_BOOST; // 3.0%
-    public static final double RARE_CHANCE = 0.006 * GLOBAL_LOOT_BOOST; // 0.6%
-    public static final double MYSTIC_CHANCE = 0.0025 * GLOBAL_LOOT_BOOST; // 0.25%
-    public static final double TWISTED_CHANCE = 0.0005 * GLOBAL_LOOT_BOOST; //0.05%
+    public static final double[] LOOT_CHANCES = {0.07, 0.03, 0.006, 0.0025, 0.0005};
+    public static double GLOBAL_LOOT_BOOST = 1.00;
+    public static double COMMON_CHANCE = LOOT_CHANCES[0] * GLOBAL_LOOT_BOOST; // 7.0%
+    public static double UNCOMMON_CHANCE = LOOT_CHANCES[1] * GLOBAL_LOOT_BOOST; // 3.0%
+    public static double RARE_CHANCE = LOOT_CHANCES[2] * GLOBAL_LOOT_BOOST; // 0.6%
+    public static double MYSTIC_CHANCE = LOOT_CHANCES[3] * GLOBAL_LOOT_BOOST; // 0.25%
+    public static double TWISTED_CHANCE = LOOT_CHANCES[4] * GLOBAL_LOOT_BOOST; //0.05%
 
 }

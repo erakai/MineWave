@@ -25,7 +25,6 @@ public abstract class Enemy extends Entity implements SpecialDeath {
 
         this.maxDamageTick = (int)(Parameters.FRAMES_PER_SECOND/attacksPerSecond);
         damageTick = maxDamageTick;
-
     }
 
     public abstract void chase(int targetX, int targetY);

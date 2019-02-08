@@ -18,7 +18,7 @@ public class Insect extends Enemy {
         defaultMoveTowards(targetX, targetY);
     }
 
-
+    
     @Override
     public void update() {
         super.update();

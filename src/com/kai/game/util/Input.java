@@ -140,7 +140,7 @@ public class Input {
             }
         }
         if (Screen.state == GameState.RUNNING) {
-            if (mouse_pressed && Screen.getPlayer().SHOOT) {
+            if (mouse_pressed && Screen.getPlayer().isShoot()) {
                 Screen.getPlayer().createProjectile(currentMouseX, currentMouseY);
             }
         }

@@ -31,7 +31,7 @@ public class GreatMineSkill extends Skill {
         int bigProjRange = 0;
         int bigProjX = (int)(tX-(p.MINE_SIZE.getWidth() * sizeMultiplier /2.0));
         int bigProjY =  (tY-(p.MINE_SIZE.getHeight() * sizeMultiplier /2));
-        if (p.SHOOT) {
+        if (p.isShoot()) {
             bigProjX = p.getCenterX() - (p.MINE_SIZE.getWidth() * sizeMultiplier / 2);
             bigProjY = p.getCenterY() - (p.MINE_SIZE.getHeight() * sizeMultiplier / 2);
             bigProjRange = 1200;

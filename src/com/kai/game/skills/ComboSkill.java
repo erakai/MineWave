@@ -22,7 +22,7 @@ public class ComboSkill extends Skill {
 
         p.removeAllMines();
 
-        if (p.SHOOT) {
+        if (p.isShoot()) {
             Projectile proj = new Projectile(p, ResourceManager.getImage("Mine.png", p.MINE_SIZE.getWidth(), p.MINE_SIZE.getHeight()),
                     p.getX() + p.getWidth() / 2 - 12, p.getY() + p.getHeight() / 2 - 12, p.MINE_SIZE.getHardWidth(), p.MINE_SIZE.getHardHeight(), 8, tX, tY, 1200, p.getPlayerDamage() * p.getMaxMines());
             p.createProjectile(proj);

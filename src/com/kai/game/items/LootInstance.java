@@ -7,6 +7,7 @@ import com.kai.game.util.MPoint;
 import com.kai.game.util.MTimer;
 import com.kai.game.util.Parameters;
 import com.kai.game.util.ResourceManager;
+import com.sun.javafx.tools.packager.Param;
 
 import java.awt.*;
 
@@ -117,7 +118,7 @@ public class LootInstance extends GameObject {
             setSelf(ResourceManager.getImage("chestmystic.png", getWidth(), getHeight()));
             addItemToLoot(getRandomItem(4));
         }
-        if (randomNumber(10000) <= Parameters.TWISTED_CHANCE * 10000 * lootChanceMultiplier) {
+        if (randomNumber(10000) <= Parameters.TWISTED_CHANCE * 10000 * lootChanceMultiplier && containedItems.size() < 4) {
             setSelf(ResourceManager.getImage("chesttwisted.png", getWidth(), getHeight()));
             addItemToLoot(getRandomItem(5));
         }
@@ -148,5 +149,19 @@ public class LootInstance extends GameObject {
 
     public boolean isDisplayContents() {
         return displayContents;
+    }
+
+    public static void changeLootBoost(double newBoost) {
+        Parameters.GLOBAL_LOOT_BOOST = newBoost;
+        updateDropChances();
+    }
+
+    public static void updateDropChances() {
+        Parameters.COMMON_CHANCE = Parameters.LOOT_CHANCES[0] * Parameters.GLOBAL_LOOT_BOOST; // 7.0%
+        Parameters.UNCOMMON_CHANCE = Parameters.LOOT_CHANCES[1] * Parameters.GLOBAL_LOOT_BOOST; // 3.0%
+        Parameters.RARE_CHANCE = Parameters.LOOT_CHANCES[2] * Parameters.GLOBAL_LOOT_BOOST; // 0.6%
+        Parameters.MYSTIC_CHANCE = Parameters.LOOT_CHANCES[3] * Parameters.GLOBAL_LOOT_BOOST; // 0.25%
+        Parameters.TWISTED_CHANCE = Parameters.LOOT_CHANCES[4] * Parameters.GLOBAL_LOOT_BOOST; //0.05%
+
     }
 }

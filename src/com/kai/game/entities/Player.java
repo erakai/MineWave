@@ -25,10 +25,11 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     private List<Projectile> projectiles;
     private List<Projectile> removeProjectileQueue;
     private List<Skill> skills;
-    public boolean SHOOT = false;
     private String killedBy;
 
     private Item[] rings;
+
+    private HashMap<String, Boolean> passives;
 
     public Player(int x, int y, int width, int height) {
         super(null, x, y, width, height, 4, 20);
@@ -40,10 +41,19 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         skills = new ArrayList<>();
         equipSkill(SelectionScreen.getCurrentlySelected(this));
 
+        passives = new HashMap<>();
+        addPassives();
+
         projectiles = new ArrayList<>();
         removeProjectileQueue = new ArrayList<>();
 
         rings = new Item[2];
+        //equipRing(0, ItemLoader.getItem("Golden Blessing"));
+    }
+
+    private void addPassives() {
+        passives.put("shoot", false);
+        passives.put("sacrifice", false);
     }
 
     public void takeDamage(double amount) {
@@ -91,7 +101,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
     }
 
     public void createProjectile(int targetX, int targetY) {
-        if (!SHOOT) {
+        if (!isShoot()) {
             if (distanceTo(targetX, targetY) <= (getPlayerRange())) {
                 createProjectile(targetX, targetY, true);
             }
@@ -108,7 +118,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
             if (ignoreRange) {
                 if (currentMines < getMaxMines()) {
                     currentMines++;
-                    if (!SHOOT) {
+                    if (!isShoot()) {
                         projectiles.add(new Projectile(this, ResourceManager.getImage("Mine.png", MINE_SIZE.getWidth(), MINE_SIZE.getHeight()),
                                 (int) (targetX - (MINE_SIZE.getHardWidth() / 2.0)), (targetY - (MINE_SIZE.getHardHeight() / 2)), MINE_SIZE.getHardWidth(), MINE_SIZE.getHardHeight(), 0, targetX, targetY, 0, getPlayerDamage()));
                     } else {
@@ -196,7 +206,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
                 break;
         }
         //Drawing range circle (unless shooting)
-        if (!SHOOT) {
+        if (!isShoot()) {
             g.setColor(new Color(83, 90, 106));
             g.drawOval( (getCenterX() - getPlayerRange()), (getCenterY() - getPlayerRange()), getPlayerRange()*2, getPlayerRange()*2);
         }
@@ -261,7 +271,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         removeAllInQueue();
 
 
-        if (SHOOT) {
+        if (isShoot()) {
             currentShotTick++;
         }
     }
@@ -369,7 +379,15 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
 
     public int getDefense() { return playerStats.getStat("defense"); }
 
+    public boolean isShoot() {
+        return passives.get("shoot");
+    }
 
+    public boolean isSacrifice() {
+        return passives.get("sacrifice");
+    }
 
-
+    public HashMap<String, Boolean> getPassives() {
+        return passives;
+    }
 }

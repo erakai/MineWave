@@ -51,4 +51,4 @@ public abstract class SceneObject extends GameObject implements Updatable {
             Screen.playerDied(name);
         }
     }
-}
+ }

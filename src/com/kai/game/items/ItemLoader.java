@@ -117,6 +117,7 @@ public class ItemLoader {
         }
     }
 
+    //TODO: Change how I'm checking for wearing duplicate rings.
     private static ItemBehavior getBehaviorForKeyword(String keyword) {
         if (keyword.equals("! SHOOT")) {
             return new ItemBehavior() {
@@ -124,13 +125,10 @@ public class ItemLoader {
                     double SECONDS_PER_SHOT = 0.25;
                     owner.maxShotTick = (int)(SECONDS_PER_SHOT * Parameters.FRAMES_PER_SECOND);
                     owner.currentShotTick = owner.maxShotTick;
-                    owner.SHOOT = true;
-                }
+                    owner.getPassives().replace("shoot", true); }
                 public void onUnEquip(Player owner) {
                     if (!(owner.getRings()[0].getName().equals("Speckled Chain") && owner.getRings()[1].getName().equals("Speckled Chain"))) {
-                        owner.SHOOT = false;
-                    }
-                }
+                        owner.getPassives().replace("shoot", false); } }
                 public String getDescription() {
                     return "Mines are now bullets";
                 }
@@ -138,9 +136,20 @@ public class ItemLoader {
         }
         if (keyword.equals("! SACRIFICE")) {
             return new ItemBehavior() {
-                public void onEquip(Player owner) { }
-                public void onUnEquip(Player owner) { }
+                public void onEquip(Player owner) {owner.getPassives().replace("sacrifice", true);}
+                public void onUnEquip(Player owner) {
+                    if (!(owner.getRings()[0].getName().equals("Ring of the Sacrificial Lamb") && owner.getRings()[1].getName().equals("Ring of the Sacrificial Lamb"))) {
+                        owner.getPassives().replace("sacrifice", false);
+                    }
+                }
                 public String getDescription() { return "Permanently wound yourself upon healing"; }
+            };
+        }
+        if (keyword.equals("! LUCKY")) {
+            return new ItemBehavior() {
+                public void onEquip(Player owner) { LootInstance.changeLootBoost(Parameters.GLOBAL_LOOT_BOOST*3); }
+                public void onUnEquip(Player owner) { LootInstance.changeLootBoost(Parameters.GLOBAL_LOOT_BOOST/3); }
+                public String getDescription() { return "Items have a tripled chance to drop"; }
             };
         }
         return null;

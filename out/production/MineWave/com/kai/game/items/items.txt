@@ -77,7 +77,7 @@ rarity: 5
 image: 24 8
 * 1 life on kill
 * -5 max health
-=Whether we wanted it or not, we've stepped into a war with the Cabal on Mars.
+= Whether we wanted it or not, we've stepped into a war with the Cabal on Mars.
 ----
 name: Ring of the Sacrificial Lamb
 rarity: 4
@@ -86,3 +86,9 @@ image: 32 8
 ! SACRIFICE
 = Have you ever wondered what it would be like to have a piece of god on your finger?
 ----
+name: Golden Blessing
+rarity: 2
+image: 40 8
+! LUCKY
+* -1 range
+= Roll the dice to win the prize. I wonder what it could be?
