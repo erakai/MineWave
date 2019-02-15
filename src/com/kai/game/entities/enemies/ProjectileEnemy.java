@@ -64,7 +64,7 @@ public abstract class ProjectileEnemy extends Enemy implements UsesProjectiles {
 
 
     @Override
-    public void attack(Entity target, int ovrDamage) {
+    public void attack(Entity target, double ovrDamage) {
         target.takeDamage(ovrDamage);
     }
 

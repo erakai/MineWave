@@ -4,7 +4,6 @@ import com.kai.game.core.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.items.Item;
-import com.kai.game.items.ItemLoader;
 import com.kai.game.skills.*;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
@@ -331,7 +330,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         attack(target, getPlayerDamage());
     }
 
-    public void attack(Entity target, int ovrDamage) {target.takeDamage(ovrDamage );}
+    public void attack(Entity target, double ovrDamage) {target.takeDamage(ovrDamage );}
 
     public int getScaledWidth(int oldWidth) {
         return (int)(oldWidth/22.0 * getWidth());

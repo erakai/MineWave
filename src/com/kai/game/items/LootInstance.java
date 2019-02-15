@@ -118,7 +118,7 @@ public class LootInstance extends GameObject {
             setSelf(ResourceManager.getImage("chestmystic.png", getWidth(), getHeight()));
             addItemToLoot(getRandomItem(4));
         }
-        if (randomNumber(10000) <= Parameters.TWISTED_CHANCE * 10000 * lootChanceMultiplier && containedItems.size() < 4) {
+        if (randomNumber(10000) <= Parameters.TWISTED_CHANCE * 10000 * lootChanceMultiplier) {
             setSelf(ResourceManager.getImage("chesttwisted.png", getWidth(), getHeight()));
             addItemToLoot(getRandomItem(5));
         }

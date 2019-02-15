@@ -4,6 +4,7 @@ import com.kai.game.entities.SpecialDeath;
 import com.kai.game.entities.UsesProjectiles;
 import com.kai.game.entities.bosses.Boss;
 import com.kai.game.entities.bosses.LavaGiant;
+import com.kai.game.entities.bosses.LightningWorm;
 import com.kai.game.entities.bosses.Vampire;
 import com.kai.game.entities.enemies.*;
 import com.kai.game.items.LootInstance;
@@ -41,7 +42,7 @@ public class RoomInstance implements Updatable {
         downArrow = ResourceManager.rotate(upArrow, 180);
         rightArrow = ResourceManager.rotate(upArrow, 90);
 
-        generateLevel(roomLevel);
+        generateLevel(8);
     }
 
     public void entered() {
@@ -245,6 +246,8 @@ public class RoomInstance implements Updatable {
                 addEnemy(new Lavakut(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             } else if (c == LavaGiant.class) {
                 addEnemy(new LavaGiant(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
+            } else if (c == LightningWorm.class) {
+                addEnemy(new LightningWorm(getXAwayFromPlayer(DEFAULT_MIN_DISTANCE), getYAwayFromPlayer(DEFAULT_MIN_DISTANCE)));
             }
         }
     }
@@ -287,7 +290,15 @@ public class RoomInstance implements Updatable {
             lavaLevel24();
         }
 
-        if (level >= 25) {
+        if (level >= 25 && level < 100) {
+            difficultySeven();
+        }
+
+        if (level == 100) {
+            bossRush();
+        }
+
+        if (level > 100) {
             difficultySeven();
         }
 
@@ -451,7 +462,7 @@ public class RoomInstance implements Updatable {
     }
     private void wormLevel8() {
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background2.png"));
-        addEnemy(new BossIncomingSign(500, 150, 5, Worm.class));
+        addEnemy(new BossIncomingSign(500, 150, 5, LightningWorm.class));
     }
     private void vampireLevel16() {
         Screen.getEnvironment().setSelf(ResourceManager.getImage("background3.png"));
@@ -464,6 +475,12 @@ public class RoomInstance implements Updatable {
     public static void centerPlayer() {
         Screen.getPlayer().setX(Screen.WINDOW_WIDTH/2 + (Screen.getPlayer().getWidth()/2));
         Screen.getPlayer().setY(Screen.WINDOW_HEIGHT/2 + (Screen.getPlayer().getHeight()/2));
+    }
+
+    private void bossRush() {
+        createNewEnemy(LightningWorm.class, 1);
+        createNewEnemy(LavaGiant.class, 1);
+        createNewEnemy(Vampire.class, 1);
     }
 
 

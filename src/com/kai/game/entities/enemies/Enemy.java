@@ -12,12 +12,16 @@ import java.awt.*;
 
 public abstract class Enemy extends Entity implements SpecialDeath {
     private String name;
-    private int damage;
+    private double damage;
     private double attacksPerSecond;
 
     private int damageTick, maxDamageTick;
 
-    public Enemy(Image self, int x, int y, int width, int height, int speed, int maxHealth, String name, int damage, double attacksPerSecond) {
+    protected int currentTargetedX, currentTargetedY;
+    protected int maxChargeTick, currentChargeTick;
+    protected double rotationDegreeDir;
+
+    public Enemy(Image self, int x, int y, int width, int height, int speed, int maxHealth, String name, double damage, double attacksPerSecond) {
         super(self, x, y, width, height, speed, maxHealth);
         this.name = name;
         this.damage = damage;
@@ -39,13 +43,44 @@ public abstract class Enemy extends Entity implements SpecialDeath {
         setY((int)(getHardY() + (getSpeed() * Math.sin(direction))));
     }
 
+    public void doCharge(int targetX, int targetY) {
+        updateRotationDegreeDir(targetX, targetY);
+
+        if (currentChargeTick >= maxChargeTick) {
+            currentTargetedY = targetY;
+            currentTargetedX = targetX;
+            currentChargeTick = 0;
+        }
+
+        if (currentTargetedX != -1 && currentTargetedY != -1 && !(distanceTo(currentTargetedX, currentTargetedY) < 5)) {
+            defaultMoveTowards(currentTargetedX, currentTargetedY);
+        }
+
+    }
+
+    private void updateRotationDegreeDir(int targetX, int targetY) {
+        double opposite = Math.abs(targetX - (getX() + getWidth()/2.0));
+        double adjacent = Math.abs(targetY - (getY()));
+        double deg = Math.toDegrees(Math.atan( (opposite/adjacent) ));
+        if (getY() < targetY && getX() < targetX) {
+            deg = (180 - deg);
+        }
+        if (getY() < targetY && getX() > targetX) {
+            deg = (180 + deg);
+        }
+        if (getY() > targetY && getX() > targetX) {
+            deg = (-1 * deg);
+        }
+        rotationDegreeDir = deg;
+    }
+
     @Override
     public void attack(Entity target) {
         attack(target, getDamage());
     }
 
     @Override
-    public void attack(Entity target, int ovrDamage) {
+    public void attack(Entity target, double ovrDamage) {
         if (damageTick >= maxDamageTick) {
             target.takeDamage(ovrDamage);
             damageTick = 0;
@@ -109,7 +144,7 @@ public abstract class Enemy extends Entity implements SpecialDeath {
         return name;
     }
 
-    public int getDamage() { return damage; }
+    public double getDamage() { return damage; }
 
     public int getDamageTick() {
         return damageTick;
@@ -123,7 +158,7 @@ public abstract class Enemy extends Entity implements SpecialDeath {
         this.damageTick = damageTick;
     }
 
-    public void setDamage(int damage) {
+    public void setDamage(double damage) {
         this.damage = damage;
     }
 

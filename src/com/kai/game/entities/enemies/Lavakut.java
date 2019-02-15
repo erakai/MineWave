@@ -35,7 +35,7 @@ public class Lavakut extends ProjectileEnemy {
         private int lavaDuration, lavaDamage;
         private double lavaAPS;
 
-        public LavakutProjectile(UsesProjectiles owner,int x, int y, int width, int height, int speed, int targetX, int targetY, int range, int damage, int lavaDamage, int lavaDuration, double lavaAPS) {
+        public LavakutProjectile(UsesProjectiles owner,int x, int y, int width, int height, int speed, int targetX, int targetY, int range, double damage, int lavaDamage, int lavaDuration, double lavaAPS) {
             super(owner, ResourceManager.getImage("LavakutProjectile.png"), x, y, width, height, speed, targetX, targetY, range, damage);
             this.lavaDamage = lavaDamage;
             this.lavaDuration = lavaDuration;

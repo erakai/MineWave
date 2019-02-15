@@ -17,14 +17,12 @@ Wave-based game with enemies progressing in difficulty, where the player must su
   - An online leaderboard.
 
 ## Utilizes:
+
   - Java Swing
 
 ## Contributors:
 
   - Kai
-  - Daniel
-  - Hirod
-  
   
 ## Screenshots:
 

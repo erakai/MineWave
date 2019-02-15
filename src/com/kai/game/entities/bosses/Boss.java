@@ -123,8 +123,8 @@ public abstract class Boss extends ProjectileEnemy {
     }
 
 
-    private MPoint healthBarPoint = new MPoint(0, 600-47);
-    private MRectangle healthBarRectangle = new MRectangle(new MPoint(16, healthBarPoint.getHardY()+16), new MPoint(1183, healthBarPoint.getHardY()+31));
+    protected MPoint healthBarPoint = new MPoint(0, 600-47);
+    protected MRectangle healthBarRectangle = new MRectangle(new MPoint(16, healthBarPoint.getHardY()+16), new MPoint(1183, healthBarPoint.getHardY()+31));
 
     @Override
     public void drawMe(Graphics g) {

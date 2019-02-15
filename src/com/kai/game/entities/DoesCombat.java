@@ -4,6 +4,6 @@ public interface DoesCombat {
     void takeDamage(double amount);
     void heal(double amount);
     void attack(Entity target);
-    void attack(Entity target, int ovrDamage);
+    void attack(Entity target, double ovrDamage);
 
 }

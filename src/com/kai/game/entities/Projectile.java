@@ -12,13 +12,13 @@ public class Projectile extends GameObject implements Updatable {
     private int targetX, targetY;
     private int speed, range;
 
-    private int damage;
+    private double damage;
 
     private int distanceTraveled;
 
     //TODO: Have projectiles not be drawn/updated inside of their owners, so they don't disappear on owner death.
 
-    public Projectile(UsesProjectiles owner, Image self, int x, int y, int width, int height, int speed, int targetX, int targetY, int range, int damage) {
+    public Projectile(UsesProjectiles owner, Image self, int x, int y, int width, int height, int speed, int targetX, int targetY, int range, double damage) {
         super(self, x, y, width, height);
         this.speed = speed;
         this.range = range;
@@ -117,7 +117,7 @@ public class Projectile extends GameObject implements Updatable {
         return distanceTraveled;
     }
 
-    public int getDamage() {
+    public double getDamage() {
         return damage;
     }
 
