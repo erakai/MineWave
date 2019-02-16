@@ -46,8 +46,7 @@ public class Worm extends Enemy {
     }
 
     @Override
-    public void onDeath() {
-        Screen.getPlayer().heal(Screen.getPlayer().getStats().get("life on kill"));
-        Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 10, true, true));
+    public void onDeath(double multiplier) {
+        super.onDeath(10);
     }
 }

@@ -42,7 +42,7 @@ public class RoomInstance implements Updatable {
         downArrow = ResourceManager.rotate(upArrow, 180);
         rightArrow = ResourceManager.rotate(upArrow, 90);
 
-        generateLevel(8);
+        generateLevel(roomLevel);
     }
 
     public void entered() {
@@ -120,7 +120,7 @@ public class RoomInstance implements Updatable {
         for (Enemy e: enemies) {
             e.update();
             if ((int)e.getHealth() < 1) {
-                ((SpecialDeath) e).onDeath();
+                ((SpecialDeath) e).onDeath(1);
                 toRemove.add(e);
             }
             Screen.getEnvironment().sceneCollisions(e);
@@ -535,7 +535,7 @@ public class RoomInstance implements Updatable {
         }
 
         @Override
-        public void onDeath() {
+        public void onDeath(double multiplier) {
 
         }
     }

@@ -164,7 +164,8 @@ public class LavaGiant extends Boss implements SpecialDeath {
     }
 
     @Override
-    public void onDeath() {
+    public void onDeath(double m) {
+        super.onDeath(m);
         Screen.getEnvironment().clearAllSceneObjects();
     }
 }

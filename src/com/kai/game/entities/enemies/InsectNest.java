@@ -34,8 +34,8 @@ public class InsectNest extends Enemy  {
     }
 
     @Override
-    public void onDeath() {
-        super.onDeath();
+    public void onDeath(double m) {
+        super.onDeath(m);
         spawn(new Insect(getX()+(getWidth()/2), getY()+(getHeight()/2)));
         spawn(new Insect(getX(), getY()));
     }

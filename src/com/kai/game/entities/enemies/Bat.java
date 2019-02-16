@@ -18,11 +18,7 @@ public class Bat extends Enemy {
     }
 
     @Override
-    public void onDeath() {
-        if (Screen.getRoomHandler().getCurrentLevel() > 16) {
-            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 0.5,false, true));
-        } else {
-            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 0.5, true, true));
-        }
+    public void onDeath(double m) {
+        super.onDeath(0.5);
     }
 }

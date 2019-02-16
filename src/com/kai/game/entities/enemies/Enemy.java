@@ -172,12 +172,12 @@ public abstract class Enemy extends Entity implements SpecialDeath {
     }
 
     @Override
-    public void onDeath() {
+    public void onDeath(double multiplier) {
         Screen.getPlayer().heal(Screen.getPlayer().getStats().get("life on kill"));
         if (Screen.getRoomHandler().getCurrentLevel() > 16) {
-            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 1,false, true));
+            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 1 * multiplier,false, true));
         } else {
-            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY()));
+            Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 1 * multiplier, true, true));
         }
     }
 }

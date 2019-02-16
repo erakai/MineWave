@@ -147,8 +147,7 @@ public abstract class Boss extends ProjectileEnemy {
     }
 
     @Override
-    public void onDeath() {
-        Screen.getPlayer().heal(Screen.getPlayer().getStats().get("life on kill"));
-        Screen.getRoomHandler().newLootInstance(new LootInstance(getCenterX(), getCenterY(), 80, false, false));
+    public void onDeath(double multiplier) {
+        super.onDeath(80);
     }
 }
