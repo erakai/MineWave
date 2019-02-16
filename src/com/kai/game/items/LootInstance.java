@@ -7,7 +7,6 @@ import com.kai.game.util.MPoint;
 import com.kai.game.util.MTimer;
 import com.kai.game.util.Parameters;
 import com.kai.game.util.ResourceManager;
-import com.sun.javafx.tools.packager.Param;
 
 import java.awt.*;
 

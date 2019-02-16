@@ -94,9 +94,9 @@ public class SelectionScreen extends GameObject {
 
         g.setColor(new Color(255, 255, 255));
         g.setFont(new MFont(1.2));
-        g.drawString("Welcome to MineWave!", textDrawX.getX(), textDrawY.getY());
-        g.drawString("Click on a starter skill to read what it does.", textDrawX.getX(), textDrawY2.getY());
-        g.drawString("This skill is activated by pressing E.", textDrawX.getX(), textDrawY3.getY());
+        g.drawString("Welcome to MineWave! Click on a skill. This skill is activated by pressing E.", textDrawX.getX(), textDrawY.getY());
+        g.drawString("Info: Items are equipped by clicking on them. Click on an equipped item to change its position.", textDrawX.getX(), textDrawY2.getY());
+        g.drawString("Info: You can't place more mines than your maximum or outside your range.", textDrawX.getX(), textDrawY3.getY());
 
         g.drawString("W/A/S/D to move.", textDrawX2.getX(), textDrawY.getY());
         g.drawString("Left click to place a mine.", textDrawX2.getX(), textDrawY2.getY());

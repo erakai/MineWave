@@ -4,6 +4,7 @@ import com.kai.game.core.GameObject;
 import com.kai.game.entities.enemies.Enemy;
 import com.kai.game.hud.SelectionScreen;
 import com.kai.game.items.Item;
+import com.kai.game.items.ItemLoader;
 import com.kai.game.skills.*;
 import com.kai.game.util.MRectangle;
 import com.kai.game.util.ResourceManager;
@@ -47,7 +48,7 @@ public class Player extends Entity implements UsesProjectiles, UsesSkills {
         removeProjectileQueue = new ArrayList<>();
 
         rings = new Item[2];
-        //equipRing(0, ItemLoader.getItem("Golden Blessing"));
+        //equipRing(0, ItemLoader.getItem("One-Eyed Mask"));
     }
 
     private void addPassives() {

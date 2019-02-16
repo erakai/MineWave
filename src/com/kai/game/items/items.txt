@@ -77,6 +77,8 @@ rarity: 5
 image: 24 8
 * 1 life on kill
 * -5 max health
+* -5 range
+* 2 speed
 = Whether we wanted it or not, we've stepped into a war with the Cabal on Mars.
 ----
 name: Ring of the Sacrificial Lamb
