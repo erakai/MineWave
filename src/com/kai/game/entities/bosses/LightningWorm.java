@@ -17,7 +17,7 @@ public class LightningWorm extends Boss {
 
         rotationDegreeDir = 0;
         maxChargeTick = getMaxDamageTick();
-
+        currentChargeTick = (int) (Math.random() * maxChargeTick);
         currentTargetedX = -1;
         currentTargetedY = -1;
     }

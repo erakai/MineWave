@@ -42,6 +42,9 @@ public class RoomInstance implements Updatable {
         downArrow = ResourceManager.rotate(upArrow, 180);
         rightArrow = ResourceManager.rotate(upArrow, 90);
 
+/*
+        roomLevel = 100;
+*/
         generateLevel(roomLevel);
     }
 
@@ -307,7 +310,7 @@ public class RoomInstance implements Updatable {
     }
 
     private void difficultyOne() {
-        createNewEnemy(Insect.class, 1);
+        createNewEnemy(LightningWorm.class, 4);
     }
 
     private void difficultyTwo() {

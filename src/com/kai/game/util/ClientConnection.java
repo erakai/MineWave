@@ -22,13 +22,20 @@ public class ClientConnection extends Thread {
     public static boolean CONNECTED = false;
 
     public ClientConnection() {
-        try {
-            socket = new Socket(Parameters.SERVER_NAME, Parameters.SERVER_PORT);
-            out = new ObjectOutputStream(socket.getOutputStream());
-            in = new ObjectInputStream(socket.getInputStream());
-            CONNECTED = true;
-        } catch (Exception ex) { CONNECTED = false; }
+        new Thread( () -> {
+            try {
+                socket = new Socket(Parameters.SERVER_NAME, Parameters.SERVER_PORT);
+                out = new ObjectOutputStream(socket.getOutputStream());
+                in = new ObjectInputStream(socket.getInputStream());
+                CONNECTED = true;
+            } catch (Exception ex) { CONNECTED = false; }
+        }).start();
 
+        try {
+            Thread.sleep(Parameters.TIMEOUT_LENGTH);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setClientDeath(DeathScreen.Death d) {
